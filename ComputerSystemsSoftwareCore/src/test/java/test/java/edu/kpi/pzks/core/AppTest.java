@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- *
+ * Sample for creating tests.
  * @author asmirnova
  */
 public class AppTest {

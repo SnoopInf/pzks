@@ -1,8 +1,9 @@
 package edu.kpi.pzks.core.validator;
 
-import edu.kpi.pzks.core.entity.Edge;
-import edu.kpi.pzks.core.entity.Node;
 
+import edu.kpi.pzks.core.exceptions.ValidationException;
+import edu.kpi.pzks.core.model.Link;
+import edu.kpi.pzks.core.model.Node;
 import java.util.*;
 
 /**
@@ -14,9 +15,9 @@ public class Validator {
         validateConsistency(incidenceMatrix);
     }
 
-    public void validate(List<Node> nodes, List<Edge> edges) {
-        validateCycles(nodes, edges);
-        validateConsistency(nodes, edges);
+    public void validate(List<Node> nodes, List<Link> links) {
+        validateCycles(nodes, links);
+        validateConsistency(nodes, links);
     }
 
     /*
@@ -27,7 +28,7 @@ public class Validator {
             return;
         }
         List<Node> nodes = new ArrayList<Node>(incidenceMatrix.length);
-        List<Edge> edges = new ArrayList<Edge>();
+        List<Link> edges = new ArrayList<Link>();
         //init Nodes
         for (int[] row : incidenceMatrix) {
             nodes.add(new Node());
@@ -36,7 +37,7 @@ public class Validator {
         for (int i = 0; i < incidenceMatrix.length; i++) {
             for (int j = 0; j < incidenceMatrix.length; j++) {
                 if (incidenceMatrix[i][j] == 1) {
-                    edges.add(new Edge(nodes.get(i), nodes.get(j)));
+                    edges.add(new Link(nodes.get(i), nodes.get(j)));
                 }
             }
         }
@@ -46,15 +47,15 @@ public class Validator {
     /*
      * Checks for cycles. I suppose that cycle is when we have path from child to one of it's parents.
      */
-    public void validateCycles(List<Node> nodes, List<Edge> edges) {
+    public void validateCycles(List<Node> nodes, List<Link> edges) {
         if (edges.isEmpty()) {
             return;
         }
 
         List<Node> roots = new ArrayList<Node>(nodes);
         Set<Node> notRoots = new HashSet<Node>();
-        for (Edge edge : edges) {
-            notRoots.add(edge.getTo());
+        for (Link edge : edges) {
+            notRoots.add(edge.getToNode());
         }
         roots.removeAll(notRoots);
         for (Node root : roots) {
@@ -64,8 +65,8 @@ public class Validator {
     }
 
     private void deepSearch(Node root, Set<Node> path) {
-        for (Node child : root.getChildren()) {
-            if (path.contains(child)) {
+        for (Node outputNodes : root.getOutputNodes()) {
+            if (path.contains(outputNodes)) {
                 throw new ValidationException("Граф имеет цикл!");
             }
             path.add(root);
@@ -104,15 +105,15 @@ public class Validator {
     /* Checks for consistency.
     *  I suppose that graph is inconsistent if there's a single Node which has no input and output.
     */
-    public void validateConsistency(List<Node> nodes, List<Edge> edges) {
+    public void validateConsistency(List<Node> nodes, List<Link> edges) {
         if (nodes.size() < 2) {
             return;
         }
 
         for (Node node : nodes) {
             boolean hasEdge = false;
-            for (Edge edge : edges) {
-                if (edge.getFrom().equals(node) || edge.getTo().equals(node)) {
+            for (Link edge : edges) {
+                if (edge.getFromNode().equals(node) || edge.getToNode().equals(node)) {
                     hasEdge = true;
                 }
             }
