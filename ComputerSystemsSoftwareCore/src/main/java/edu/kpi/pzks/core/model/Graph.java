@@ -14,7 +14,7 @@ public class Graph implements Serializable {
     private static final long serialVersionUID = 1;
     private Set<Node> nodes = new HashSet<>();
     private Links links = new Links();
-    private Set<IChangeListener> changeListeners = new HashSet<>();
+    private transient Set<IChangeListener> changeListeners = new HashSet<>();
 
     public Graph() {
     }
@@ -64,14 +64,7 @@ public class Graph implements Serializable {
         }
     }
 
-    private void removeGraphObject(GraphObject pn) {
-        if (pn instanceof Node) {
-            removeNode((Node) pn);
-        } else if (pn instanceof Link) {
-            removeLink((Link) pn);
-        }
-    }
-//TODO please move me to gui
+    //TODO please move me to gui
 //    public boolean isAnyGraphObjectSelected() {
 //        return !selectedNodes.isEmpty();
 //    }
@@ -179,7 +172,7 @@ public class Graph implements Serializable {
     public boolean isNodesEmpty() {
         return nodes.isEmpty();
     }
-    
+
     public boolean isLinksEmpty() {
         return links.isEmpty();
     }
