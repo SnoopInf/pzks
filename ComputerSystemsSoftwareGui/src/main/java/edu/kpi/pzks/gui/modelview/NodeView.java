@@ -10,6 +10,8 @@ import java.awt.Point;
 public interface NodeView extends GraphObjectView {
 
     Point getUpperLeftCorner();
+    
+    Point getCenter();
 
     void setUpperLeftCorner(Point point);
 

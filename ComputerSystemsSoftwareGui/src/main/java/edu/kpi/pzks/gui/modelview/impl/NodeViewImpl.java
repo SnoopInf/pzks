@@ -53,6 +53,10 @@ public class NodeViewImpl implements NodeView {
         return (int) this.ellipse.getHeight();
     }
 
+    public Point getCenter() {
+        return new Point((int) ellipse.getCenterX(), (int) ellipse.getCenterY());
+    }
+
     public String getName() {
 //        return "Node"+getNumber();
         throw new UnsupportedOperationException("Not supported yet.");
