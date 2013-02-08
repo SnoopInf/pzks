@@ -1,8 +1,7 @@
 target/
-.settings/
 nbproject/private/
 
 .classpath
 .project
-nb-configuration.xml
+
 
