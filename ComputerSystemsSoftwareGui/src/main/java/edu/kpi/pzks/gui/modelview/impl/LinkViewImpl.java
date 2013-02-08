@@ -23,7 +23,7 @@ public class LinkViewImpl implements LinkView {
     }
 
     public Link getLink() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return this.link;
     }
 
     public void setBendPoint(int x, int y) {
@@ -94,5 +94,9 @@ public class LinkViewImpl implements LinkView {
 
     public boolean isSelected() {
         return this.selected;
+    }
+
+    public boolean contains(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

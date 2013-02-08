@@ -83,4 +83,8 @@ public class NodeViewImpl implements NodeView {
     public boolean isSelected() {
         return this.selected;
     }
+
+    public boolean contains(int x, int y) {
+        return this.ellipse.contains(x, y);
+    }
 }
