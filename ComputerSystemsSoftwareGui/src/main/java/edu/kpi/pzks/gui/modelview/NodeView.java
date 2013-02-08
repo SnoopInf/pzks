@@ -1,5 +1,6 @@
 package edu.kpi.pzks.gui.modelview;
 
+import edu.kpi.pzks.core.model.Node;
 import java.awt.Point;
 import java.util.List;
 
@@ -7,8 +8,8 @@ import java.util.List;
  *
  * @author Aloren
  */
-public interface INodeView extends IGraphObjectView {
-    
+public interface NodeView extends GraphObjectView {
+
     	public Point getUpperLeftCorner();
 	public void setUpperLeftCorner(Point point);
 	public int getWidth();

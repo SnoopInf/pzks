@@ -17,7 +17,7 @@
         <dependency>
             <groupId>edu.kpi.pzks</groupId>
             <artifactId>core</artifactId>
-            <version>[1.0,)</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -27,7 +27,7 @@
             <type>jar</type>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>

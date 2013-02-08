@@ -6,8 +6,8 @@ import java.awt.Graphics;
  *
  * @author Aloren
  */
-public interface IGraphObjectView {
-    
+public interface GraphObjectView {
+
     void paint(Graphics g);
-    
+
 }
