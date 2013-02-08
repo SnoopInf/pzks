@@ -19,5 +19,4 @@ public interface GraphView {
 	public GraphObjectView addViewByElement(GraphObject element);
 	public GraphObjectView getViewByElement(GraphObject element);
 	public GraphObjectView removeViewByElement(GraphObject element);
-
 }

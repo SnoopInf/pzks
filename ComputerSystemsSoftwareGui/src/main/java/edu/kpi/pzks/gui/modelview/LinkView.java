@@ -10,7 +10,7 @@ import java.awt.Point;
 public interface LinkView extends GraphObjectView {
 
     	public Link getLink();
-	public void setPoint(int x, int y);
-	public Point getPoint();
+	public void setBendPoint(int x, int y);
+	public Point getBendPoint();
 
 }
