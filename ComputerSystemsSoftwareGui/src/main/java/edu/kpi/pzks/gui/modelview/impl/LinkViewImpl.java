@@ -7,6 +7,7 @@ import edu.kpi.pzks.gui.modelview.NodeView;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.Line2D;
 import javax.swing.JPopupMenu;
 
 /**
@@ -14,12 +15,13 @@ import javax.swing.JPopupMenu;
  * @author asmirnova
  */
 public class LinkViewImpl implements LinkView {
-    
+
     protected NodeView fromNodeView;
     protected NodeView toNodeView;
     protected Point bendPoint;
     protected boolean selected;
     protected Link link;
+    private static final int HIT_BOX_SIZE = 6;
 
     public LinkViewImpl(NodeView fromNodeView, NodeView toNodeView) {
         Node fromNode = fromNodeView.getNode();
@@ -27,7 +29,6 @@ public class LinkViewImpl implements LinkView {
         this.link = new Link(fromNode, toNode);
         this.fromNodeView = fromNodeView;
         this.toNodeView = toNodeView;
-
     }
 
     public Link getLink() {
@@ -57,34 +58,11 @@ public class LinkViewImpl implements LinkView {
     public void setToNodeView(NodeView toNodeView) {
         this.toNodeView = toNodeView;
     }
-    
+
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         throw new UnsupportedOperationException("Not supported yet.");
     }
-//    public int getWidth() {
-//        return (int) Math.abs(getX2() - getX1());
-//    }
-//    public int getHeight() {
-//        return (int) Math.abs(getY2() - getY1());
-//    }
-//    @Override
-//    public int compareTo(Object o) {
-//        return super.weight.compareTo(((Link) o).getNumber());
-//    }
-//    public Line2D.Double[] getLines() {
-//        return arrow.getLines();
-//    }
-//
-//    @Override
-//    public boolean contains(int x, int y) {
-//        return arrow.contains(x, y);
-//    }
-//
-//    @Override
-//    public String getName() {
-//        return "Link";
-//    }
 
     @Override
     public JPopupMenu getPopupMenu() {
@@ -101,6 +79,28 @@ public class LinkViewImpl implements LinkView {
     }
 
     public boolean contains(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        int boxX = x - HIT_BOX_SIZE / 2;
+        int boxY = y - HIT_BOX_SIZE / 2;
+        int width = HIT_BOX_SIZE;
+        int height = HIT_BOX_SIZE;
+        final Line2D.Double[] lines = getLines();
+        for (int j = 0; j < lines.length; j++) {
+            Line2D.Double line = lines[j];
+            if (line.intersects(boxX, boxY, width, height)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Line2D.Double[] getLines() {
+        Point fromCenter = fromNodeView.getCenter();
+        Point toCenter = toNodeView.getCenter();
+        if (bendPoint != null) {
+            return new Line2D.Double[]{new Line2D.Double(toCenter, bendPoint),
+                        new Line2D.Double(bendPoint, fromCenter)};
+        } else {
+            return new Line2D.Double[]{new Line2D.Double(toCenter, fromCenter)};
+        }
     }
 }
