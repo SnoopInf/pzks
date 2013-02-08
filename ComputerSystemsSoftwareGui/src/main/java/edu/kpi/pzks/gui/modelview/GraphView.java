@@ -12,11 +12,27 @@ import java.awt.Graphics;
  */
 public interface GraphView {
 
-    	public void paint(Graphics g);
-	public Graph getGraph();
-	public Node getNodeAtPoint(int x, int y);
-	public Link getLinkAtPoint(int x, int y);
-	public GraphObjectView addViewByElement(GraphObject element);
-	public GraphObjectView getViewByElement(GraphObject element);
-	public GraphObjectView removeViewByElement(GraphObject element);
+    void paint(Graphics g);
+
+    Graph getGraph();
+
+    NodeView getNodeViewAtPoint(int x, int y);
+
+    LinkView getLinkViewAtPoint(int x, int y);
+
+    void addNodeView(NodeView nodeView);
+
+    void addLinkView(LinkView linkView);
+
+    NodeView getNodeView(Node node);
+
+    LinkView getLinkView(Link link);
+
+    void removeNode(Node node);
+
+    void removeLink(Link link);
+
+    void removeNodeView(NodeView nodeView);
+
+    void removeLinkView(LinkView linkView);
 }
