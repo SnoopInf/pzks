@@ -8,7 +8,7 @@ import java.awt.Color;
  */
 public class CONSTANTS {
 
-    public static final String MAIN_TITLE = "Petri Nets Editor";
+    public static final String MAIN_TITLE = "Computer Systems Software";
 
     public static final Color SELECTED_COLOR = new Color(202, 229, 255);
     public static final Color BORDER_SELECTED_COLOR = new Color(126, 191, 255);
