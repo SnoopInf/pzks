@@ -12,28 +12,27 @@ import org.junit.Test;
  * @author asmirnova
  */
 public class AppTest {
-    
+
     public AppTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
-    
+
     @Test
     public void test() {
-        fail("The test case is a prototype.");
     }
 }

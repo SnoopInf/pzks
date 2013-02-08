@@ -32,10 +32,10 @@ public class GraphTest {
         assertTrue("", g.isNodesEmpty());
         createNodes();
         createLinks();
-        
+
         addNodesToGraph();
         assertTrue("", g.getNodes().size() == nodesSize);
-        
+
         addLinksGraph();
         assertTrue("", g.getLinks().size() == linksSize);
     }
@@ -57,7 +57,7 @@ public class GraphTest {
 
     private void createLinks() {
         for (int i = 0; i < linksSize; i++) {
-            Link link = new Link();
+            Link link = new Link(new Node(), new Node());
             links.add(link);
         }
     }
