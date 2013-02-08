@@ -1,19 +1,19 @@
 package edu.kpi.pzks.core.model;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
  * @author Aloren
  */
 public class Node implements GraphObject {
-    
+
     private static final long serialVersionUID = 4;
     //TODO please move me to gui
 //    protected Ellipse2D.Double ellipse;
-    protected List<Node> inputNodes = new LinkedList<>();
-    protected List<Node> outputNodes = new LinkedList<>();
+    protected Set<Node> inputNodes = new HashSet<>();
+    protected Set<Node> outputNodes = new HashSet<>();
 //TODO please move me to gui
 //    public Node(int number, Point2D.Double point) {
 //        this(number, (int) point.x, (int) point.y);
@@ -23,7 +23,6 @@ public class Node implements GraphObject {
 //        this.weight = number;
 //        this.ellipse = new Ellipse2D.Double(x, y, CONSTANTS.PLACE_WIDTH, CONSTANTS.PLACE_WIDTH);
 //    }
-
 //    @Override
 //    public void paintComponent(Graphics2D g2) {
 //        g2.fill(getEllipse());
@@ -95,29 +94,30 @@ public class Node implements GraphObject {
 //    public Ellipse2D.Double getEllipse() {
 //        return ellipse;
 //    }
-
 //    @Override
 //    public String getName() {
 //        return "Node"+getNumber();
 //    }
-
 //    public JPopupMenu getPopup(Graph graph) {
 //        return new NodePopup(this);
 //    }
-
-    public List<Node> getInputNodes() {
+    public Set<Node> getInputNodes() {
         return inputNodes;
     }
 
-    public List<Node> getOutputNodes() {
+    public Set<Node> getOutputNodes() {
         return outputNodes;
     }
-    
+
     public void addInputNode(Node node) {
-        inputNodes.add(node);
+        if (node != null) {
+            inputNodes.add(node);
+        }
     }
-    
+
     public void addOutputNode(Node node) {
-        outputNodes.add(node);
+        if (node != null) {
+            outputNodes.add(node);
+        }
     }
 }
