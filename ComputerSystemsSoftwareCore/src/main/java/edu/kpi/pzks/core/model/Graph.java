@@ -42,7 +42,7 @@ public class Graph implements Serializable {
 
     public void removeNode(Node node) {
         if (node != null) {
-            links.remove(node);
+            links.removeAllLinksFor(node);
             nodes.remove(node);
             notifyListener();
         }
@@ -97,7 +97,7 @@ public class Graph implements Serializable {
 //
 //    public void deselectSelectedGraphObject(GraphObject pn) {
 //        if (selectedNodes.contains(pn)) {
-//            selectedNodes.remove(pn);
+//            selectedNodes.removeAllLinksFor(pn);
 //            pn.setSelected(false);
 //        }
 //    }
@@ -119,7 +119,7 @@ public class Graph implements Serializable {
     /**
      * Removes node from the graph and the links that are connected with it.
      *
-     * @param pn node to remove from the graph.
+     * @param pn node to removeAllLinksFor from the graph.
      */
 //    public ArrayList<GraphObject> getNodesInsideRectangle(Rectangle rect) {
 //        ArrayList<GraphObject> selected = new ArrayList<>();

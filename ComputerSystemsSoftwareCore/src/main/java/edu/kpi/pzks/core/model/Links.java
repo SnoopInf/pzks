@@ -1,6 +1,5 @@
 package edu.kpi.pzks.core.model;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -11,7 +10,7 @@ import java.util.Set;
  *
  * @author Aloren
  */
-public class Links extends HashSet<Link> implements Serializable {
+public class Links extends HashSet<Link> {
 
     private static final long serialVersionUID = 2;
 
@@ -28,12 +27,6 @@ public class Links extends HashSet<Link> implements Serializable {
         return super.add(link);
     }
 
-    /**
-     * Removes link between two nodes.
-     *
-     * @param node1
-     * @param node2
-     */
     public void removeLinkBetweenNodes(Node node1, Node node2) {
         LinkedList<Link> linksToRemove = new LinkedList<>();
         Iterator<Link> it = iterator();
@@ -51,12 +44,7 @@ public class Links extends HashSet<Link> implements Serializable {
         return super.remove(link);
     }
 
-    /**
-     * Removes all links for the input node.
-     *
-     * @param node
-     */
-    public void remove(Node node) {
+    public void removeAllLinksFor(Node node) {
         LinkedList<Link> linksToRemove = new LinkedList<>();
         Iterator<Link> it = iterator();
         while (it.hasNext()) {
