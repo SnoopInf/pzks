@@ -15,5 +15,7 @@ public interface GraphObjectView {
 
     void paint(Graphics g);
 
+    boolean contains(int x, int y);
+
     JPopupMenu getPopupMenu();
 }

@@ -9,11 +9,15 @@ import java.awt.Point;
  */
 public interface NodeView extends GraphObjectView {
 
-    	public Point getUpperLeftCorner();
-	public void setUpperLeftCorner(Point point);
-	public int getWidth();
-	public int getHeight();
-	public String getName();
-	public Node getNode();
+    Point getUpperLeftCorner();
 
+    void setUpperLeftCorner(Point point);
+
+    int getWidth();
+
+    int getHeight();
+
+    String getName();
+
+    Node getNode();
 }
