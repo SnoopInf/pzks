@@ -1,7 +1,9 @@
 package edu.kpi.pzks.gui.modelview.impl;
 
 import edu.kpi.pzks.core.model.Link;
+import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.gui.modelview.LinkView;
+import edu.kpi.pzks.gui.modelview.NodeView;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -12,13 +14,19 @@ import javax.swing.JPopupMenu;
  * @author asmirnova
  */
 public class LinkViewImpl implements LinkView {
-
+    
+    protected NodeView fromNodeView;
+    protected NodeView toNodeView;
     protected Point bendPoint;
     protected boolean selected;
     protected Link link;
 
-    public LinkViewImpl(Link link) {
-        this.link = link;
+    public LinkViewImpl(NodeView fromNodeView, NodeView toNodeView) {
+        Node fromNode = fromNodeView.getNode();
+        Node toNode = toNodeView.getNode();
+        this.link = new Link(fromNode, toNode);
+        this.fromNodeView = fromNodeView;
+        this.toNodeView = toNodeView;
 
     }
 
@@ -34,35 +42,31 @@ public class LinkViewImpl implements LinkView {
         return bendPoint;
     }
 
+    public NodeView getFromNodeView() {
+        return fromNodeView;
+    }
+
+    public void setFromNodeView(NodeView fromNodeView) {
+        this.fromNodeView = fromNodeView;
+    }
+
+    public NodeView getToNodeView() {
+        return toNodeView;
+    }
+
+    public void setToNodeView(NodeView toNodeView) {
+        this.toNodeView = toNodeView;
+    }
+    
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         throw new UnsupportedOperationException("Not supported yet.");
     }
-//    @Override
 //    public int getWidth() {
 //        return (int) Math.abs(getX2() - getX1());
 //    }
-//    @Override
 //    public int getHeight() {
 //        return (int) Math.abs(getY2() - getY1());
-//    }
-//    public double getX1() {
-//        return node1.getX() + node1.getWidth() / 2;
-//    }
-//    public double getY1() {
-//        return node1.getY() + node1.getHeight() / 2;
-//    }
-//    public Point2D getP1() {
-//        return new Point2D.Double(node1.getX() + node1.getWidth() / 2, node1.getY() + node1.getHeight() / 2);
-//    }
-//    public double getX2() {
-//        return node2.getX() + node2.getWidth() / 2;
-//    }
-//    public double getY2() {
-//        return node2.getY() + node2.getHeight() / 2;
-//    }
-//    public Point2D getP2() {
-//        return new Point2D.Double(node2.getX() + node2.getWidth() / 2, node2.getY() + node2.getHeight() / 2);
 //    }
 //    @Override
 //    public int compareTo(Object o) {
