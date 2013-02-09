@@ -10,38 +10,10 @@ import java.util.*;
  * Author: Kirill Davidenko Date: 07.02.13 Time: 21:14
  */
 public class Validator {
-    public void validate(int[][] incidenceMatrix) {
-        validateCycles(incidenceMatrix);
-        validateConsistency(incidenceMatrix);
-    }
 
     public void validate(List<Node> nodes, List<Link> links) {
         validateCycles(nodes, links);
         validateConsistency(nodes, links);
-    }
-
-    /*
-     * Checks for cycles. I suppose that cycle is when we have path from child to one of it's parents.
-     */
-    public void validateCycles(int[][] incidenceMatrix) {
-        if (incidenceMatrix.length < 2) {
-            return;
-        }
-        List<Node> nodes = new ArrayList<Node>(incidenceMatrix.length);
-        List<Link> edges = new ArrayList<Link>();
-        //init Nodes
-        for (int[] row : incidenceMatrix) {
-            nodes.add(new Node());
-        }
-        //init edges
-        for (int i = 0; i < incidenceMatrix.length; i++) {
-            for (int j = 0; j < incidenceMatrix.length; j++) {
-                if (incidenceMatrix[i][j] == 1) {
-                    edges.add(new Link(nodes.get(i), nodes.get(j)));
-                }
-            }
-        }
-        validateCycles(nodes, edges);
     }
 
     /*
@@ -74,33 +46,6 @@ public class Validator {
         }
     }
 
-
-    /* Checks for consistency.
-    *  I suppose that graph is inconsistent if there's a single Node which has no input and output.
-    */
-    public void validateConsistency(int[][] incidenceMatrix) {
-        if (incidenceMatrix.length < 2) {
-            return;
-        }
-
-        int rowIndex = 0;
-        for (int[] row : incidenceMatrix) {
-            int rowSum = 0;
-            for (int value : row) {
-                rowSum += Math.abs(value);
-            }
-            if (rowSum == 0) {
-                int columnSum = 0;
-                for (int i = 0; i < row.length; i++) {
-                    columnSum += Math.abs(incidenceMatrix[rowIndex][i]);
-                }
-                if (columnSum == 0) {
-                    throw new ValidationException("Граф не связан");
-                }
-            }
-            rowIndex++;
-        }
-    }
 
     /* Checks for consistency.
     *  I suppose that graph is inconsistent if there's a single Node which has no input and output.
