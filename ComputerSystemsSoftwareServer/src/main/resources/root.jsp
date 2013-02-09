@@ -7,9 +7,22 @@
 <link rel="stylesheet" href="css/root.css" />
 <script type="text/javascript" src="libs/jquery/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="js/root.js"></script>
+<script type="text/javascript">
+  mxBasePath = 'libs/mxgraph';
+</script>
+<script type="text/javascript" src="libs/mxgraph/mxClient.js"></script>
 </head>
 <body>
-  <span id="text">...</span>
-  <button onclick="greet()">Greet</button>
+    <h1>Computer Systems Software</h1>
+    <div id="menubar"></div>
+    <div id="viewer">
+        <div id="navigation"></div>
+        <div>
+            <div id="left"></div>
+            <div id="view"></div>
+            <div id="right"></div>
+        </div>
+    </div>
+    <div id="copyright">&copy; Yurii Shylov 2013</div>
 </body>
 </html>
