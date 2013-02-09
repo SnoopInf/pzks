@@ -9,6 +9,10 @@ import java.io.Serializable;
 public abstract class GraphObject implements Serializable {
 
     protected int weight;
+    
+    public GraphObject() {
+        this(0);
+    }
 
     public GraphObject(int weigth) {
         this.weight = weigth;
