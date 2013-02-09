@@ -1,7 +1,7 @@
 package edu.kpi.pzks.gui.io.impl;
 
-import edu.kpi.pzks.gui.io.GraphLoader;
 import edu.kpi.pzks.core.exceptions.GraphException;
+import edu.kpi.pzks.gui.io.GraphLoader;
 import edu.kpi.pzks.gui.modelview.GraphView;
 import java.io.File;
 
