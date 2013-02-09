@@ -125,12 +125,12 @@ public class GraphViewImpl implements GraphView {
     }
 
     @Override
-    public Collection getLinkViews() {
+    public Collection<LinkView> getLinkViews() {
         return linkViews;
     }
 
     @Override
-    public Collection getNodeViews() {
+    public Collection<NodeView> getNodeViews() {
         return nodeViews;
     }
 }
