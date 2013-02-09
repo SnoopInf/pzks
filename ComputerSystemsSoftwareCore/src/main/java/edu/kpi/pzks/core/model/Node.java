@@ -7,12 +7,19 @@ import java.util.Set;
  *
  * @author Aloren
  */
-public class Node implements GraphObject {
+public class Node extends GraphObject {
 
     private static final long serialVersionUID = 4;
-    protected int weight;
     protected Set<Node> inputNodes = new HashSet<>();
     protected Set<Node> outputNodes = new HashSet<>();
+
+    public Node() {
+        this(0);
+    }
+
+    public Node(int weigth) {
+        super(weigth);
+    }
 
     public Set<Node> getInputNodes() {
         return inputNodes;
@@ -32,13 +39,5 @@ public class Node implements GraphObject {
         if (node != null) {
             outputNodes.add(node);
         }
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
     }
 }

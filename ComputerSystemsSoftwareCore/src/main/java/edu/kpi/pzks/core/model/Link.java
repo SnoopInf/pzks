@@ -6,16 +6,22 @@ import java.util.Objects;
  *
  * @author Aloren
  */
-public class Link implements GraphObject {
+public class Link extends GraphObject {
 
     private static final long serialVersionUID = 3;
     private Node fromNode;
     private Node toNode;
-
+    
     public Link() {
+        this(null, null);
     }
 
     public Link(Node fromNode, Node toNode) {
+        this(fromNode, toNode, 0);
+    }
+
+    public Link(Node fromNode, Node toNode, int weight) {
+        super(weight);
         this.fromNode = fromNode;
         this.toNode = toNode;
     }
