@@ -7,6 +7,7 @@ import edu.kpi.pzks.gui.modelview.GraphView;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import java.awt.Graphics;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import java.util.Set;
  */
 public class GraphViewImpl implements GraphView {
 
-    private final Graph graph;
+    private Graph graph;
     private Set<NodeView> nodeViews = new HashSet<>();
     private Set<LinkView> linkViews = new HashSet<>();
 
@@ -121,5 +122,15 @@ public class GraphViewImpl implements GraphView {
             }
         }
         return null;
+    }
+
+    @Override
+    public Collection getLinkViews() {
+        return linkViews;
+    }
+
+    @Override
+    public Collection getNodeViews() {
+        return nodeViews;
     }
 }

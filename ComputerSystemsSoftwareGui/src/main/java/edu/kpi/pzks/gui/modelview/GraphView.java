@@ -1,10 +1,10 @@
 package edu.kpi.pzks.gui.modelview;
 
 import edu.kpi.pzks.core.model.Graph;
-import edu.kpi.pzks.core.model.GraphObject;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
 import java.awt.Graphics;
+import java.util.Collection;
 
 /**
  *
@@ -35,4 +35,8 @@ public interface GraphView {
     void removeNodeView(NodeView nodeView);
 
     void removeLinkView(LinkView linkView);
+    
+    Collection getLinkViews();
+    
+    Collection getNodeViews();
 }
