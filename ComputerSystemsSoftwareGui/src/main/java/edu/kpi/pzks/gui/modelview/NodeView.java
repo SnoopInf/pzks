@@ -14,7 +14,7 @@ public interface NodeView extends GraphObjectView {
     Point getCenter();
 
     void setUpperLeftCorner(Point point);
-
+    
     int getWidth();
 
     int getHeight();

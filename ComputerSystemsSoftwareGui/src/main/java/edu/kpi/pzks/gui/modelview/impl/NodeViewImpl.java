@@ -25,47 +25,59 @@ public class NodeViewImpl implements NodeView {
         this(node, point.x, point.y);
     }
 
+    public NodeViewImpl(Node node) {
+        this(node, 0, 0);
+    }
     public NodeViewImpl(Node node, double x, double y) {
         this.node = node;
         this.ellipse = new Ellipse2D.Double(x, y,
                 CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
     }
 
+    @Override
     public JPopupMenu getPopupMenu() {
         throw new UnsupportedOperationException("Not supported yet.");
 //        return new NodePopup(this);
     }
 
+    @Override
     public Point getUpperLeftCorner() {
         return new Point((int) ellipse.getX(), (int) ellipse.getY());
     }
 
+    @Override
     public void setUpperLeftCorner(Point point) {
         ellipse.x = point.getX();
         ellipse.y = point.getY();
     }
 
+    @Override
     public int getWidth() {
         return (int) this.ellipse.getWidth();
     }
 
+    @Override
     public int getHeight() {
         return (int) this.ellipse.getHeight();
     }
 
+    @Override
     public Point getCenter() {
         return new Point((int) ellipse.getCenterX(), (int) ellipse.getCenterY());
     }
 
+    @Override
     public String getName() {
 //        return "Node"+getNumber();
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public Node getNode() {
         return this.node;
     }
 
+    @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.fill(ellipse);
@@ -80,14 +92,17 @@ public class NodeViewImpl implements NodeView {
         g2.setStroke(new BasicStroke(1));
     }
 
+    @Override
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
 
+    @Override
     public boolean isSelected() {
         return this.selected;
     }
 
+    @Override
     public boolean contains(int x, int y) {
         return this.ellipse.contains(x, y);
     }
