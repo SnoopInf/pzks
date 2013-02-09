@@ -36,7 +36,7 @@ public interface GraphView {
 
     void removeLinkView(LinkView linkView);
     
-    Collection getLinkViews();
+    Collection<LinkView> getLinkViews();
     
-    Collection getNodeViews();
+    Collection<NodeView> getNodeViews();
 }

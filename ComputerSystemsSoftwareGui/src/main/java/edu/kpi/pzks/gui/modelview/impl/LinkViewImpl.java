@@ -31,18 +31,22 @@ public class LinkViewImpl implements LinkView {
         this.toNodeView = toNodeView;
     }
 
+    @Override
     public Link getLink() {
         return this.link;
     }
 
+    @Override
     public void setBendPoint(int x, int y) {
         this.bendPoint = new Point(x, y);
     }
 
+    @Override
     public Point getBendPoint() {
         return bendPoint;
     }
 
+    @Override
     public NodeView getFromNodeView() {
         return fromNodeView;
     }
@@ -51,6 +55,7 @@ public class LinkViewImpl implements LinkView {
         this.fromNodeView = fromNodeView;
     }
 
+    @Override
     public NodeView getToNodeView() {
         return toNodeView;
     }
@@ -59,6 +64,7 @@ public class LinkViewImpl implements LinkView {
         this.toNodeView = toNodeView;
     }
 
+    @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         throw new UnsupportedOperationException("Not supported yet.");
@@ -70,14 +76,17 @@ public class LinkViewImpl implements LinkView {
 //        return new LinkPopup(this);
     }
 
+    @Override
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
 
+    @Override
     public boolean isSelected() {
         return this.selected;
     }
 
+    @Override
     public boolean contains(int x, int y) {
         int boxX = x - HIT_BOX_SIZE / 2;
         int boxY = y - HIT_BOX_SIZE / 2;
