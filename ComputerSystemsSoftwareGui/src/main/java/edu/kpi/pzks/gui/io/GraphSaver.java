@@ -1,6 +1,7 @@
 package edu.kpi.pzks.gui.io;
 
 import edu.kpi.pzks.core.exceptions.GraphException;
+import edu.kpi.pzks.gui.modelview.GraphView;
 import java.io.File;
 
 /**
@@ -9,6 +10,6 @@ import java.io.File;
  */
 public interface GraphSaver {
 
-    void saveToFile(File file) throws GraphException;
+    void saveToFile(GraphView graphView, File file) throws GraphException;
 
 }
