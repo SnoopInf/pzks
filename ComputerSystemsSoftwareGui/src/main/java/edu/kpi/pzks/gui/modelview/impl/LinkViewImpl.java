@@ -22,11 +22,15 @@ public class LinkViewImpl implements LinkView {
     protected boolean selected;
     protected Link link;
     private static final int HIT_BOX_SIZE = 6;
+    
+    public LinkViewImpl(Link link) {
+        this.link = link;
+        this.fromNodeView = null;
+        this.toNodeView = null;
+    }
 
-    public LinkViewImpl(NodeView fromNodeView, NodeView toNodeView) {
-        Node fromNode = fromNodeView.getNode();
-        Node toNode = toNodeView.getNode();
-        this.link = new Link(fromNode, toNode);
+    public LinkViewImpl(NodeView fromNodeView, NodeView toNodeView, Link link) {
+        this.link = link;
         this.fromNodeView = fromNodeView;
         this.toNodeView = toNodeView;
     }
