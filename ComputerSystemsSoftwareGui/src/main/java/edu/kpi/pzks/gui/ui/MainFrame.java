@@ -20,6 +20,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
@@ -146,8 +147,14 @@ public class MainFrame extends JFrame {
     private Container getMainPane(JPanel taskPanel, JPanel systemPanel) {
         JSplitPane pane = new JSplitPane();
         pane.setDividerLocation(INIT_WIDTH / 2);
-        pane.setLeftComponent(taskPanel);
-        pane.setRightComponent(systemPanel);
+        
+        JScrollPane taskPane = new JScrollPane();
+        taskPane.setViewportView(taskPanel);
+        pane.setLeftComponent(taskPane);
+        
+        JScrollPane systemPane = new JScrollPane();
+        systemPane.setViewportView(systemPanel);
+        pane.setRightComponent(systemPane);
         return pane;
     }
 
