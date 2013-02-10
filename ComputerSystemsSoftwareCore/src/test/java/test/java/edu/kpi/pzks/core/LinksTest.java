@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * @author Aloren
+ * @author Kirill Davidenko
  */
 public class LinksTest {
 
