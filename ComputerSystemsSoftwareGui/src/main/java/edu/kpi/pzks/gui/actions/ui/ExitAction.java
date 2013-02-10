@@ -1,6 +1,6 @@
-package edu.kpi.pzks.gui.actions;
+package edu.kpi.pzks.gui.actions.ui;
 
-import edu.kpi.pzks.gui.ui.GraphPanel;
+import edu.kpi.pzks.gui.ui.MainFrame;
 import java.awt.event.ActionEvent;
 
 /**
@@ -9,8 +9,8 @@ import java.awt.event.ActionEvent;
  */
 public class ExitAction extends MainAction {
 
-    public ExitAction(GraphPanel graphPanel) {
-        super(graphPanel);
+    public ExitAction(MainFrame mainFrame) {
+        super(mainFrame);
     }
 
     @Override

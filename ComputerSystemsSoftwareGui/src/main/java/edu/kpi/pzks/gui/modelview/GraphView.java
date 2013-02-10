@@ -3,7 +3,7 @@ package edu.kpi.pzks.gui.modelview;
 import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Collection;
 
 /**
@@ -12,7 +12,7 @@ import java.util.Collection;
  */
 public interface GraphView {
 
-    void paint(Graphics g);
+    void paint(Graphics2D g2);
 
     Graph getGraph();
 

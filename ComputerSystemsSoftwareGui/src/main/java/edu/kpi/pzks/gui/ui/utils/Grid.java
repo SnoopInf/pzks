@@ -1,6 +1,6 @@
 package edu.kpi.pzks.gui.ui.utils;
 
-import edu.kpi.pzks.gui.utils.CONSTANTS;
+import edu.kpi.pzks.gui.utils.COLORS;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 
@@ -31,7 +31,7 @@ public class Grid {
 
     public void paint(Graphics2D g, int width, int height) {
         if (showGrid) {
-            g.setColor(CONSTANTS.GRID_COLOR);
+            g.setColor(COLORS.GRID_COLOR);
             paintVerticalLines(width, g, height);
             paintHorizontalLines(height, g, width);
         }
