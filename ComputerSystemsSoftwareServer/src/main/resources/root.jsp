@@ -17,7 +17,7 @@
 <script type="text/javascript" src="libs/mxgraph/mxClient.js"></script>
 </head>
 <body>
-    <div class="page-header" style="margin-bottom: 0">
+    <div class="page-header" style="margin-bottom: 0; padding-bottom: 0">
         <h1>Computer Systems Software <small>Laboratory work #1</small></h1>
     </div>
     <div id="central">
@@ -26,8 +26,12 @@
                <ul id="navigation" class="breadcrumb">
                </ul>
 	        </div>
-	        <div id="menubar"></div>
-	        <div>
+	        <div id="menubar" class="navbar-inner">
+	           <button class='btn'><img src="images/new.png"/></button>
+	           <button class='btn'><img src="images/save.png"/></button>
+	           <button class='btn'><img src="images/open.png"/></button>
+	        </div>
+	        <div id="outer">
 	            <div id="left">
 	                <img src="images/left.png"></img>
 	            </div>
