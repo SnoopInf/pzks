@@ -1,12 +1,12 @@
 package edu.kpi.pzks.core.model;
 
 import edu.kpi.pzks.core.listener.IChangeListener;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
  * @author Aloren
  */
 public class Graph implements Serializable {
@@ -116,10 +116,9 @@ public class Graph implements Serializable {
 //        }
 //        selectedNodes.clear();
 //    }
+
     /**
      * Removes node from the graph and the links that are connected with it.
-     *
-     * @param pn node to removeAllLinksFor from the graph.
      */
 //    public ArrayList<GraphObject> getNodesInsideRectangle(Rectangle rect) {
 //        ArrayList<GraphObject> selected = new ArrayList<>();

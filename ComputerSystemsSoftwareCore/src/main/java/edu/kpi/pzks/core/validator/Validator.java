@@ -4,12 +4,16 @@ package edu.kpi.pzks.core.validator;
 import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
+
 import java.util.*;
 
 /**
  * Author: Kirill Davidenko Date: 07.02.13 Time: 21:14
  */
 public class Validator {
+
+    public static final Locale locale = Locale.getDefault();
+    private ResourceBundle messages = ResourceBundle.getBundle("messages", locale);
 
     public void validate(List<Node> nodes, List<Link> links) {
         validateCycles(nodes, links);
@@ -26,10 +30,16 @@ public class Validator {
 
         List<Node> roots = new ArrayList<Node>(nodes);
         Set<Node> notRoots = new HashSet<Node>();
+
         for (Link edge : edges) {
             notRoots.add(edge.getToNode());
         }
         roots.removeAll(notRoots);
+
+        if (roots.isEmpty()) {
+            throw new ValidationException(messages.getString("core.validation.error.cycles.present"));
+        }
+
         for (Node root : roots) {
             deepSearch(root, new HashSet<Node>(Arrays.asList(root)));
         }
@@ -39,7 +49,7 @@ public class Validator {
     private void deepSearch(Node root, Set<Node> path) {
         for (Node outputNodes : root.getOutputNodes()) {
             if (path.contains(outputNodes)) {
-                throw new ValidationException("Граф имеет цикл!");
+                throw new ValidationException(messages.getString("core.validation.error.cycles.present"));
             }
             path.add(root);
             deepSearch(root, new HashSet<Node>(path));
@@ -63,7 +73,7 @@ public class Validator {
                 }
             }
             if (!hasEdge) {
-                throw new ValidationException("Граф не связан");
+                throw new ValidationException(messages.getString("core.validation.error.graph.inconsistent"));
             }
         }
     }

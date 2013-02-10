@@ -3,7 +3,6 @@ package edu.kpi.pzks.core.model;
 import java.util.Objects;
 
 /**
- *
  * @author Aloren
  */
 public class Link extends GraphObject {
@@ -11,7 +10,7 @@ public class Link extends GraphObject {
     private static final long serialVersionUID = 3;
     private Node fromNode;
     private Node toNode;
-    
+
     public Link() {
         this(null, null);
     }
@@ -45,6 +44,7 @@ public class Link extends GraphObject {
 //        arrow.pn2 = node2;
     }
 
+    //TODO must next 4 methods be public? can they be called explicitly? maybe call them on link creation/deletion?
     public void removeFromOutputNodes() {
         fromNode.getOutputNodes().remove(toNode);
     }
@@ -78,12 +78,6 @@ public class Link extends GraphObject {
             return false;
         }
         final Link other = (Link) obj;
-        if (!Objects.equals(this.fromNode, other.fromNode)) {
-            return false;
-        }
-        if (!Objects.equals(this.toNode, other.toNode)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.fromNode, other.fromNode) && Objects.equals(this.toNode, other.toNode);
     }
 }
