@@ -70,7 +70,6 @@ public class NodeViewImpl implements NodeView {
     @Override
     public String getName() {
         return "Node w=" + node.getWeight();
-//        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -85,6 +84,10 @@ public class NodeViewImpl implements NodeView {
         g2.setColor(COLORS.NODE_BORDER_COLOR);
         g2.setStroke(new BasicStroke(1.5f));
         g2.draw(ellipse);
+        //TODO add string length to position weight right
+        int x = (int) (ellipse.x + ellipse.width / 2);
+        int y = (int) (ellipse.y + ellipse.height / 2);
+        g2.drawString(Integer.toString(node.getWeight()), x, y);
     }
 
     @Override

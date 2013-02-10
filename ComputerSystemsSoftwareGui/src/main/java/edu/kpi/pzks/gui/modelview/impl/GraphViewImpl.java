@@ -27,10 +27,10 @@ public class GraphViewImpl implements GraphView {
 
     @Override
     public void paint(Graphics2D g2) {
-        for(NodeView nodeView : nodeViews) {
+        for (NodeView nodeView : nodeViews) {
             nodeView.paint(g2);
         }
-        for(LinkView linkView : linkViews) {
+        for (LinkView linkView : linkViews) {
             linkView.paint(g2);
         }
     }
@@ -54,8 +54,8 @@ public class GraphViewImpl implements GraphView {
 
     @Override
     public NodeView getNodeView(Node node) {
-        for(NodeView nodeView : nodeViews) {
-            if(nodeView.getNode().equals(node)) {
+        for (NodeView nodeView : nodeViews) {
+            if (nodeView.getNode().equals(node)) {
                 return nodeView;
             }
         }
@@ -64,8 +64,8 @@ public class GraphViewImpl implements GraphView {
 
     @Override
     public LinkView getLinkView(Link link) {
-        for(LinkView linkView : linkViews) {
-            if(linkView.getLink().equals(link)) {
+        for (LinkView linkView : linkViews) {
+            if (linkView.getLink().equals(link)) {
                 return linkView;
             }
         }
@@ -74,8 +74,8 @@ public class GraphViewImpl implements GraphView {
 
     @Override
     public void removeNode(Node node) {
-        for(NodeView nodeView : nodeViews) {
-            if(nodeView.getNode().equals(node)) {
+        for (NodeView nodeView : nodeViews) {
+            if (nodeView.getNode().equals(node)) {
                 nodeViews.remove(nodeView);
                 graph.removeNode(node);
                 return;
@@ -85,8 +85,8 @@ public class GraphViewImpl implements GraphView {
 
     @Override
     public void removeLink(Link link) {
-        for(LinkView linkView : linkViews) {
-            if(linkView.getLink().equals(link)) {
+        for (LinkView linkView : linkViews) {
+            if (linkView.getLink().equals(link)) {
                 linkViews.remove(linkView);
                 graph.removeLink(link);
                 return;
@@ -106,8 +106,8 @@ public class GraphViewImpl implements GraphView {
 
     @Override
     public NodeView getNodeViewAtPoint(int x, int y) {
-        for(NodeView nodeView : nodeViews) {
-            if(nodeView.contains(x, y)) {
+        for (NodeView nodeView : nodeViews) {
+            if (nodeView.contains(x, y)) {
                 return nodeView;
             }
         }
@@ -116,8 +116,8 @@ public class GraphViewImpl implements GraphView {
 
     @Override
     public LinkView getLinkViewAtPoint(int x, int y) {
-        for(LinkView linkView : linkViews) {
-            if(linkView.contains(x, y)) {
+        for (LinkView linkView : linkViews) {
+            if (linkView.contains(x, y)) {
                 return linkView;
             }
         }
