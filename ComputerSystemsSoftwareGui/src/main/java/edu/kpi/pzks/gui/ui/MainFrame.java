@@ -1,5 +1,9 @@
 package edu.kpi.pzks.gui.ui;
 
+import edu.kpi.pzks.gui.actions.graph.LinkCreationToolAction;
+import edu.kpi.pzks.gui.actions.graph.NodeCreationToolAction;
+import edu.kpi.pzks.gui.actions.ui.OpenAction;
+import edu.kpi.pzks.gui.actions.ui.SaveAsAction;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -31,10 +35,9 @@ public class MainFrame extends JFrame {
     public static final Locale locale = Locale.getDefault();//Locale.forLanguageTag("ru")
     private final int TOOLBAR_ORIENTATION = JToolBar.HORIZONTAL;
     private final String iconsPath = "/icons";
-    
     private ResourceBundle resource = ResourceBundle.getBundle("Menu", locale);
-    private JPanel systemPanel;
-    private JPanel taskPanel;
+    private GraphPanel systemPanel;
+    private GraphPanel taskPanel;
 
     public static void main(String[] args) {
         try {
@@ -49,12 +52,12 @@ public class MainFrame extends JFrame {
 
     public MainFrame(String title) {
         super(title);
+        this.taskPanel = createTaskPanel();
+        this.systemPanel = createSystemPanel();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setJMenuBar(getMainMenuBar());
         add(getToolBar(TOOLBAR_ORIENTATION), BorderLayout.NORTH);
-        this.taskPanel = getTaskPanel();
-        this.systemPanel = getSystemPanel();
-        setContentPane(getMainPane(taskPanel, systemPanel));
+        add(getMainPane(taskPanel, systemPanel), BorderLayout.CENTER);
         setSize(INIT_WIDTH, INIT_HEIGHT);
         setLocationRelativeTo(null);
     }
@@ -99,11 +102,13 @@ public class MainFrame extends JFrame {
         toolBar.setFloatable(false);
 
         ImageIcon openIcon = new ImageIcon(getClass().getResource(iconsPath + "/open.png"));
-        JButton openButton = new JButton(openIcon);
+        JButton openButton = new JButton(new OpenAction(this));
+        openButton.setIcon(openIcon);
         openButton.setToolTipText(resource.getString("open"));
 
         ImageIcon saveIcon = new ImageIcon(getClass().getResource(iconsPath + "/save.png"));
-        JButton saveButton = new JButton(saveIcon);
+        JButton saveButton = new JButton(new SaveAsAction(this));
+        saveButton.setIcon(saveIcon);
         saveButton.setToolTipText(resource.getString("save"));
 
         ImageIcon taskIcon = new ImageIcon(getClass().getResource(iconsPath + "/task.png"));
@@ -114,10 +119,21 @@ public class MainFrame extends JFrame {
         JButton genSystemGraphButton = new JButton(systemIcon);
         genSystemGraphButton.setToolTipText(resource.getString("generateSystemGraph"));
 
+        ImageIcon nodeIcon = new ImageIcon(getClass().getResource(iconsPath + "/node.png"));
+        JButton newNodeButton = new JButton(new NodeCreationToolAction(this));
+        newNodeButton.setIcon(nodeIcon);
+
+        ImageIcon linkIcon = new ImageIcon(getClass().getResource(iconsPath + "/link.png"));
+        JButton newLinkButton = new JButton(new LinkCreationToolAction(this));
+        newLinkButton.setIcon(linkIcon);
+
         toolBar.add(openButton);
         toolBar.add(saveButton);
         toolBar.add(genTaskGraphButton);
         toolBar.add(genSystemGraphButton);
+        toolBar.add(newNodeButton);
+        toolBar.add(newLinkButton);
+
         return toolBar;
     }
 
@@ -129,16 +145,26 @@ public class MainFrame extends JFrame {
         return pane;
     }
 
-    private JPanel getTaskPanel() {
-        JPanel taskPanel = new GraphPanel();
-        taskPanel.setBorder(BorderFactory.createTitledBorder(resource.getString("taskGraph")));
-        return taskPanel;
+    private GraphPanel createTaskPanel() {
+        GraphPanel localTaskPanel = new GraphPanel();
+        localTaskPanel.setName("taskPanel");
+        localTaskPanel.setBorder(BorderFactory.createTitledBorder(resource.getString("taskGraph")));
+        return localTaskPanel;
 
     }
 
-    private JPanel getSystemPanel() {
-        JPanel systemPanel = new GraphPanel();
-        systemPanel.setBorder(BorderFactory.createTitledBorder(resource.getString("systemGraph")));
+    private GraphPanel createSystemPanel() {
+        GraphPanel localSystemPanel = new GraphPanel();
+        localSystemPanel.setName("systemPanel");
+        localSystemPanel.setBorder(BorderFactory.createTitledBorder(resource.getString("systemGraph")));
+        return localSystemPanel;
+    }
+
+    public GraphPanel getSystemPanel() {
         return systemPanel;
+    }
+
+    public GraphPanel getTaskPanel() {
+        return taskPanel;
     }
 }
