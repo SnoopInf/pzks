@@ -1,10 +1,8 @@
 package edu.kpi.pzks.gui.modelview.impl;
 
 import edu.kpi.pzks.core.model.Link;
-import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Line2D;
@@ -69,8 +67,7 @@ public class LinkViewImpl implements LinkView {
     }
 
     @Override
-    public void paint(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
+    public void paint(Graphics2D g2) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

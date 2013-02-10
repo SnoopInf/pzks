@@ -4,7 +4,6 @@ import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
 import java.awt.BasicStroke;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Ellipse2D;
@@ -28,6 +27,7 @@ public class NodeViewImpl implements NodeView {
     public NodeViewImpl(Node node) {
         this(node, 0, 0);
     }
+
     public NodeViewImpl(Node node, double x, double y) {
         this.node = node;
         this.ellipse = new Ellipse2D.Double(x, y,
@@ -68,8 +68,8 @@ public class NodeViewImpl implements NodeView {
 
     @Override
     public String getName() {
-//        return "Node"+getNumber();
-        throw new UnsupportedOperationException("Not supported yet.");
+        return "Node w=" + node.getWeight();
+//        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -78,18 +78,12 @@ public class NodeViewImpl implements NodeView {
     }
 
     @Override
-    public void paint(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
+    public void paint(Graphics2D g2) {
+        g2.setColor(CONSTANTS.NODE_COLOR);
         g2.fill(ellipse);
-        if (isSelected()) {
-            g2.setStroke(new BasicStroke(3));
-            g2.setColor(CONSTANTS.BORDER_SELECTED_COLOR);
-        } else {
-            g2.setColor(CONSTANTS.BORDER_COLOR);
-        }
+        g2.setColor(CONSTANTS.NODE_BORDER_COLOR);
+        g2.setStroke(new BasicStroke(1.5f));
         g2.draw(ellipse);
-        g2.drawString(getName(), (int) ellipse.x - 10, (int) ellipse.y - 5);
-        g2.setStroke(new BasicStroke(1));
     }
 
     @Override

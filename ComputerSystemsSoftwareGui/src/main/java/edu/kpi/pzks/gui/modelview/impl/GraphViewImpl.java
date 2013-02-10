@@ -6,7 +6,7 @@ import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.gui.modelview.GraphView;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,12 +26,12 @@ public class GraphViewImpl implements GraphView {
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paint(Graphics2D g2) {
         for(NodeView nodeView : nodeViews) {
-            nodeView.paint(g);
+            nodeView.paint(g2);
         }
         for(LinkView linkView : linkViews) {
-            linkView.paint(g);
+            linkView.paint(g2);
         }
     }
 

@@ -1,6 +1,6 @@
 package edu.kpi.pzks.gui.modelview;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.JPopupMenu;
 
 /**
@@ -13,7 +13,7 @@ public interface GraphObjectView {
 
     boolean isSelected();
 
-    void paint(Graphics g);
+    void paint(Graphics2D g2);
 
     boolean contains(int x, int y);
 
