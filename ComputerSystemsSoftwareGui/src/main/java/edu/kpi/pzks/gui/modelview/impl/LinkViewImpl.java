@@ -78,16 +78,6 @@ public class LinkViewImpl implements LinkView {
     }
 
     @Override
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    @Override
-    public boolean isSelected() {
-        return this.selected;
-    }
-
-    @Override
     public boolean contains(int x, int y) {
         int boxX = x - HIT_BOX_SIZE / 2;
         int boxY = y - HIT_BOX_SIZE / 2;

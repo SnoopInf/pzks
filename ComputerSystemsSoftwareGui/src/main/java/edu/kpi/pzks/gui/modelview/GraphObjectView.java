@@ -9,10 +9,6 @@ import javax.swing.JPopupMenu;
  */
 public interface GraphObjectView {
 
-    void setSelected(boolean selected);
-
-    boolean isSelected();
-
     void paint(Graphics2D g2);
 
     boolean contains(int x, int y);

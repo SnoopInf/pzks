@@ -91,16 +91,6 @@ public class NodeViewImpl implements NodeView {
     }
 
     @Override
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    @Override
-    public boolean isSelected() {
-        return this.selected;
-    }
-
-    @Override
     public boolean contains(int x, int y) {
         return this.ellipse.contains(x, y);
     }
