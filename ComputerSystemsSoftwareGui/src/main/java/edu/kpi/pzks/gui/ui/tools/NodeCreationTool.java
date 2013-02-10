@@ -10,7 +10,6 @@ import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Point2D;
 
 /**
  *
@@ -32,23 +31,13 @@ public class NodeCreationTool implements Tool {
     @Override
     public void paint(Graphics2D g2) {
         if (needToPaint) {
-            g2.setColor(COLORS.NODE_COLOR);
-            g2.fillOval(myMousePosition.x, myMousePosition.y,
-                    CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
-            g2.setColor(COLORS.NODE_BORDER_COLOR);
-            g2.setStroke(new BasicStroke(1.5f));
-            g2.drawOval(myMousePosition.x, myMousePosition.y,
-                    CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
+            paintNode(g2);
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        Point2D.Double p = graphPanel.getGrid().
-                getSnapToGridPoint(me.getX(), me.getY());
-        myMousePosition.x = (int) p.x;
-        myMousePosition.y = (int) p.y;
-        createNode(myMousePosition.x, myMousePosition.y);
+        createNode(me);
         graphPanel.repaint();
     }
 
@@ -83,15 +72,32 @@ public class NodeCreationTool implements Tool {
     @Override
     public void mouseMoved(MouseEvent me) {
         if (needToPaint) {
-            Point2D.Double p = graphPanel.getGrid().getSnapToGridPoint(me.getX(), me.getY());
-            myMousePosition.x = (int) p.x;
-            myMousePosition.y = (int) p.y;
+            myMousePosition = graphPanel.getGrid().getSnapToGridPoint(me.getX(), me.getY());
             graphPanel.repaint();
         }
     }
 
-    protected void createNode(int x, int y) {
-        NodeView nodeView = new NodeViewImpl(new Node(), x, y);
+    protected void createNode(MouseEvent me) {
+        Point point = graphPanel.getGrid().getSnapToGridPoint(me.getX(), me.getY());
+        NodeView nodeView = new NodeViewImpl(new Node(), point.x, point.y);
         graphPanel.getGraphView().addNodeView(nodeView);
+    }
+
+    private void paintNodeBorder(Graphics2D g2) {
+        g2.setColor(COLORS.NODE_COLOR);
+        g2.fillOval(myMousePosition.x, myMousePosition.y,
+                CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
+    }
+
+    private void paintNodeInside(Graphics2D g2) {
+        g2.setColor(COLORS.NODE_BORDER_COLOR);
+        g2.setStroke(new BasicStroke(1.5f));
+        g2.drawOval(myMousePosition.x, myMousePosition.y,
+                CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
+    }
+
+    private void paintNode(Graphics2D g2) {
+        paintNodeBorder(g2);
+        paintNodeInside(g2);
     }
 }
