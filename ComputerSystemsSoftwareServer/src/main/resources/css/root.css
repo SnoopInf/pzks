@@ -16,7 +16,6 @@ body {
 
 #copyright {
 	border-top: 1px solid #e5e5e5;
-    padding: 20px 0;
 }
 
 .page-header, #copyright {
@@ -40,6 +39,7 @@ body {
 }
 
 #left {
+	visibility: hidden;
 	float: left;
 }
 
@@ -96,4 +96,11 @@ body {
 
 #navigationbar {
 	margin-top: 5px;
+}
+
+#description {
+	font-weight: bold;
+	font-size: 18px;
+	position: absolute;
+	left: 45%;
 }

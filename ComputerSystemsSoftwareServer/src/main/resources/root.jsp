@@ -22,11 +22,6 @@
 	    <div id="viewer">
 	        <div id="navigationbar">
                <ul id="navigation" class="breadcrumb">
-                   <li class="active"><a href="#">Step 1</a> <span class="divider">/</span></li>
-                   <li><a href="#">Step 2</a> <span class="divider">/</span></li>
-                   <li><a href="#">Step 3</a> <span class="divider">/</span></li>
-                   <li>Step 4</li>
-                   <li style="float:right" id="currentstep">tst</li>
                </ul>
 	        </div>
 	        <div id="menubar"></div>
@@ -41,7 +36,7 @@
 	               <div id="stepouter">
 	                   <div id="fadeleft"></div>
 		               <div class="step" style="background:grey"></div>
-	                   <div class="step" style="background:blue"></div>
+	                   <div class="step" style="background:green"></div>
 	                   <div class="step" style="background:yellow"></div>
 	                   <div class="step" style="background:red"></div>
 	                   <div id="faderight"></div>
