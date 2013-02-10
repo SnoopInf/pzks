@@ -5,8 +5,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Computer Systems Software Server</title>
 <link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css" />
+<link rel="stylesheet" href="libs/messi/messi.min.css" />
 <link rel="stylesheet" href="css/root.css" />
 <script type="text/javascript" src="libs/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="libs/messi/messi.min.js"></script>
 <script type="text/javascript" src="js/root.js"></script>
 <script type="text/javascript" src="js/navigation.js"></script>
 <script type="text/javascript">

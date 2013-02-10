@@ -1,5 +1,11 @@
 var shift = 0;
-var stepDescriptions = ['Build task graph', 'Build system graph', 'Immerse task', 'Statistics'];
+var stepDescriptions = ['Build task graph', 'Build system graph', 'Task immersion', 'Statistics'];
+var help = [
+            'In this step you have to build task graph. Drag`n`drop vertices from menubar, connect them with mouse and proceed to the next step',
+            'Build system graph',
+            'Immerse task',
+            'Statistics'
+            ];
 
 function navigateToStep(step) {
 	$('#stepouter').animate({left: '-' + 1002 * step + 'px'});
@@ -16,6 +22,7 @@ function setBreadscrumb() {
 	}
 	$('#navigation').append('<li class="active">Step ' + (shift + 1) + '</li>');
 	$('#navigation').append('<li id="description">' + stepDescriptions[shift] + '</li>');
+	$('#navigation').append('<li id="help" onclick="showHelp()"><img src="images/help.png"/></li>');
 	handleButtonsVisibility();
 }
 
@@ -30,6 +37,10 @@ function handleButtonsVisibility() {
 	} else {
 		$('#right').css('visibility', 'visible');
 	}
+}
+
+function showHelp() {
+	new Messi(help[shift], {title: 'Help', titleClass: 'info', buttons: [{id: 0, label: 'Close', val: 'X'}]});
 }
 
 $(document).ready(function() {

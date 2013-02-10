@@ -104,3 +104,9 @@ body {
 	position: absolute;
 	left: 45%;
 }
+
+#help {
+	float: right;
+	cursor: pointer;
+	margin-top: -6px;
+}
