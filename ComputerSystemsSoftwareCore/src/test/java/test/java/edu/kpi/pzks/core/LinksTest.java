@@ -18,7 +18,6 @@ public class LinksTest {
     Node node2;
     Node node3;
     Node node4;
-
     Link link12;
     Link link13;
     Link link34;
@@ -33,8 +32,16 @@ public class LinksTest {
         node4 = new Node();
 
         link12 = new Link(node1, node2);
+        assertTrue(node1.getOutputNodes().contains(node2));
+        assertTrue(node2.getInputNodes().contains(node1));
+
         link13 = new Link(node1, node3);
+        assertTrue(node1.getOutputNodes().contains(node3));
+        assertTrue(node3.getInputNodes().contains(node1));
+
         link34 = new Link(node3, node4);
+        assertTrue(node3.getOutputNodes().contains(node4));
+        assertTrue(node4.getInputNodes().contains(node3));
 
         links.add(link12);
         links.add(link13);
@@ -43,18 +50,30 @@ public class LinksTest {
 
     @Test
     public void testRemoveLinkForNode() {
-        links.removeAllLinksFor(node3);
+        links.removeAllLinksForNode(node3);
+
+        assertEquals(1, links.size());
+
         assertFalse(links.contains(link13));
         assertFalse(links.contains(link34));
-        assertEquals(1, links.size());
+
+        assertFalse(node1.getOutputNodes().contains(node3));
+        assertFalse(node3.getInputNodes().contains(node1));
+
+        assertFalse(node3.getOutputNodes().contains(node4));
+        assertFalse(node4.getInputNodes().contains(node3));
     }
 
     @Test
     public void testRemoveLinkBetweenNodes() {
         links.removeLinkBetweenNodes(node1, node2);
+        assertEquals(2, links.size());
+
         assertFalse(links.contains(link12));
         assertTrue(links.contains(link13));
-        assertEquals(2, links.size());
-    }
 
+        assertTrue(!node1.getOutputNodes().contains(node2));
+
+
+    }
 }

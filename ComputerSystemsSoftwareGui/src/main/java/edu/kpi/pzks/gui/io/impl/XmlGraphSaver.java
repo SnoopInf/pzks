@@ -43,7 +43,7 @@ public class XmlGraphSaver implements GraphSaver {
             doc.appendChild(graphElement);
 
             Graph graph = graphView.getGraph();
-            
+
             Element dataElement = doc.createElement("data");
             Map<Node, Integer> idNodeMap = appendNodes(doc, dataElement, graph);
             Map<Link, Integer> idLinkMap = appendLinks(doc, dataElement, graph, idNodeMap);
@@ -64,7 +64,8 @@ public class XmlGraphSaver implements GraphSaver {
         }
     }
 
-    private Map<Node, Integer> appendNodes(Document doc, Element dataElement, Graph graph) throws DOMException {
+    private Map<Node, Integer> appendNodes(Document doc, 
+            Element dataElement, Graph graph) throws DOMException {
         Element nodesElement = doc.createElement("nodes");
         dataElement.appendChild(nodesElement);
         Map<Node, Integer> idNodeMap = new HashMap<>();
@@ -80,7 +81,8 @@ public class XmlGraphSaver implements GraphSaver {
         return idNodeMap;
     }
 
-    private Map<Link, Integer> appendLinks(Document doc, Element dataElement, Graph graph, Map<Node, Integer> idNodeMap) throws DOMException {
+    private Map<Link, Integer> appendLinks(Document doc, 
+            Element dataElement, Graph graph, Map<Node, Integer> idNodeMap) throws DOMException {
         Map<Link, Integer> idLinkMap = new HashMap<>();
         Element linksElement = doc.createElement("links");
         dataElement.appendChild(linksElement);
@@ -105,7 +107,8 @@ public class XmlGraphSaver implements GraphSaver {
         return idLinkMap;
     }
 
-    private void appendNodeViews(GraphView graphView, Document doc, Element viewElement, Map<Node, Integer> idNodeMap) throws DOMException {
+    private void appendNodeViews(GraphView graphView, Document doc, 
+            Element viewElement, Map<Node, Integer> idNodeMap) throws DOMException {
         Collection<NodeView> nodeViews = graphView.getNodeViews();
         Element nodeViewsElement = doc.createElement("nodeViews");
         for (NodeView nodeView : nodeViews) {
@@ -121,7 +124,8 @@ public class XmlGraphSaver implements GraphSaver {
         viewElement.appendChild(nodeViewsElement);
     }
 
-    private void appendLinkViews(GraphView graphView, Document doc, Element viewElement, Map<Link, Integer> idLinkMap) throws DOMException {
+    private void appendLinkViews(GraphView graphView, Document doc, 
+            Element viewElement, Map<Link, Integer> idLinkMap) throws DOMException {
         Collection<LinkView> linkViews = graphView.getLinkViews();
         Element linkViewsElement = doc.createElement("linkViews");
         for (LinkView linkView : linkViews) {

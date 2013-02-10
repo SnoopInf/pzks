@@ -2,7 +2,7 @@ package edu.kpi.pzks.gui.ui.utils;
 
 import edu.kpi.pzks.gui.utils.COLORS;
 import java.awt.Graphics2D;
-import java.awt.geom.Point2D;
+import java.awt.Point;
 
 /**
  *
@@ -37,13 +37,13 @@ public class Grid {
         }
     }
 
-    public Point2D.Double getSnapToGridPoint(int x, int y) {
+    public Point getSnapToGridPoint(int x, int y) {
         int xGrid = x / spacing;
         int yGrid = y / spacing;
         if (snapToGrid) {
-            return new Point2D.Double((int) xGrid * spacing, (int) yGrid * spacing);
+            return new Point(xGrid * spacing, yGrid * spacing);
         } else {
-            return new Point2D.Double(x, y);
+            return new Point(x, y);
         }
     }
 

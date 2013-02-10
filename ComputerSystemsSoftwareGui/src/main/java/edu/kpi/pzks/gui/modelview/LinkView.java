@@ -18,4 +18,10 @@ public interface LinkView extends GraphObjectView {
     NodeView getFromNodeView();
 
     NodeView getToNodeView();
+    
+    void setFromNodeView(NodeView nodeView);
+    
+    void setToNodeView(NodeView nodeView);
+    
+    void setLink(Link link);
 }
