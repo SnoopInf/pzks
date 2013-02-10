@@ -19,15 +19,23 @@ import javax.swing.AbstractAction;
 public class SelectionDraggingToolAction extends AbstractAction {
 
     private final MainFrame mainFrame;
-    private final GraphPanel graphPanel;
 
-    public SelectionDraggingToolAction(MainFrame mainFrame, GraphPanel graphPanel) {
+    public SelectionDraggingToolAction(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-        this.graphPanel = graphPanel;
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+        setToolsForPanel(mainFrame.getTaskPanel());
+        setToolsForPanel(mainFrame.getSystemPanel());
+    }
+
+    private void setToolsForPanel(GraphPanel taskPanel) {
+        Set<Tool> taskPanelTools = getNewTools(taskPanel);
+        taskPanel.setCurrentTools(taskPanelTools);
+    }
+
+    private Set<Tool> getNewTools(GraphPanel graphPanel) {
         //TODO where to store this tools???
         //when we press button some class must already know abpit them
         //but not instantiate!
@@ -36,6 +44,6 @@ public class SelectionDraggingToolAction extends AbstractAction {
         tools.add(new NodeSelectionTool(graphPanel));
         tools.add(new NodeDraggingTool(graphPanel));
         tools.add(new LinkDraggingTool(graphPanel));
-        this.graphPanel.setCurrentTools(tools);
+        return tools;
     }
 }
