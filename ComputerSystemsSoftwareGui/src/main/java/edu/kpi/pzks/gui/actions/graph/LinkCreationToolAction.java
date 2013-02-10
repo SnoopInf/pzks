@@ -1,4 +1,4 @@
-package edu.kpi.pzks.gui.actions;
+package edu.kpi.pzks.gui.actions.graph;
 
 import edu.kpi.pzks.gui.ui.MainFrame;
 import edu.kpi.pzks.gui.ui.tools.LinkCreationTool;
