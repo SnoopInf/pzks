@@ -39,7 +39,6 @@
 }
 
 #left {
-	visibility: hidden;
 	float: left;
 }
 
@@ -122,4 +121,5 @@
 
 #menubar {
 	border-radius: 0px;
+	height: 42px;
 }

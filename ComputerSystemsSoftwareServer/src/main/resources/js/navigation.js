@@ -1,4 +1,5 @@
 var shift = 0;
+var stepLabels = ['Task', 'System', 'Immersion', 'Statistics'];
 var stepDescriptions = ['Build task graph', 'Build system graph', 'Task immersion', 'Statistics'];
 var help = [
             'In this step you have to build task graph. Drag`n`drop vertices from menubar, connect them with mouse and proceed to the next step',
@@ -13,17 +14,18 @@ function navigateToStep(step) {
 	$('#fadeleft').animate({left: '+' + 1002 * step - 150 + 'px'});
 	shift = step;
 	setBreadscrumb();
+	handleButtonsVisibility();
+	selectCorrespondingMenu();
 }
 
 function setBreadscrumb() {
 	$('#navigation').html('');
 	for (var i = 0; i < shift; i++) {
-		$('#navigation').append('<li><a href="#" onclick="navigateToStep(' + i + ')">Step ' + (i + 1) + '</a> <span class="divider">/</span></li>');
+		$('#navigation').append('<li><a href="#" onclick="navigateToStep(' + i + ')">' + stepLabels[i] + '</a> <span class="divider">/</span></li>');
 	}
-	$('#navigation').append('<li class="active">Step ' + (shift + 1) + '</li>');
+	$('#navigation').append('<li class="active">' + stepLabels[shift] + '</li>');
 	$('#navigation').append('<li id="description">' + stepDescriptions[shift] + '</li>');
 	$('#navigation').append('<li id="help" onclick="showHelp()"><img src="images/help.png"/></li>');
-	handleButtonsVisibility();
 }
 
 function handleButtonsVisibility() {
@@ -39,24 +41,26 @@ function handleButtonsVisibility() {
 	}
 }
 
+function selectCorrespondingMenu() {
+	$('#menubar').find('div').each(function(index) {
+		if (index == shift) {
+			$(this).show();
+		} else {
+			$(this).hide();
+		}
+	});
+}
+
 function showHelp() {
 	new Messi(help[shift], {title: 'Help', titleClass: 'info', buttons: [{id: 0, label: 'Close', val: 'X'}]});
 }
 
 $(document).ready(function() {
-	setBreadscrumb();
+	navigateToStep(shift);
 	$('#right').click(function() {
-		$('#stepouter').animate({left: '-=1002px'});
-		$('#faderight').animate({left: '+=1002px'});
-		$('#fadeleft').animate({left: '+=1002px'});
-		shift++;
-		setBreadscrumb();
+		navigateToStep(++shift);
 	});
 	$('#left').click(function() {
-		$('#stepouter').animate({left: '+=1002px'});
-		$('#faderight').animate({left: '-=1002px'});
-		$('#fadeleft').animate({left: '-=1002px'});
-		shift--;
-		setBreadscrumb();
+		navigateToStep(--shift);
 	});
 });
