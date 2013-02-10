@@ -9,8 +9,6 @@ import javax.ws.rs.core.MediaType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import edu.kpi.pzks.core.Main;
-
 @Path("/ajax")
 public final class AjaxController {
 
@@ -26,6 +24,6 @@ public final class AjaxController {
   @Path("/greeting")
   @Produces(MediaType.APPLICATION_JSON)
   public Object greeting() {
-    return Main.GREETING;
+    return "GREETING";
   }
 }
