@@ -27,9 +27,20 @@
                </ul>
 	        </div>
 	        <div id="menubar" class="navbar-inner">
-	           <button class='btn'><img src="images/new.png"/></button>
-	           <button class='btn'><img src="images/save.png"/></button>
-	           <button class='btn'><img src="images/open.png"/></button>
+	           <div>
+		           <button class='btn'><img src="images/new.png"/></button>
+	               <button class='btn'><img src="images/save.png"/></button>
+	               <button class='btn'><img src="images/open.png"/></button>
+	           </div>
+	           <div>
+                   <button class='btn'><img src="images/new.png"/></button>
+                   <button class='btn'><img src="images/save.png"/></button>
+                   <button class='btn'><img src="images/open.png"/></button>
+               </div>
+               <div>
+               </div>
+	           <div>
+               </div>
 	        </div>
 	        <div id="outer">
 	            <div id="left">
