@@ -2,6 +2,7 @@ package edu.kpi.pzks.gui.modelview.impl;
 
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.gui.modelview.NodeView;
+import edu.kpi.pzks.gui.utils.COLORS;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
@@ -79,9 +80,9 @@ public class NodeViewImpl implements NodeView {
 
     @Override
     public void paint(Graphics2D g2) {
-        g2.setColor(CONSTANTS.NODE_COLOR);
+        g2.setColor(COLORS.NODE_COLOR);
         g2.fill(ellipse);
-        g2.setColor(CONSTANTS.NODE_BORDER_COLOR);
+        g2.setColor(COLORS.NODE_BORDER_COLOR);
         g2.setStroke(new BasicStroke(1.5f));
         g2.draw(ellipse);
     }
