@@ -42,7 +42,7 @@ public class Graph implements Serializable {
 
     public void removeNode(Node node) {
         if (node != null) {
-            links.removeAllLinksFor(node);
+            links.removeAllLinksForNode(node);
             nodes.remove(node);
             notifyListener();
         }
@@ -51,16 +51,12 @@ public class Graph implements Serializable {
     public void addLink(Link link) {
         if (link != null) {
             links.add(link);
-            link.addToOutputNodes();
-            link.addToInputNodes();
         }
     }
 
     public void removeLink(Link link) {
         if (link != null) {
             links.remove(link);
-            link.removeFromOutputNodes();
-            link.removeFromInputNodes();
         }
     }
 

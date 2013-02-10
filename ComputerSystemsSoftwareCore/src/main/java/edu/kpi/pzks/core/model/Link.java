@@ -23,6 +23,8 @@ public class Link extends GraphObject {
         super(weight);
         this.fromNode = fromNode;
         this.toNode = toNode;
+        addToOutputNodes();
+        addToInputNodes();
     }
 
     public Node getFromNode() {
@@ -44,21 +46,28 @@ public class Link extends GraphObject {
 //        arrow.pn2 = node2;
     }
 
-    //TODO must next 4 methods be public? can they be called explicitly? maybe call them on link creation/deletion?
-    public void removeFromOutputNodes() {
-        fromNode.getOutputNodes().remove(toNode);
+    void removeFromOutputNodes() {
+        if (fromNode != null && toNode != null) {
+            fromNode.getOutputNodes().remove(toNode);
+        }
     }
 
-    public void removeFromInputNodes() {
-        toNode.getInputNodes().remove(fromNode);
+    void removeFromInputNodes() {
+        if (fromNode != null && toNode != null) {
+            toNode.getInputNodes().remove(fromNode);
+        }
     }
 
-    public void addToOutputNodes() {
-        fromNode.getOutputNodes().add(toNode);
+    private void addToOutputNodes() {
+        if (fromNode != null && toNode != null) {
+            fromNode.getOutputNodes().add(toNode);
+        }
     }
 
-    public void addToInputNodes() {
-        toNode.getInputNodes().add(fromNode);
+    private void addToInputNodes() {
+        if (fromNode != null && toNode != null) {
+            toNode.getInputNodes().add(fromNode);
+        }
     }
 
     @Override

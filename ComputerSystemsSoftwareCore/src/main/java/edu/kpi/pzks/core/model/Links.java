@@ -1,5 +1,6 @@
 package edu.kpi.pzks.core.model;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,22 +29,24 @@ public class Links extends HashSet<Link> {
     }
 
     //TODO is it possible to have more than 1 link between 2 nodes?
-    public void removeLinkBetweenNodes(Node node1, Node node2) {
+    public void removeLinkBetweenNodes(Node fromNode, Node toNode) {
         List<Link> linksToRemove = new LinkedList<>();
         for (Link link : this) {
-            if (link.getFromNode().equals(node1)
-                    && link.getToNode().equals(node2)) {
+            if (link.getFromNode().equals(fromNode)
+                    && link.getToNode().equals(toNode)) {
                 linksToRemove.add(link);
             }
         }
-        super.removeAll(linksToRemove);
+        removeAllLinks(linksToRemove);
     }
 
     public boolean remove(Link link) {
+        link.removeFromOutputNodes();
+        link.removeFromInputNodes();
         return super.remove(link);
     }
 
-    public void removeAllLinksFor(Node node) {
+    public void removeAllLinksForNode(Node node) {
         List<Link> linksToRemove = new LinkedList<>();
         for (Link link : this) {
             if (link.getFromNode().equals(node)
@@ -51,10 +54,16 @@ public class Links extends HashSet<Link> {
                 linksToRemove.add(link);
             }
         }
-        super.removeAll(linksToRemove);
+        removeAllLinks(linksToRemove);
     }
 
     public boolean contains(Link link) {
         return super.contains(link);
+    }
+    
+    private void removeAllLinks(Collection<Link> linksToRemove) {
+        for(Link link : linksToRemove) {
+            remove(link);
+        }
     }
 }
