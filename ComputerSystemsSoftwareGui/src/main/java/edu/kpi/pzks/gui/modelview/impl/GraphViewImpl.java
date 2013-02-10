@@ -27,11 +27,11 @@ public class GraphViewImpl implements GraphView {
 
     @Override
     public void paint(Graphics2D g2) {
-        for (NodeView nodeView : nodeViews) {
-            nodeView.paint(g2);
-        }
         for (LinkView linkView : linkViews) {
             linkView.paint(g2);
+        }
+        for (NodeView nodeView : nodeViews) {
+            nodeView.paint(g2);
         }
     }
 
