@@ -1,5 +1,6 @@
 package edu.kpi.pzks.gui.ui.tools;
 
+import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
@@ -7,6 +8,8 @@ import edu.kpi.pzks.gui.modelview.impl.LinkViewImpl;
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.utils.COLORS;
 import edu.kpi.pzks.gui.utils.PaintUtils;
+
+import javax.swing.*;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -46,10 +49,18 @@ public class LinkCreationTool implements Tool {
             } else { //second click
                 if (activeLinkView != null) {
                     activeLinkView.setToNodeView(nodeView);
-                    activeLinkView.setLink(new Link(activeLinkView.getFromNodeView().getNode(), nodeView.getNode()));
-                    graphPanel.getGraphView().addLinkView(activeLinkView);
-                    graphPanel.getSelectedNodeViews().clear();
-                    removeActiveLinkView();
+                    try {
+                        Link newLink = new Link(activeLinkView.getFromNodeView().getNode(), nodeView.getNode());
+                        activeLinkView.setLink(newLink);
+                        graphPanel.getGraphView().addLinkView(activeLinkView);
+                    }
+                    catch (ValidationException ex) {
+                        JOptionPane.showMessageDialog(null, ex.getLocalizedMessage());
+                    }
+                    finally {
+                        graphPanel.getSelectedNodeViews().clear();
+                        removeActiveLinkView();
+                    }
                 }
             }
         }
