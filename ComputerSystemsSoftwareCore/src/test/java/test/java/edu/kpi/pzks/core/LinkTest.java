@@ -1,5 +1,6 @@
 package test.java.edu.kpi.pzks.core;
 
+import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
 import org.junit.Test;
@@ -26,6 +27,11 @@ public class LinkTest {
         testLinkEquals();
         testLinkHashcode();
         testFromToNodesSetters();
+    }
+
+    @Test(expected=ValidationException.class)
+    public void testCyclicLinkAreProhibited() {
+        new Link(fromNode, fromNode);
     }
 
     private void testFromToNodesAreNull(Link testLinkWithoutFromToNodes) {

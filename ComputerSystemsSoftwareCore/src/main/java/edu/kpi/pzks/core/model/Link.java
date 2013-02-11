@@ -1,5 +1,8 @@
 package edu.kpi.pzks.core.model;
 
+import com.sun.deploy.uitoolkit.impl.fx.ui.resources.ResourceManager;
+import edu.kpi.pzks.core.exceptions.ValidationException;
+
 import java.util.Objects;
 
 /**
@@ -21,10 +24,17 @@ public class Link extends GraphObject {
 
     public Link(Node fromNode, Node toNode, int weight) {
         super(weight);
+        checkNodesEqual(fromNode, toNode);
         this.fromNode = fromNode;
         this.toNode = toNode;
         addToOutputNodes();
         addToInputNodes();
+    }
+
+    private void checkNodesEqual(Node fromNode, Node toNode) {
+        if((fromNode != null && toNode != null) && fromNode.hashCode() == toNode.hashCode()) {
+            throw new ValidationException(ResourceManager.getMessage("core.validation.error.cycles.direct"));
+        }
     }
 
     public Node getFromNode() {
@@ -32,6 +42,7 @@ public class Link extends GraphObject {
     }
 
     public void setFromNode(Node fromNode) {
+        checkNodesEqual(fromNode, this.toNode);
         this.fromNode = fromNode;
 //        arrow.pn1 = node1;
     }
@@ -41,6 +52,7 @@ public class Link extends GraphObject {
     }
 
     public void setToNode(Node toNode) {
+        checkNodesEqual(this.fromNode, toNode);
         this.toNode = toNode;
         //TODO please move me to gui
 //        arrow.pn2 = node2;
