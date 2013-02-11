@@ -1,16 +1,12 @@
 package edu.kpi.pzks.gui.ui.tools;
 
-import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.LinkViewImpl;
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.utils.COLORS;
-import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.PaintUtils;
-
-import javax.swing.*;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -50,19 +46,10 @@ public class LinkCreationTool implements Tool {
             } else { //second click
                 if (activeLinkView != null) {
                     activeLinkView.setToNodeView(nodeView);
-                    try {
-                        Link newLink = new Link(activeLinkView.getFromNodeView().getNode(), nodeView.getNode());
-                        activeLinkView.setLink(newLink);
-                        graphPanel.getGraphView().addLinkView(activeLinkView);
-                    }
-                    catch (ValidationException ex) {
-                        JOptionPane.showMessageDialog(null, ex.getLocalizedMessage(),
-                                CONSTANTS.ERROR_VALIDATION_TITLE, JOptionPane.ERROR_MESSAGE);
-                    }
-                    finally {
-                        graphPanel.getSelectedNodeViews().clear();
-                        removeActiveLinkView();
-                    }
+                    activeLinkView.setLink(new Link(activeLinkView.getFromNodeView().getNode(), nodeView.getNode()));
+                    graphPanel.getGraphView().addLinkView(activeLinkView);
+                    graphPanel.getSelectedNodeViews().clear();
+                    removeActiveLinkView();
                 }
             }
         }
@@ -115,9 +102,9 @@ public class LinkCreationTool implements Tool {
             double dx = PaintUtils.getLength(fromNodeViewCenter.x, mousePosition.x);
             double dy = PaintUtils.getLength(fromNodeViewCenter.y, mousePosition.y);
             double theta = Math.atan2(dy, dx);
-            Point2D.Double intersectionPoint = PaintUtils.getEllipseIntersectionPoint(theta, 
+            Point2D.Double intersectionPoint = PaintUtils.getEllipseIntersectionPoint(theta,
                     fromNodeView.getWidth(), fromNodeView.getHeight());
-            g2.drawLine((int) (fromNodeViewCenter.x + intersectionPoint.getX()), 
+            g2.drawLine((int) (fromNodeViewCenter.x + intersectionPoint.getX()),
                     (int) (fromNodeViewCenter.y + intersectionPoint.getY()),
                     mousePosition.x, mousePosition.y);
         }
