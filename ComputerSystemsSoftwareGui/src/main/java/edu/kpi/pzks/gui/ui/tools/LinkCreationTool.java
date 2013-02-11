@@ -7,6 +7,7 @@ import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.LinkViewImpl;
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.utils.COLORS;
+import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.PaintUtils;
 
 import javax.swing.*;
@@ -55,7 +56,8 @@ public class LinkCreationTool implements Tool {
                         graphPanel.getGraphView().addLinkView(activeLinkView);
                     }
                     catch (ValidationException ex) {
-                        JOptionPane.showMessageDialog(null, ex.getLocalizedMessage());
+                        JOptionPane.showMessageDialog(null, ex.getLocalizedMessage(),
+                                CONSTANTS.ERROR_VALIDATION_TITLE, JOptionPane.ERROR_MESSAGE);
                     }
                     finally {
                         graphPanel.getSelectedNodeViews().clear();

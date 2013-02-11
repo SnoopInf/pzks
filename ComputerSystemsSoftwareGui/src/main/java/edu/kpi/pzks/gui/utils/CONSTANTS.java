@@ -9,6 +9,7 @@ public class CONSTANTS {
     private static ResourceBundle defaults = ResourceBundle.getBundle("settings", Locale.getDefault());
 
     public static final String MAIN_TITLE = defaults.getString("main.title");
+    public static final String ERROR_VALIDATION_TITLE = defaults.getString("error.validation.title");
 
     public static final int NODE_WIDTH = Integer.parseInt(defaults.getString("node.width"));
     public static final int NODE_HEIGHT = Integer.parseInt(defaults.getString("node.height"));
