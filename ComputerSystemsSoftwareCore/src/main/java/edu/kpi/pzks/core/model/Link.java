@@ -1,9 +1,10 @@
 package edu.kpi.pzks.core.model;
 
-import com.sun.deploy.uitoolkit.impl.fx.ui.resources.ResourceManager;
 import edu.kpi.pzks.core.exceptions.ValidationException;
 
+import java.util.Locale;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 /**
  * @author Aloren
@@ -13,6 +14,9 @@ public class Link extends GraphObject {
     private static final long serialVersionUID = 3;
     private Node fromNode;
     private Node toNode;
+    public static final Locale locale = Locale.getDefault();
+    private ResourceBundle messages = ResourceBundle.getBundle("messages", locale);
+
 
     public Link() {
         this(null, null);
@@ -33,7 +37,7 @@ public class Link extends GraphObject {
 
     private void checkNodesEqual(Node fromNode, Node toNode) {
         if((fromNode != null && toNode != null) && fromNode.hashCode() == toNode.hashCode()) {
-            throw new ValidationException(ResourceManager.getMessage("core.validation.error.cycles.direct"));
+            throw new ValidationException(messages.getString("core.validation.error.cycles.direct"));
         }
     }
 
