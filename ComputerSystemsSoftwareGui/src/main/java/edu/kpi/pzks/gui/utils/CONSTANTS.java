@@ -6,7 +6,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class CONSTANTS {
-    private static ResourceBundle defaults = ResourceBundle.getBundle("settings", Locale.getDefault());
+    public static final Locale locale = Locale.forLanguageTag("ru");//Locale.getDefault();
+    private static ResourceBundle defaults = ResourceBundle.getBundle("settings", locale);
 
     public static final String MAIN_TITLE = defaults.getString("main.title");
     public static final String ERROR_VALIDATION_TITLE = defaults.getString("error.validation.title");

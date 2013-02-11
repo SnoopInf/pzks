@@ -21,10 +21,9 @@ public class MainFrame extends JFrame {
 
     public static final int INIT_HEIGHT = 600;
     public static final int INIT_WIDTH = 800;
-    public static final Locale locale = Locale.getDefault();//Locale.forLanguageTag("ru")
     private final int TOOLBAR_ORIENTATION = JToolBar.HORIZONTAL;
     private final String iconsPath = "/icons";
-    protected ResourceBundle resource = ResourceBundle.getBundle("Menu", locale);
+    protected ResourceBundle resource = ResourceBundle.getBundle("Menu", CONSTANTS.locale);
     protected GraphPanel systemPanel;
     protected GraphPanel taskPanel;
 
