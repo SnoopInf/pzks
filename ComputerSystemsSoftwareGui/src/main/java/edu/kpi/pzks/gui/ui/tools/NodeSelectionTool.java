@@ -32,12 +32,14 @@ public class NodeSelectionTool implements SelectionDraggingTool {
         NodeView selectedNodeView = graphPanel.getGraphView().getNodeViewAtPoint(x, y);
         if (selectedNodeView != null) {
             setSelectedNodeView(selectedNodeView);
-            graphPanel.repaint();
 //            if (me.getModifiers() == MouseEvent.BUTTON3_MASK) {
 //                JPopupMenu pp = selectedNodeView.getPopupMenu();
 //                pp.show(me.getComponent(), me.getX(), me.getY());
 //            }
+        } else{
+            clearSelected();
         }
+        graphPanel.repaint();
     }
 
     @Override
