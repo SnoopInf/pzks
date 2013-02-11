@@ -68,7 +68,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>edu.kpi.pzks.gui.ui.MainFrame</mainClass>
+                            <mainClass>edu.kpi.pzks.gui.ui.CustomMainFrame</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

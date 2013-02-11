@@ -6,28 +6,15 @@ import edu.kpi.pzks.gui.actions.graph.SelectionDraggingToolAction;
 import edu.kpi.pzks.gui.actions.ui.OpenAction;
 import edu.kpi.pzks.gui.actions.ui.SaveAsAction;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
-import java.awt.BorderLayout;
-import java.awt.Container;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JToolBar;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- *
  * @author Aloren
  */
 public class MainFrame extends JFrame {
@@ -37,9 +24,9 @@ public class MainFrame extends JFrame {
     public static final Locale locale = Locale.getDefault();//Locale.forLanguageTag("ru")
     private final int TOOLBAR_ORIENTATION = JToolBar.HORIZONTAL;
     private final String iconsPath = "/icons";
-    private ResourceBundle resource = ResourceBundle.getBundle("Menu", locale);
-    private GraphPanel systemPanel;
-    private GraphPanel taskPanel;
+    protected ResourceBundle resource = ResourceBundle.getBundle("Menu", locale);
+    protected GraphPanel systemPanel;
+    protected GraphPanel taskPanel;
 
     public static void main(String[] args) {
         try {
@@ -64,7 +51,7 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    private JMenuBar getMainMenuBar() {
+    protected JMenuBar getMainMenuBar() {
         JMenuBar bar = new JMenuBar();
         bar.add(getFileMenu());
         bar.add(getModelingMenu());
@@ -73,22 +60,22 @@ public class MainFrame extends JFrame {
         return bar;
     }
 
-    private JMenu getModelingMenu() {
+    protected JMenu getModelingMenu() {
         JMenu modelingMenu = new JMenu(resource.getString("modelingMenu"));
         return modelingMenu;
     }
 
-    private JMenu getStatisticMenu() {
+    protected JMenu getStatisticMenu() {
         JMenu statisticMenu = new JMenu(resource.getString("statisticMenu"));
         return statisticMenu;
     }
 
-    private JMenu getHelpMenu() {
+    protected JMenu getHelpMenu() {
         JMenu helpMenu = new JMenu(resource.getString("helpMenu"));
         return helpMenu;
     }
 
-    private JMenu getFileMenu() {
+    protected JMenu getFileMenu() {
         JMenu fileMenu = new JMenu(resource.getString("fileMenu"));
         JMenuItem openMenuItem = new JMenuItem(resource.getString("open"));
         JMenuItem saveMenuItem = new JMenuItem(resource.getString("save"));
@@ -99,7 +86,7 @@ public class MainFrame extends JFrame {
         return fileMenu;
     }
 
-    private JToolBar getToolBar(int orientation) {
+    protected JToolBar getToolBar(int orientation) {
         JToolBar toolBar = new JToolBar(orientation);
         toolBar.setFloatable(false);
 
@@ -144,21 +131,21 @@ public class MainFrame extends JFrame {
         return toolBar;
     }
 
-    private Container getMainPane(JPanel taskPanel, JPanel systemPanel) {
+    protected Container getMainPane(JPanel taskPanel, JPanel systemPanel) {
         JSplitPane pane = new JSplitPane();
         pane.setDividerLocation(INIT_WIDTH / 2);
-        
+
         JScrollPane taskPane = new JScrollPane();
         taskPane.setViewportView(taskPanel);
         pane.setLeftComponent(taskPane);
-        
+
         JScrollPane systemPane = new JScrollPane();
         systemPane.setViewportView(systemPanel);
         pane.setRightComponent(systemPane);
         return pane;
     }
 
-    private GraphPanel createTaskPanel() {
+    protected GraphPanel createTaskPanel() {
         GraphPanel localTaskPanel = new GraphPanel();
         localTaskPanel.setName("taskPanel");
         localTaskPanel.setBorder(BorderFactory.createTitledBorder(resource.getString("taskGraph")));
@@ -166,7 +153,7 @@ public class MainFrame extends JFrame {
 
     }
 
-    private GraphPanel createSystemPanel() {
+    protected GraphPanel createSystemPanel() {
         GraphPanel localSystemPanel = new GraphPanel();
         localSystemPanel.setName("systemPanel");
         localSystemPanel.setBorder(BorderFactory.createTitledBorder(resource.getString("systemGraph")));

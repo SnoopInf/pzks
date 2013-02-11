@@ -4,15 +4,13 @@ import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.utils.COLORS;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
-import java.awt.Point;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
-import javax.swing.JPopupMenu;
 
 /**
- *
  * @author asmirnova
  */
 public class NodeViewImpl implements NodeView {
@@ -84,10 +82,15 @@ public class NodeViewImpl implements NodeView {
         g2.setColor(COLORS.NODE_BORDER_COLOR);
         g2.setStroke(new BasicStroke(1.5f));
         g2.draw(ellipse);
-        //TODO add string length to position weight right
-        int x = (int) (ellipse.x + ellipse.width / 2);
-        int y = (int) (ellipse.y + ellipse.height / 2);
-        g2.drawString(Integer.toString(node.getWeight()), x, y);
+        String fontFamily = CONSTANTS.FONT_FAMILY;
+        int fontSize = CONSTANTS.FONT_SIZE;
+        int fontWeight = CONSTANTS.FONT_WEIGHT;
+        g2.setFont(new Font(fontFamily, fontWeight, fontSize));
+        FontMetrics metrics = g2.getFontMetrics(g2.getFont());
+        String caption = Integer.toString(node.getWeight());
+        int x = (int) (ellipse.x + ellipse.width / 2 - metrics.stringWidth(caption) / 2);
+        int y = (int) (ellipse.y + ellipse.height / 2 + metrics.getHeight() / 3);
+        g2.drawString(caption, x, y);
     }
 
     @Override
