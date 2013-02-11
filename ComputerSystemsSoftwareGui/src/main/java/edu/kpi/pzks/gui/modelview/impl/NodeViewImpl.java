@@ -4,11 +4,10 @@ import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.utils.COLORS;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
+import javax.swing.*;
 
 /**
  * @author asmirnova
@@ -29,6 +28,7 @@ public class NodeViewImpl implements NodeView {
 
     public NodeViewImpl(Node node, double x, double y) {
         this.node = node;
+        System.out.println(CONSTANTS.NODE_WIDTH);
         this.ellipse = new Ellipse2D.Double(x, y,
                 CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
     }

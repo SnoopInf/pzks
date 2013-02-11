@@ -5,14 +5,11 @@ import edu.kpi.pzks.gui.actions.graph.NodeCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.SelectionDraggingToolAction;
 import edu.kpi.pzks.gui.actions.ui.OpenAction;
 import edu.kpi.pzks.gui.actions.ui.SaveAsAction;
-import edu.kpi.pzks.gui.utils.CONSTANTS;
-
-import javax.swing.*;
+import edu.kpi.pzks.gui.utils.STRINGS;
 import java.awt.*;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.*;
 
 /**
  * @author Aloren
@@ -21,10 +18,8 @@ public class MainFrame extends JFrame {
 
     public static final int INIT_HEIGHT = 600;
     public static final int INIT_WIDTH = 800;
-    public static final Locale locale = Locale.getDefault();//Locale.forLanguageTag("ru")
     private final int TOOLBAR_ORIENTATION = JToolBar.HORIZONTAL;
     private final String iconsPath = "/icons";
-    protected ResourceBundle resource = ResourceBundle.getBundle("Menu", locale);
     protected GraphPanel systemPanel;
     protected GraphPanel taskPanel;
 
@@ -35,7 +30,7 @@ public class MainFrame extends JFrame {
                 IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        MainFrame frame = new MainFrame(CONSTANTS.MAIN_TITLE);
+        MainFrame frame = new MainFrame(STRINGS.MAIN_TITLE);
         frame.setVisible(true);
     }
 
@@ -61,25 +56,25 @@ public class MainFrame extends JFrame {
     }
 
     protected JMenu getModelingMenu() {
-        JMenu modelingMenu = new JMenu(resource.getString("modelingMenu"));
+        JMenu modelingMenu = new JMenu(STRINGS.MODELING_MENU);
         return modelingMenu;
     }
 
     protected JMenu getStatisticMenu() {
-        JMenu statisticMenu = new JMenu(resource.getString("statisticMenu"));
+        JMenu statisticMenu = new JMenu(STRINGS.STATISTIC_MENU);
         return statisticMenu;
     }
 
     protected JMenu getHelpMenu() {
-        JMenu helpMenu = new JMenu(resource.getString("helpMenu"));
+        JMenu helpMenu = new JMenu(STRINGS.HELP_MENU);
         return helpMenu;
     }
 
     protected JMenu getFileMenu() {
-        JMenu fileMenu = new JMenu(resource.getString("fileMenu"));
-        JMenuItem openMenuItem = new JMenuItem(resource.getString("open"));
-        JMenuItem saveMenuItem = new JMenuItem(resource.getString("save"));
-        JMenuItem exitMenuItem = new JMenuItem(resource.getString("exit"));
+        JMenu fileMenu = new JMenu(STRINGS.FILE_MENU);
+        JMenuItem openMenuItem = new JMenuItem(STRINGS.OPEN);
+        JMenuItem saveMenuItem = new JMenuItem(STRINGS.SAVE);
+        JMenuItem exitMenuItem = new JMenuItem(STRINGS.EXIT);
         fileMenu.add(openMenuItem);
         fileMenu.add(saveMenuItem);
         fileMenu.add(exitMenuItem);
@@ -93,20 +88,20 @@ public class MainFrame extends JFrame {
         ImageIcon openIcon = new ImageIcon(getClass().getResource(iconsPath + "/open.png"));
         JButton openButton = new JButton(new OpenAction(this));
         openButton.setIcon(openIcon);
-        openButton.setToolTipText(resource.getString("open"));
+        openButton.setToolTipText(STRINGS.OPEN);
 
         ImageIcon saveIcon = new ImageIcon(getClass().getResource(iconsPath + "/save.png"));
         JButton saveButton = new JButton(new SaveAsAction(this));
         saveButton.setIcon(saveIcon);
-        saveButton.setToolTipText(resource.getString("save"));
+        saveButton.setToolTipText(STRINGS.SAVE);
 
         ImageIcon taskIcon = new ImageIcon(getClass().getResource(iconsPath + "/task.png"));
         JButton genTaskGraphButton = new JButton(taskIcon);
-        genTaskGraphButton.setToolTipText(resource.getString("generateTaskGraph"));
+        genTaskGraphButton.setToolTipText(STRINGS.GEN_TASK_GRAPH);
 
         ImageIcon systemIcon = new ImageIcon(getClass().getResource(iconsPath + "/system.png"));
         JButton genSystemGraphButton = new JButton(systemIcon);
-        genSystemGraphButton.setToolTipText(resource.getString("generateSystemGraph"));
+        genSystemGraphButton.setToolTipText(STRINGS.GEN_SYSTEM_GRAPH);
 
         ImageIcon nodeIcon = new ImageIcon(getClass().getResource(iconsPath + "/node.png"));
         JButton newNodeButton = new JButton(new NodeCreationToolAction(this));
@@ -148,7 +143,7 @@ public class MainFrame extends JFrame {
     protected GraphPanel createTaskPanel() {
         GraphPanel localTaskPanel = new GraphPanel();
         localTaskPanel.setName("taskPanel");
-        localTaskPanel.setBorder(BorderFactory.createTitledBorder(resource.getString("taskGraph")));
+        localTaskPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.TASK_GRAPH));
         return localTaskPanel;
 
     }
@@ -156,7 +151,7 @@ public class MainFrame extends JFrame {
     protected GraphPanel createSystemPanel() {
         GraphPanel localSystemPanel = new GraphPanel();
         localSystemPanel.setName("systemPanel");
-        localSystemPanel.setBorder(BorderFactory.createTitledBorder(resource.getString("systemGraph")));
+        localSystemPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.SYSTEM_GRAPH));
         return localSystemPanel;
     }
 
