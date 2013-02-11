@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 public class COLORS {
 
-    private static ResourceBundle defaults = ResourceBundle.getBundle("settings", Locale.getDefault());
+    private static final ResourceBundle defaults = ResourceBundle.getBundle("settings", Locale.getDefault());
 
     public static final Color DEFAULT_COLOR = Color.decode(defaults.getString("color.default"));
 
