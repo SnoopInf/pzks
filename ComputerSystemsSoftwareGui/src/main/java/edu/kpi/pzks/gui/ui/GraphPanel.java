@@ -2,6 +2,7 @@ package edu.kpi.pzks.gui.ui;
 
 import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.gui.modelview.GraphView;
+import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl;
 import edu.kpi.pzks.gui.ui.tools.Tool;
@@ -26,6 +27,7 @@ public class GraphPanel extends JPanel {
     private Grid grid = new Grid();
     private GraphView graphView = new GraphViewImpl(new Graph());
     private Set<NodeView> selectedNodeViews = new HashSet<>();
+    private Set<LinkView> selectedLinkViews = new HashSet<>();
 
     public GraphPanel() {
         setBackground(Color.WHITE);
@@ -98,6 +100,7 @@ public class GraphPanel extends JPanel {
     }
 
     public void checkSize() {
+        //TODO bug if drag Node up
         Dimension dimension = new Dimension(0, 0);
         for (NodeView nodeView : graphView.getNodeViews()) {
             Point point = nodeView.getUpperLeftCorner();
@@ -110,5 +113,17 @@ public class GraphPanel extends JPanel {
         }
         this.setSize(dimension);
         this.setPreferredSize(dimension);
+    }
+
+    public Set<LinkView> getSelectedLinkViews() {
+        return selectedLinkViews;
+    }
+
+    public void setSelectedLinkViews(Set<LinkView> selectedLinkViews) {
+        this.selectedLinkViews = selectedLinkViews;
+    }
+
+    public void addSelectedLinkView(LinkView linkView) {
+        this.selectedLinkViews.add(linkView);
     }
 }
