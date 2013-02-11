@@ -39,16 +39,16 @@ public class XmlGraphSaver implements GraphSaver {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.newDocument();
 
-            Element graphElement = doc.createElement("graph");
+            Element graphElement = doc.createElement(XmlConst.GRAPH);
             doc.appendChild(graphElement);
 
             Graph graph = graphView.getGraph();
 
-            Element dataElement = doc.createElement("data");
+            Element dataElement = doc.createElement(XmlConst.DATA);
             Map<Node, Integer> idNodeMap = appendNodes(doc, dataElement, graph);
             Map<Link, Integer> idLinkMap = appendLinks(doc, dataElement, graph, idNodeMap);
 
-            Element viewElement = doc.createElement("view");
+            Element viewElement = doc.createElement(XmlConst.VIEW);
             appendNodeViews(graphView, doc, viewElement, idNodeMap);
             appendLinkViews(graphView, doc, viewElement, idLinkMap);
 
@@ -64,41 +64,41 @@ public class XmlGraphSaver implements GraphSaver {
         }
     }
 
-    private Map<Node, Integer> appendNodes(Document doc, 
+    private Map<Node, Integer> appendNodes(Document doc,
             Element dataElement, Graph graph) throws DOMException {
-        Element nodesElement = doc.createElement("nodes");
+        Element nodesElement = doc.createElement(XmlConst.NODES);
         dataElement.appendChild(nodesElement);
         Map<Node, Integer> idNodeMap = new HashMap<>();
         int nodeId = 0;
         for (Node node : graph.getNodes()) {
             idNodeMap.put(node, nodeId);
-            Element nodeElement = doc.createElement("node");
-            nodeElement.setAttribute("id", Integer.toString(nodeId));
-            nodeElement.setAttribute("weight", Integer.toString(node.getWeight()));
+            Element nodeElement = doc.createElement(XmlConst.NODE);
+            nodeElement.setAttribute(XmlConst.ID, Integer.toString(nodeId));
+            nodeElement.setAttribute(XmlConst.WEIGHT, Integer.toString(node.getWeight()));
             nodesElement.appendChild(nodeElement);
             nodeId++;
         }
         return idNodeMap;
     }
 
-    private Map<Link, Integer> appendLinks(Document doc, 
+    private Map<Link, Integer> appendLinks(Document doc,
             Element dataElement, Graph graph, Map<Node, Integer> idNodeMap) throws DOMException {
         Map<Link, Integer> idLinkMap = new HashMap<>();
-        Element linksElement = doc.createElement("links");
+        Element linksElement = doc.createElement(XmlConst.LINKS);
         dataElement.appendChild(linksElement);
         int linkId = 0;
         for (Link link : graph.getLinks()) {
             idLinkMap.put(link, linkId);
-            Element linkElement = doc.createElement("link");
-            linkElement.setAttribute("id", Integer.toString(linkId));
-            linkElement.setAttribute("weight", Integer.toString(link.getWeight()));
+            Element linkElement = doc.createElement(XmlConst.LINK);
+            linkElement.setAttribute(XmlConst.ID, Integer.toString(linkId));
+            linkElement.setAttribute(XmlConst.WEIGHT, Integer.toString(link.getWeight()));
             Node fromNode = link.getFromNode();
             Node toNode = link.getToNode();
-            Element fromNodeElement = doc.createElement("fromNode");
-            fromNodeElement.setAttribute("id", Integer.toString(idNodeMap.get(fromNode)));
+            Element fromNodeElement = doc.createElement(XmlConst.FROM_NODE);
+            fromNodeElement.setAttribute(XmlConst.ID, Integer.toString(idNodeMap.get(fromNode)));
 
-            Element toNodeElement = doc.createElement("toNode");
-            toNodeElement.setAttribute("id", Integer.toString(idNodeMap.get(toNode)));
+            Element toNodeElement = doc.createElement(XmlConst.TO_NODE);
+            toNodeElement.setAttribute(XmlConst.ID, Integer.toString(idNodeMap.get(toNode)));
             linkElement.appendChild(fromNodeElement);
             linkElement.appendChild(toNodeElement);
             linksElement.appendChild(linkElement);
@@ -107,24 +107,24 @@ public class XmlGraphSaver implements GraphSaver {
         return idLinkMap;
     }
 
-    private void appendNodeViews(GraphView graphView, Document doc, 
+    private void appendNodeViews(GraphView graphView, Document doc,
             Element viewElement, Map<Node, Integer> idNodeMap) throws DOMException {
         Collection<NodeView> nodeViews = graphView.getNodeViews();
-        Element nodeViewsElement = doc.createElement("nodeViews");
+        Element nodeViewsElement = doc.createElement(XmlConst.NODE_VIEWS);
         for (NodeView nodeView : nodeViews) {
-            Element nodeViewEl = doc.createElement("nodeView");
+            Element nodeViewEl = doc.createElement(XmlConst.NODE_VIEW);
             Point point = nodeView.getUpperLeftCorner();
-            Element pointEl = doc.createElement("point");
-            pointEl.setAttribute("y", Double.toString(point.getY()));
-            pointEl.setAttribute("x", Double.toString(point.getX()));
-            nodeViewEl.setAttribute("nodeId", Integer.toString(idNodeMap.get(nodeView.getNode())));
+            Element pointEl = doc.createElement(XmlConst.POINT);
+            pointEl.setAttribute(XmlConst.Y, Double.toString(point.getY()));
+            pointEl.setAttribute(XmlConst.X, Double.toString(point.getX()));
+            nodeViewEl.setAttribute(XmlConst.NODE_ID, Integer.toString(idNodeMap.get(nodeView.getNode())));
             nodeViewEl.appendChild(pointEl);
             nodeViewsElement.appendChild(nodeViewEl);
         }
         viewElement.appendChild(nodeViewsElement);
     }
 
-    private void appendLinkViews(GraphView graphView, Document doc, 
+    private void appendLinkViews(GraphView graphView, Document doc,
             Element viewElement, Map<Link, Integer> idLinkMap) throws DOMException {
         Collection<LinkView> linkViews = graphView.getLinkViews();
         Element linkViewsElement = doc.createElement("linkViews");

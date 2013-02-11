@@ -63,6 +63,7 @@ public class XmlGraphLoader implements GraphLoader {
 
     private class GraphXmlHandler extends DefaultHandler {
 
+
         private Link link;
         private NodeView nodeView;
         private LinkView linkView;
@@ -73,40 +74,40 @@ public class XmlGraphLoader implements GraphLoader {
         @Override
         public void startElement(String uri, String localName, String qName,
                 Attributes attributes) throws SAXException {
-            if (qName.equalsIgnoreCase("node")) {
-                int weight = Integer.parseInt(attributes.getValue("weight"));
+            if (qName.equalsIgnoreCase(XmlConst.NODE)) {
+                int weight = Integer.parseInt(attributes.getValue(XmlConst.WEIGHT));
                 Node node = new Node(weight);
-                int id = Integer.parseInt(attributes.getValue("id"));
+                int id = Integer.parseInt(attributes.getValue(XmlConst.ID));
                 idNodeMap.put(id, node);
             }
-            
-            if (qName.equalsIgnoreCase("link")) {
-                int weight = Integer.parseInt(attributes.getValue("weight"));
+
+            if (qName.equalsIgnoreCase(XmlConst.LINK)) {
+                int weight = Integer.parseInt(attributes.getValue(XmlConst.WEIGHT));
                 link = new Link(null, null, weight);
-                int id = Integer.parseInt(attributes.getValue("id"));
+                int id = Integer.parseInt(attributes.getValue(XmlConst.ID));
                 idLinkMap.put(id, link);
             }
-            if (qName.equalsIgnoreCase("fromNode")) {
-                link.setFromNode((Node) idNodeMap.get(Integer.parseInt(attributes.getValue("id"))));
-            } else if (qName.equalsIgnoreCase("toNode")) {
-                link.setToNode((Node) idNodeMap.get(Integer.parseInt(attributes.getValue("id"))));
+            if (qName.equalsIgnoreCase(XmlConst.FROM_NODE)) {
+                link.setFromNode((Node) idNodeMap.get(Integer.parseInt(attributes.getValue(XmlConst.ID))));
+            } else if (qName.equalsIgnoreCase(XmlConst.TO_NODE)) {
+                link.setToNode((Node) idNodeMap.get(Integer.parseInt(attributes.getValue(XmlConst.ID))));
             }
 
-            if (qName.equalsIgnoreCase("nodeView")) {
-                final int nodeId = Integer.parseInt(attributes.getValue("nodeId"));
+            if (qName.equalsIgnoreCase(XmlConst.NODE_VIEW)) {
+                final int nodeId = Integer.parseInt(attributes.getValue(XmlConst.NODE_ID));
                 Node node = (Node) idNodeMap.get(nodeId);
                 nodeView = new NodeViewImpl(node);
                 idNodeViewMap.put(nodeId, nodeView);
             }
-            if (qName.equalsIgnoreCase("point")) {
-                double y = Double.parseDouble(attributes.getValue("y"));
-                double x = Double.parseDouble(attributes.getValue("x"));
+            if (qName.equalsIgnoreCase(XmlConst.POINT)) {
+                double y = Double.parseDouble(attributes.getValue(XmlConst.Y));
+                double x = Double.parseDouble(attributes.getValue(XmlConst.X));
                 nodeView.setUpperLeftCorner(new Point((int) x, (int) y));
                 graphView.addNodeView(nodeView);
             }
 
-            if (qName.equalsIgnoreCase("linkView")) {
-                Link curLink = idLinkMap.get(Integer.parseInt(attributes.getValue("linkId")));
+            if (qName.equalsIgnoreCase(XmlConst.LINK_VIEW)) {
+                Link curLink = idLinkMap.get(Integer.parseInt(attributes.getValue(XmlConst.LINK_ID)));
                 BidiMap inverseidNodeMap = idNodeMap.inverseBidiMap();
                 int idFromNode = (Integer) inverseidNodeMap.get(curLink.getFromNode());
                 int idToNode = (Integer) inverseidNodeMap.get(curLink.getToNode());
@@ -114,9 +115,9 @@ public class XmlGraphLoader implements GraphLoader {
                 NodeView toNodeView = idNodeViewMap.get(idToNode);
                 linkView = new LinkViewImpl(fromNodeView, toNodeView, curLink);
             }
-            if (qName.equalsIgnoreCase("bendPoint")) {
-                double y = Double.parseDouble(attributes.getValue("y"));
-                double x = Double.parseDouble(attributes.getValue("x"));
+            if (qName.equalsIgnoreCase(XmlConst.BEND_POINT)) {
+                double y = Double.parseDouble(attributes.getValue(XmlConst.Y));
+                double x = Double.parseDouble(attributes.getValue(XmlConst.X));
                 linkView.setBendPoint((int) x, (int) y);
                 graphView.addLinkView(linkView);
             }
