@@ -35,7 +35,7 @@ public class MainFrame extends JFrame {
                 IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        MainFrame frame = new MainFrame(CONSTANTS.MAIN_TITLE); //TODO Move under resources
+        MainFrame frame = new MainFrame(CONSTANTS.MAIN_TITLE);
         frame.setVisible(true);
     }
 
