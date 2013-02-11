@@ -1,10 +1,8 @@
 package edu.kpi.pzks.core.model;
 
-import edu.kpi.pzks.core.exceptions.ValidationException;
 
 import java.util.Locale;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 /**
  * @author Aloren
@@ -15,8 +13,6 @@ public class Link extends GraphObject {
     private Node fromNode;
     private Node toNode;
     public static final Locale locale = Locale.getDefault();
-    private ResourceBundle messages = ResourceBundle.getBundle("messages", locale);
-
 
     public Link() {
         this(null, null);
@@ -28,17 +24,10 @@ public class Link extends GraphObject {
 
     public Link(Node fromNode, Node toNode, int weight) {
         super(weight);
-        checkNodesEqual(fromNode, toNode);
         this.fromNode = fromNode;
         this.toNode = toNode;
         addToOutputNodes();
         addToInputNodes();
-    }
-
-    private void checkNodesEqual(Node fromNode, Node toNode) {
-        if((fromNode != null && toNode != null) && fromNode.hashCode() == toNode.hashCode()) {
-            throw new ValidationException(messages.getString("core.validation.error.cycles.direct"));
-        }
     }
 
     public Node getFromNode() {
@@ -46,9 +35,7 @@ public class Link extends GraphObject {
     }
 
     public void setFromNode(Node fromNode) {
-        checkNodesEqual(fromNode, this.toNode);
         this.fromNode = fromNode;
-//        arrow.pn1 = node1;
     }
 
     public Node getToNode() {
@@ -56,10 +43,7 @@ public class Link extends GraphObject {
     }
 
     public void setToNode(Node toNode) {
-        checkNodesEqual(this.fromNode, toNode);
         this.toNode = toNode;
-        //TODO please move me to gui
-//        arrow.pn2 = node2;
     }
 
     void removeFromOutputNodes() {
