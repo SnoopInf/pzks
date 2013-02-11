@@ -1,5 +1,6 @@
 package edu.kpi.pzks.gui.ui.tools;
 
+import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -11,6 +12,8 @@ import java.awt.event.MouseEvent;
 public class LinkDraggingTool implements SelectionDraggingTool {
 
     private final GraphPanel graphPanel;
+//    private Point mousePosition = new Point(0, 0);
+    private LinkView selectedLinkView;
 
     public LinkDraggingTool(GraphPanel graphPanel) {
         this.graphPanel = graphPanel;
@@ -22,6 +25,9 @@ public class LinkDraggingTool implements SelectionDraggingTool {
 
     @Override
     public void mouseClicked(MouseEvent me) {
+        int x = me.getX();
+        int y = me.getY();
+        selectedLinkView = graphPanel.getGraphView().getLinkViewAtPoint(x, y);
     }
 
     @Override
@@ -30,6 +36,7 @@ public class LinkDraggingTool implements SelectionDraggingTool {
 
     @Override
     public void mouseReleased(MouseEvent me) {
+        selectedLinkView = null;
     }
 
     @Override
@@ -42,9 +49,18 @@ public class LinkDraggingTool implements SelectionDraggingTool {
 
     @Override
     public void mouseDragged(MouseEvent me) {
+        //TODO update drag bendPoint for multiple links
+        if (graphPanel.getSelectedLinkViews().contains(selectedLinkView)) {
+            for (LinkView linkView : graphPanel.getSelectedLinkViews()) {
+                linkView.setBendPoint(me.getX(), me.getY());
+            }
+            graphPanel.checkSize();
+            graphPanel.repaint();
+        }
     }
 
     @Override
     public void mouseMoved(MouseEvent me) {
+//        mousePosition = graphPanel.getGrid().getSnapToGridPoint(me.getX(), me.getY());
     }
 }
