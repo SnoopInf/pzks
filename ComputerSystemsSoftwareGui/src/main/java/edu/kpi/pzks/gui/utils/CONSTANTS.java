@@ -4,7 +4,7 @@ import java.util.ResourceBundle;
 
 public class CONSTANTS {
 
-    private static final ResourceBundle defaults = Resources.defaults;
+    private static final ResourceBundle defaults = Resources.settings;
 
     public static final int NODE_WIDTH = Integer.parseInt(defaults.getString("node.width"));
     public static final int NODE_HEIGHT = Integer.parseInt(defaults.getString("node.height"));
