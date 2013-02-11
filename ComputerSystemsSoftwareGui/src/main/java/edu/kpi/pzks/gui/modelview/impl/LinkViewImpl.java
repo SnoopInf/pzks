@@ -4,8 +4,10 @@ import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.utils.COLORS;
+import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.PaintUtils;
 import java.awt.BasicStroke;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
@@ -167,6 +169,11 @@ public class LinkViewImpl implements LinkView {
         final int destX = (int) (toNodeView.getCenter().getX());
         final int destY = (int) (toNodeView.getCenter().getY());
 
+        String fontFamily = CONSTANTS.FONT_FAMILY;
+        int fontSize = CONSTANTS.FONT_SIZE;
+        int fontWeight = CONSTANTS.FONT_WEIGHT;
+        g2.setFont(new Font(fontFamily, fontWeight, fontSize));
+        
         if (!hasBendPoint()) {
             drawWeightWithoutBendPoint(g2, srcX, destX, srcY, destY);
             g2.drawLine(srcX, srcY, destX, destY);
