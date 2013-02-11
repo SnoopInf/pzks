@@ -74,26 +74,8 @@ public class LinkViewImpl implements LinkView {
 
     @Override
     public void paint(Graphics2D g2) {
-        final int srcX = (int) (fromNodeView.getCenter().getX());
-        final int srcY = (int) (fromNodeView.getCenter().getY());
-
-        final int destX = (int) (toNodeView.getCenter().getX());
-        final int destY = (int) (toNodeView.getCenter().getY());
-
         g2.setColor(COLORS.LINK_COLOR);
-        if (!hasBendPoint()) {
-            drawWeightWithoutBendPoint(g2, srcX, destX, srcY, destY);
-            g2.drawLine(srcX, srcY, destX, destY);
-            double aDir = Math.atan2(srcX - destX, srcY - destY);
-            drawArrowHead(g2, aDir, srcX, srcY, destX, destY);
-        } else {
-            drawWeightWithBendPoint(g2);
-            g2.drawLine(srcX, srcY, bendPoint.x, bendPoint.y);
-            g2.drawLine(bendPoint.x, bendPoint.y, destX, destY);
-            double aDir = Math.atan2(bendPoint.getX() - destX, bendPoint.getY() - destY);
-            drawArrowHead(g2, aDir, (int) bendPoint.getX(), (int) bendPoint.getY(), destX, destY);
-        }
-        g2.setStroke(new BasicStroke(1));
+        paintWithoutColor(g2);
     }
 
     /**
@@ -158,7 +140,7 @@ public class LinkViewImpl implements LinkView {
         }
     }
 
-    private boolean hasBendPoint() {
+    public boolean hasBendPoint() {
         return !(bendPoint.x == -1 && bendPoint.y == -1);
     }
 
@@ -173,5 +155,28 @@ public class LinkViewImpl implements LinkView {
 
     private void drawWeightWithBendPoint(Graphics2D g2) {
         g2.drawString(Double.toString(link.getWeight()), (int) bendPoint.getX() + 10, (int) bendPoint.getY() + 10);
+    }
+
+    @Override
+    public void paintWithoutColor(Graphics2D g2) {
+        final int srcX = (int) (fromNodeView.getCenter().getX());
+        final int srcY = (int) (fromNodeView.getCenter().getY());
+
+        final int destX = (int) (toNodeView.getCenter().getX());
+        final int destY = (int) (toNodeView.getCenter().getY());
+
+        if (!hasBendPoint()) {
+            drawWeightWithoutBendPoint(g2, srcX, destX, srcY, destY);
+            g2.drawLine(srcX, srcY, destX, destY);
+            double aDir = Math.atan2(srcX - destX, srcY - destY);
+            drawArrowHead(g2, aDir, srcX, srcY, destX, destY);
+        } else {
+            drawWeightWithBendPoint(g2);
+            g2.drawLine(srcX, srcY, bendPoint.x, bendPoint.y);
+            g2.drawLine(bendPoint.x, bendPoint.y, destX, destY);
+            double aDir = Math.atan2(bendPoint.getX() - destX, bendPoint.getY() - destY);
+            drawArrowHead(g2, aDir, (int) bendPoint.getX(), (int) bendPoint.getY(), destX, destY);
+        }
+        g2.setStroke(new BasicStroke(1));
     }
 }
