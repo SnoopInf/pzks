@@ -29,11 +29,6 @@ public class LinkTest {
         testFromToNodesSetters();
     }
 
-    @Test(expected=ValidationException.class)
-    public void testCyclicLinkAreProhibited() {
-        new Link(fromNode, fromNode);
-    }
-
     private void testFromToNodesAreNull(Link testLinkWithoutFromToNodes) {
         assertTrue("", testLinkWithoutFromToNodes.getFromNode() == null);
         assertTrue("", testLinkWithoutFromToNodes.getToNode() == null);
