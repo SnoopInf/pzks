@@ -74,7 +74,7 @@ public class XmlGraphSaver implements GraphSaver {
             idNodeMap.put(node, nodeId);
             Element nodeElement = doc.createElement("node");
             nodeElement.setAttribute("id", Integer.toString(nodeId));
-            nodeElement.setAttribute("weigth", Integer.toString(node.getWeight()));
+            nodeElement.setAttribute("weight", Integer.toString(node.getWeight()));
             nodesElement.appendChild(nodeElement);
             nodeId++;
         }
@@ -91,7 +91,7 @@ public class XmlGraphSaver implements GraphSaver {
             idLinkMap.put(link, linkId);
             Element linkElement = doc.createElement("link");
             linkElement.setAttribute("id", Integer.toString(linkId));
-            linkElement.setAttribute("weigth", Integer.toString(link.getWeight()));
+            linkElement.setAttribute("weight", Integer.toString(link.getWeight()));
             Node fromNode = link.getFromNode();
             Node toNode = link.getToNode();
             Element fromNodeElement = doc.createElement("fromNode");

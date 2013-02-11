@@ -17,8 +17,8 @@ public class Node extends GraphObject {
         super();
     }
 
-    public Node(int weigth) {
-        super(weigth);
+    public Node(int weight) {
+        super(weight);
     }
 
     public Set<Node> getInputNodes() {

@@ -14,8 +14,8 @@ public abstract class GraphObject implements Serializable {
         this(0);
     }
 
-    public GraphObject(int weigth) {
-        this.weight = weigth;
+    public GraphObject(int weight) {
+        this.weight = weight;
     }
 
     public int getWeight() {

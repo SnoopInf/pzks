@@ -74,15 +74,15 @@ public class XmlGraphLoader implements GraphLoader {
         public void startElement(String uri, String localName, String qName,
                 Attributes attributes) throws SAXException {
             if (qName.equalsIgnoreCase("node")) {
-                int weigth = Integer.parseInt(attributes.getValue("weigth"));
-                Node node = new Node(weigth);
+                int weight = Integer.parseInt(attributes.getValue("weight"));
+                Node node = new Node(weight);
                 int id = Integer.parseInt(attributes.getValue("id"));
                 idNodeMap.put(id, node);
             }
             
             if (qName.equalsIgnoreCase("link")) {
-                int weigth = Integer.parseInt(attributes.getValue("weigth"));
-                link = new Link(null, null, weigth);
+                int weight = Integer.parseInt(attributes.getValue("weight"));
+                link = new Link(null, null, weight);
                 int id = Integer.parseInt(attributes.getValue("id"));
                 idLinkMap.put(id, link);
             }
