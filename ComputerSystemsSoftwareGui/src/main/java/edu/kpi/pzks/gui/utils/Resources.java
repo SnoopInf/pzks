@@ -17,7 +17,7 @@ public class Resources {
     };
     public static final ResourceBundle localeBundle = ResourceBundle.getBundle(ResourceName.Locale.toString(), Locale.getDefault());
     public static final Locale locale = Locale.forLanguageTag(localeBundle.getString("locale"));
-    public static final ResourceBundle defaults = ResourceBundle.getBundle(ResourceName.Settings.toString(), locale);
+    public static final ResourceBundle defaults = ResourceBundle.getBundle(ResourceName.Settings.toString(), Locale.forLanguageTag("en"));//this file is in eglish only
     public static final ResourceBundle strings = ResourceBundle.getBundle(ResourceName.Strings.toString(), locale);
     public static final ResourceBundle colors = ResourceBundle.getBundle(ResourceName.Colors.toString(), locale);
     public static final ResourceBundle menu = ResourceBundle.getBundle(ResourceName.Menu.toString(), locale);
