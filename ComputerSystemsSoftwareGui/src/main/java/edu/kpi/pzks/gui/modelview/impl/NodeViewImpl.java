@@ -28,7 +28,6 @@ public class NodeViewImpl implements NodeView {
 
     public NodeViewImpl(Node node, double x, double y) {
         this.node = node;
-        System.out.println(CONSTANTS.NODE_WIDTH);
         this.ellipse = new Ellipse2D.Double(x, y,
                 CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
     }
