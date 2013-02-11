@@ -129,7 +129,8 @@ public class LinkViewImpl implements LinkView {
         return false;
     }
 
-    private Line2D.Double[] getLines() {
+    @Override
+    public Line2D.Double[] getLines() {
         Point fromCenter = fromNodeView.getCenter();
         Point toCenter = toNodeView.getCenter();
         if (hasBendPoint()) {
@@ -140,6 +141,7 @@ public class LinkViewImpl implements LinkView {
         }
     }
 
+    @Override
     public boolean hasBendPoint() {
         return !(bendPoint.x == -1 && bendPoint.y == -1);
     }

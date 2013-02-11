@@ -3,6 +3,7 @@ package edu.kpi.pzks.gui.modelview;
 import edu.kpi.pzks.core.model.Link;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.Line2D;
 
 /**
  *
@@ -29,4 +30,6 @@ public interface LinkView extends GraphObjectView {
     void setToNodeView(NodeView nodeView);
 
     void setLink(Link link);
+
+    Line2D.Double[] getLines();
 }

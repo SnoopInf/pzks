@@ -6,6 +6,7 @@ import edu.kpi.pzks.gui.ui.tools.LinkDraggingTool;
 import edu.kpi.pzks.gui.ui.tools.LinkSelectionTool;
 import edu.kpi.pzks.gui.ui.tools.NodeDraggingTool;
 import edu.kpi.pzks.gui.ui.tools.NodeSelectionTool;
+import edu.kpi.pzks.gui.ui.tools.RectangleSelectionTool;
 import edu.kpi.pzks.gui.ui.tools.Tool;
 import java.awt.event.ActionEvent;
 import java.util.HashSet;
@@ -44,6 +45,7 @@ public class SelectionDraggingToolAction extends AbstractAction {
         tools.add(new NodeSelectionTool(graphPanel));
         tools.add(new NodeDraggingTool(graphPanel));
         tools.add(new LinkDraggingTool(graphPanel));
+        tools.add(new RectangleSelectionTool(graphPanel));
         return tools;
     }
 }
