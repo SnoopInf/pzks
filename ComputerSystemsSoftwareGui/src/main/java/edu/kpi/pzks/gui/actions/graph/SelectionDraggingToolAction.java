@@ -27,6 +27,7 @@ public class SelectionDraggingToolAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+        //TODO where to store these tools?
         setToolsForPanel(mainFrame.getTaskPanel());
         setToolsForPanel(mainFrame.getSystemPanel());
     }
@@ -37,10 +38,11 @@ public class SelectionDraggingToolAction extends AbstractAction {
     }
 
     private Set<Tool> getNewTools(GraphPanel graphPanel) {
-        //TODO where to store this tools???
-        //when we press button some class must already know abpit them
-        //but not instantiate!
         Set<Tool> tools = new HashSet<>();
+        RemoveKeyTool removeKeyTool = new RemoveKeyTool(graphPanel);
+        //TODO this line is bad
+        graphPanel.addKeyListener(removeKeyTool);
+        tools.add(removeKeyTool);
         tools.add(new LinkSelectionTool(graphPanel));
         tools.add(new NodeSelectionTool(graphPanel));
         tools.add(new NodeDraggingTool(graphPanel));
