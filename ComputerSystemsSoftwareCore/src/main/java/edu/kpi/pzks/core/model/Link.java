@@ -59,13 +59,13 @@ public class Link extends GraphObject {
 
     private void addToOutputNodes() {
         if (fromNode != null && toNode != null) {
-            fromNode.getOutputNodes().add(toNode);
+            fromNode.addOutputNode(toNode);
         }
     }
 
     private void addToInputNodes() {
         if (fromNode != null && toNode != null) {
-            toNode.getInputNodes().add(fromNode);
+            toNode.addInputNode(fromNode);
         }
     }
 
