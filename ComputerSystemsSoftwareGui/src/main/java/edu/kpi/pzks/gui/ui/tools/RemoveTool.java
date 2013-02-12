@@ -1,21 +1,22 @@
 package edu.kpi.pzks.gui.ui.tools;
 
+import edu.kpi.pzks.gui.modelview.LinkView;
+import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.ui.GraphPanel;
-import edu.kpi.pzks.gui.ui.MainFrame;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 
 /**
  *
  * @author Aloren
  */
-public class RemoveTool implements Tool {
+public class RemoveTool implements Tool, KeyListener {
 
     private final GraphPanel graphPanel;
-    private final MainFrame mainFrame;
 
-    public RemoveTool(MainFrame mainFrame, GraphPanel graphPanel) {
-        this.mainFrame = mainFrame;
+    public RemoveTool(GraphPanel graphPanel) {
         this.graphPanel = graphPanel;
     }
 
@@ -25,6 +26,19 @@ public class RemoveTool implements Tool {
 
     @Override
     public void mouseClicked(MouseEvent me) {
+        int x = me.getX();
+        int y = me.getY();
+        NodeView selectedNodeView = graphPanel.getGraphView().getNodeViewAtPoint(x, y);
+        if (selectedNodeView != null) {
+            graphPanel.getGraphView().removeNodeView(selectedNodeView);
+            graphPanel.repaint();
+        } else {
+            LinkView selectedLinkView = graphPanel.getGraphView().getLinkViewAtPoint(x, y);
+            if (selectedLinkView != null) {
+                graphPanel.getGraphView().removeLinkView(selectedLinkView);
+                graphPanel.repaint();
+            }
+        }
     }
 
     @Override
@@ -49,5 +63,17 @@ public class RemoveTool implements Tool {
 
     @Override
     public void mouseMoved(MouseEvent me) {
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 }
