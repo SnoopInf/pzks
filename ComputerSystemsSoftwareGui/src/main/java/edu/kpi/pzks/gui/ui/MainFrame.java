@@ -4,6 +4,7 @@ import edu.kpi.pzks.core.validator.ConsistencyValidator;
 import edu.kpi.pzks.core.validator.CyclingValidator;
 import edu.kpi.pzks.gui.actions.graph.LinkCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.NodeCreationToolAction;
+import edu.kpi.pzks.gui.actions.graph.RemoveAction;
 import edu.kpi.pzks.gui.actions.graph.SelectionDraggingToolAction;
 import edu.kpi.pzks.gui.actions.ui.OpenAction;
 import edu.kpi.pzks.gui.actions.ui.SaveAsAction;
@@ -118,13 +119,21 @@ public class MainFrame extends JFrame {
         JButton selectButton = new JButton(new SelectionDraggingToolAction(this));
         selectButton.setIcon(selectIcon);
 
+        ImageIcon removeIcon = new ImageIcon(getClass().getResource(iconsPath + "/remove.png"));
+        JButton removeButton = new JButton(new RemoveAction(this));
+        removeButton.setIcon(removeIcon);
+
         toolBar.add(openButton);
         toolBar.add(saveButton);
-        toolBar.add(genTaskGraphButton);
-        toolBar.add(genSystemGraphButton);
+        toolBar.addSeparator();
         toolBar.add(newNodeButton);
         toolBar.add(newLinkButton);
         toolBar.add(selectButton);
+        toolBar.add(removeButton);
+        toolBar.addSeparator();
+        toolBar.add(genTaskGraphButton);
+        toolBar.add(genSystemGraphButton);
+        toolBar.addSeparator();
 
         return toolBar;
     }

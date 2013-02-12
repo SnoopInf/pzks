@@ -1,10 +1,9 @@
 package edu.kpi.pzks.gui.modelview;
 
-import java.awt.Graphics2D;
-import javax.swing.JPopupMenu;
+import javax.swing.*;
+import java.awt.*;
 
 /**
- *
  * @author Aloren
  */
 public interface GraphObjectView {
@@ -14,4 +13,8 @@ public interface GraphObjectView {
     boolean contains(int x, int y);
 
     JPopupMenu getPopupMenu();
+
+    void setWeight(int weight);
+
+    int getWeight();
 }

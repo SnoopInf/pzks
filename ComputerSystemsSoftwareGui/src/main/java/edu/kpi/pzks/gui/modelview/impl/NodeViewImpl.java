@@ -2,12 +2,14 @@ package edu.kpi.pzks.gui.modelview.impl;
 
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.gui.modelview.NodeView;
+import edu.kpi.pzks.gui.ui.popups.NodeViewPopup;
 import edu.kpi.pzks.gui.utils.COLORS;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
-import javax.swing.*;
 
 /**
  * @author asmirnova
@@ -34,8 +36,7 @@ public class NodeViewImpl implements NodeView {
 
     @Override
     public JPopupMenu getPopupMenu() {
-        throw new UnsupportedOperationException("Not supported yet.");
-//        return new NodePopup(this);
+        return new NodeViewPopup(this);
     }
 
     @Override
@@ -95,5 +96,20 @@ public class NodeViewImpl implements NodeView {
     @Override
     public boolean contains(int x, int y) {
         return this.ellipse.contains(x, y);
+    }
+
+    @Override
+    public NodeViewPopup getPopup() {
+        return new NodeViewPopup(this);
+    }
+
+    @Override
+    public void setWeight(int weight) {
+        this.node.setWeight(weight);
+    }
+
+    @Override
+    public int getWeight() {
+        return this.node.getWeight();
     }
 }

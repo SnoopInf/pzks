@@ -13,4 +13,7 @@ public class CONSTANTS {
     public static final int FONT_SIZE = Integer.parseInt(defaults.getString("font.size"));
     public static final int FONT_WEIGHT = Integer.parseInt(defaults.getString("font.weight"));
 
+    public static final String YES_ICON = defaults.getString("yes.icon");
+    public static final String NO_ICON = defaults.getString("no.icon");
+
 }

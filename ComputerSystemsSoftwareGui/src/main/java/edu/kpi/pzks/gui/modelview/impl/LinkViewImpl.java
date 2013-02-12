@@ -3,20 +3,17 @@ package edu.kpi.pzks.gui.modelview.impl;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
+import edu.kpi.pzks.gui.ui.popups.LinkViewPopup;
 import edu.kpi.pzks.gui.utils.COLORS;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.PaintUtils;
-import java.awt.BasicStroke;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Polygon;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
-import javax.swing.JPopupMenu;
 
 /**
- *
  * @author asmirnova
  */
 public class LinkViewImpl implements LinkView {
@@ -111,8 +108,7 @@ public class LinkViewImpl implements LinkView {
 
     @Override
     public JPopupMenu getPopupMenu() {
-        throw new UnsupportedOperationException("Not supported yet.");
-//        return new LinkPopup(this);
+        return new LinkViewPopup(this);
     }
 
     @Override
@@ -137,7 +133,7 @@ public class LinkViewImpl implements LinkView {
         Point toCenter = toNodeView.getCenter();
         if (hasBendPoint()) {
             return new Line2D.Double[]{new Line2D.Double(toCenter, bendPoint),
-                        new Line2D.Double(bendPoint, fromCenter)};
+                    new Line2D.Double(bendPoint, fromCenter)};
         } else {
             return new Line2D.Double[]{new Line2D.Double(toCenter, fromCenter)};
         }
@@ -173,7 +169,7 @@ public class LinkViewImpl implements LinkView {
         int fontSize = CONSTANTS.FONT_SIZE;
         int fontWeight = CONSTANTS.FONT_WEIGHT;
         g2.setFont(new Font(fontFamily, fontWeight, fontSize));
-        
+
         if (!hasBendPoint()) {
             drawWeightWithoutBendPoint(g2, srcX, destX, srcY, destY);
             g2.drawLine(srcX, srcY, destX, destY);
@@ -187,5 +183,20 @@ public class LinkViewImpl implements LinkView {
             drawArrowHead(g2, aDir, (int) bendPoint.getX(), (int) bendPoint.getY(), destX, destY);
         }
         g2.setStroke(new BasicStroke(1));
+    }
+
+    @Override
+    public LinkViewPopup getPopup() {
+        return new LinkViewPopup(this);
+    }
+
+    @Override
+    public void setWeight(int weight) {
+        this.link.setWeight(weight);
+    }
+
+    @Override
+    public int getWeight() {
+        return link.getWeight();
     }
 }

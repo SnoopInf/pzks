@@ -3,11 +3,12 @@ package edu.kpi.pzks.gui.modelview;
 import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
-import java.awt.Graphics2D;
+
+import java.awt.*;
 import java.util.Collection;
+import java.util.Set;
 
 /**
- *
  * @author Aloren
  */
 public interface GraphView {
@@ -28,15 +29,15 @@ public interface GraphView {
 
     LinkView getLinkView(Link link);
 
-    void removeNode(Node node);
-
-    void removeLink(Link link);
-
     void removeNodeView(NodeView nodeView);
 
     void removeLinkView(LinkView linkView);
-    
+
     Collection<LinkView> getLinkViews();
-    
+
     Collection<NodeView> getNodeViews();
+
+    void removeLinkViews(Set<LinkView> selectedLinkViews);
+
+    void removeNodeViews(Set<NodeView> selectedNodeViews);
 }

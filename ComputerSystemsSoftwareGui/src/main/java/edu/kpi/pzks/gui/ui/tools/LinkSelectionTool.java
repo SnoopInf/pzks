@@ -3,12 +3,12 @@ package edu.kpi.pzks.gui.ui.tools;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.utils.COLORS;
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 /**
- *
  * @author Aloren
  */
 public class LinkSelectionTool implements SelectionDraggingTool {
@@ -31,11 +31,11 @@ public class LinkSelectionTool implements SelectionDraggingTool {
         LinkView selectedLinkView = graphPanel.getGraphView().getLinkViewAtPoint(x, y);
         if (selectedLinkView != null) {
             setSelectedLinkView(selectedLinkView);
-//            if (me.getModifiers() == MouseEvent.BUTTON3_MASK) {
-//                JPopupMenu pp = selectedLinkView.getPopupMenu();
-//                pp.show(me.getComponent(), me.getX(), me.getY());
-//            }
-        } else{
+            if (me.getModifiers() == MouseEvent.BUTTON3_MASK) {
+                JPopupMenu pp = selectedLinkView.getPopupMenu();
+                pp.show(me.getComponent(), me.getX(), me.getY());
+            }
+        } else {
             clearSelected();
         }
         graphPanel.repaint();
