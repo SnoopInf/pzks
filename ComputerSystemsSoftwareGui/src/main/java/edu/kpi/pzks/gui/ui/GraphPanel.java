@@ -17,6 +17,11 @@ import javax.swing.*;
  */
 public class GraphPanel extends JPanel {
 
+    public enum NodeType {
+
+        Task, System
+    };
+    private NodeType type;
     private Set<Tool> currentTools = new HashSet<>();
     private Grid grid = new Grid();
     private GraphView graphView = new GraphViewImpl(new Graph());
@@ -27,8 +32,9 @@ public class GraphPanel extends JPanel {
     private ImageIcon valid;
     private ImageIcon invalid;
 
-    public GraphPanel() {
+    public GraphPanel(NodeType type) {
         super(new BorderLayout());
+        this.type = type;
         setBackground(Color.WHITE);
         setFocusable(true);
         createValidationLabel();
@@ -168,5 +174,9 @@ public class GraphPanel extends JPanel {
     public void removeSelectedNodeViews() {
         graphView.removeNodeViews(selectedNodeViews);
         selectedNodeViews.clear();
+    }
+
+    public NodeType getType() {
+        return type;
     }
 }

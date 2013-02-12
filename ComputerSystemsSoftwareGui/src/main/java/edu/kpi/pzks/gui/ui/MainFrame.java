@@ -1,19 +1,33 @@
 package edu.kpi.pzks.gui.ui;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.NodeType;
 import edu.kpi.pzks.core.validator.ConsistencyValidator;
 import edu.kpi.pzks.core.validator.CyclingValidator;
 import edu.kpi.pzks.gui.actions.graph.LinkCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.NodeCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.RemoveAction;
 import edu.kpi.pzks.gui.actions.graph.SelectionDraggingToolAction;
+import edu.kpi.pzks.gui.actions.ui.ExitAction;
 import edu.kpi.pzks.gui.actions.ui.OpenAction;
 import edu.kpi.pzks.gui.actions.ui.SaveAsAction;
 import edu.kpi.pzks.gui.utils.STRINGS;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JToolBar;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * @author Aloren
@@ -26,6 +40,9 @@ public class MainFrame extends JFrame {
     private final String iconsPath = "/icons";
     protected GraphPanel systemPanel;
     protected GraphPanel taskPanel;
+    protected final OpenAction openAction = new OpenAction(this);
+    protected final SaveAsAction saveAsAction = new SaveAsAction(this);
+    protected final ExitAction exitAction = new ExitAction(this);
 
     public static void main(String[] args) {
         try {
@@ -76,11 +93,17 @@ public class MainFrame extends JFrame {
 
     protected JMenu getFileMenu() {
         JMenu fileMenu = new JMenu(STRINGS.FILE_MENU);
-        JMenuItem openMenuItem = new JMenuItem(STRINGS.OPEN);
-        JMenuItem saveMenuItem = new JMenuItem(STRINGS.SAVE);
-        JMenuItem exitMenuItem = new JMenuItem(STRINGS.EXIT);
+
+        JMenuItem openMenuItem = new JMenuItem(openAction);
+        openMenuItem.setText(STRINGS.OPEN);
+
+        JMenuItem saveAsMenuItem = new JMenuItem(saveAsAction);
+        saveAsMenuItem.setText(STRINGS.SAVE);
+
+        JMenuItem exitMenuItem = new JMenuItem(exitAction);
+        exitMenuItem.setText(STRINGS.EXIT);
         fileMenu.add(openMenuItem);
-        fileMenu.add(saveMenuItem);
+        fileMenu.add(saveAsMenuItem);
         fileMenu.add(exitMenuItem);
         return fileMenu;
     }
@@ -90,12 +113,12 @@ public class MainFrame extends JFrame {
         toolBar.setFloatable(false);
 
         ImageIcon openIcon = new ImageIcon(getClass().getResource(iconsPath + "/open.png"));
-        JButton openButton = new JButton(new OpenAction(this));
+        JButton openButton = new JButton(openAction);
         openButton.setIcon(openIcon);
         openButton.setToolTipText(STRINGS.OPEN);
 
         ImageIcon saveIcon = new ImageIcon(getClass().getResource(iconsPath + "/save.png"));
-        JButton saveButton = new JButton(new SaveAsAction(this));
+        JButton saveButton = new JButton(saveAsAction);
         saveButton.setIcon(saveIcon);
         saveButton.setToolTipText(STRINGS.SAVE);
 
@@ -153,7 +176,7 @@ public class MainFrame extends JFrame {
     }
 
     protected GraphPanel createTaskPanel() {
-        GraphPanel localTaskPanel = new GraphPanel();
+        GraphPanel localTaskPanel = new GraphPanel(GraphPanel.NodeType.Task);
         localTaskPanel.setName("taskPanel");
         localTaskPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.TASK_GRAPH));
         localTaskPanel.getGraphView().getGraph().addValidator(new CyclingValidator());
@@ -162,7 +185,7 @@ public class MainFrame extends JFrame {
     }
 
     protected GraphPanel createSystemPanel() {
-        GraphPanel localSystemPanel = new GraphPanel();
+        GraphPanel localSystemPanel = new GraphPanel(GraphPanel.NodeType.System);
         localSystemPanel.setName("systemPanel");
         localSystemPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.SYSTEM_GRAPH));
         localSystemPanel.getGraphView().getGraph().addValidator(new ConsistencyValidator());

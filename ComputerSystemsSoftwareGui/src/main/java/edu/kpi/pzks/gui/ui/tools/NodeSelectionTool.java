@@ -2,6 +2,7 @@ package edu.kpi.pzks.gui.ui.tools;
 
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.ui.GraphPanel;
+import edu.kpi.pzks.gui.ui.GraphPanel.NodeType;
 import edu.kpi.pzks.gui.utils.COLORS;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
@@ -15,9 +16,19 @@ import javax.swing.JPopupMenu;
  */
 public class NodeSelectionTool implements SelectionDraggingTool {
 
-    private final GraphPanel graphPanel;
+    protected final GraphPanel graphPanel;
+    
+    public static Tool newNodeSelectionTool(GraphPanel graphPanel) {
+        final NodeType type = graphPanel.getType();
+        if(type.equals(NodeType.System)) {
+            return new SystemNodeSelectionTool(graphPanel);
+        } else if(type.equals(NodeType.Task)) {
+            return new NodeSelectionTool(graphPanel);
+        }
+        throw new IllegalArgumentException("Not supported type of panel: "+type);
+    }
 
-    public NodeSelectionTool(GraphPanel graphPanel) {
+    protected NodeSelectionTool(GraphPanel graphPanel) {
         this.graphPanel = graphPanel;
     }
 
@@ -106,18 +117,27 @@ public class NodeSelectionTool implements SelectionDraggingTool {
     private void paintSelectedNodeBorder(Graphics2D g2, NodeView selectedNodeView) {
         g2.setStroke(new BasicStroke(3));
         g2.setColor(COLORS.NODE_BORDER_SELECTED_COLOR);
+        drawShape(g2, selectedNodeView);
+    }
+
+    private void paintSelectedNodeInside(Graphics2D g2, NodeView selectedNodeView) {
+        g2.setColor(COLORS.FILL_BLUE);
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 6 * 0.1f));
+        fillShape(g2, selectedNodeView);
+    }
+
+    protected void drawShape(Graphics2D g2, NodeView selectedNodeView) {
         g2.drawOval(selectedNodeView.getUpperLeftCorner().x,
                 selectedNodeView.getUpperLeftCorner().y,
                 selectedNodeView.getWidth(),
                 selectedNodeView.getHeight());
     }
 
-    private void paintSelectedNodeInside(Graphics2D g2, NodeView selectedNodeView) {
-        g2.setColor(COLORS.FILL_BLUE);
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 6 * 0.1f));
+    protected void fillShape(Graphics2D g2, NodeView selectedNodeView) {
         g2.fillOval(selectedNodeView.getUpperLeftCorner().x,
                 selectedNodeView.getUpperLeftCorner().y,
                 selectedNodeView.getWidth(),
                 selectedNodeView.getHeight());
     }
+    
 }

@@ -11,6 +11,7 @@ import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl;
 import edu.kpi.pzks.gui.modelview.impl.LinkViewImpl;
 import edu.kpi.pzks.gui.modelview.impl.NodeViewImpl;
+import edu.kpi.pzks.gui.ui.GraphPanel.NodeType;
 import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,6 +34,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public class XmlGraphLoader implements GraphLoader {
 
     protected GraphView graphView;
+    private NodeType type = NodeType.Task;
 
     //TODO throw specific GraphException, so that client can handle it appropriately
     @Override
@@ -42,9 +44,9 @@ public class XmlGraphLoader implements GraphLoader {
             return graphView;
         } catch (ParserConfigurationException | SAXException ex) {
             throw new GraphException("Errors in parsing file");
-        } catch(FileNotFoundException ex) {
+        } catch (FileNotFoundException ex) {
             throw new GraphException(ex);
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             throw new GraphException(ex);
         }
     }
@@ -61,8 +63,12 @@ public class XmlGraphLoader implements GraphLoader {
         }
     }
 
-    private class GraphXmlHandler extends DefaultHandler {
+    @Override
+    public void setNodeType(NodeType type) {
+        this.type = type;
+    }
 
+    private class GraphXmlHandler extends DefaultHandler {
 
         private Link link;
         private NodeView nodeView;
@@ -96,7 +102,9 @@ public class XmlGraphLoader implements GraphLoader {
             if (qName.equalsIgnoreCase(XmlConst.NODE_VIEW)) {
                 final int nodeId = Integer.parseInt(attributes.getValue(XmlConst.NODE_ID));
                 Node node = (Node) idNodeMap.get(nodeId);
-                nodeView = new NodeViewImpl(node);
+                if (type.equals(NodeType.Task)) {
+                    nodeView = new NodeViewImpl(node);
+                }
                 idNodeViewMap.put(nodeId, nodeView);
             }
             if (qName.equalsIgnoreCase(XmlConst.POINT)) {

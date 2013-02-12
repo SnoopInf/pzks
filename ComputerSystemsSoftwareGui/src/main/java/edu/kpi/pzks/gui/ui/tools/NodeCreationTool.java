@@ -6,7 +6,6 @@ import edu.kpi.pzks.gui.modelview.impl.NodeViewImpl;
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.utils.COLORS;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -15,13 +14,12 @@ import java.awt.event.MouseEvent;
  */
 public class NodeCreationTool implements Tool {
 
-    private Point myMousePosition;
-    private boolean needToPaint;
-    private final GraphPanel graphPanel;
+    protected Point myMousePosition = new Point(0, 0);
+    protected boolean needToPaint;
+    protected final GraphPanel graphPanel;
 
     public NodeCreationTool(GraphPanel graphPanel) {
         this.graphPanel = graphPanel;
-        this.myMousePosition = new Point(0, 0);
     }
 
     //TODO copypaste from NodeView paint
@@ -77,7 +75,7 @@ public class NodeCreationTool implements Tool {
 
     protected void createNode(MouseEvent me) {
         Point point = graphPanel.getGrid().getSnapToGridPoint(me.getX(), me.getY());
-        NodeView nodeView = new NodeViewImpl(new Node(), point.x, point.y);
+        NodeView nodeView = createNodeView(point);
         graphPanel.getGraphView().addNodeView(nodeView);
         String validatorMessage = graphPanel.getGraphView().getGraph().isValid();
         if (validatorMessage == null) {
@@ -89,19 +87,32 @@ public class NodeCreationTool implements Tool {
 
     private void paintNodeBorder(Graphics2D g2) {
         g2.setColor(COLORS.NODE_COLOR);
-        g2.fillOval(myMousePosition.x, myMousePosition.y,
-                CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
+        fillShape(g2);
     }
 
     private void paintNodeInside(Graphics2D g2) {
         g2.setColor(COLORS.NODE_BORDER_COLOR);
         g2.setStroke(new BasicStroke(1.5f));
-        g2.drawOval(myMousePosition.x, myMousePosition.y,
-                CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
+        drawShape(g2);
     }
 
     private void paintNode(Graphics2D g2) {
         paintNodeBorder(g2);
         paintNodeInside(g2);
+    }
+
+    protected NodeView createNodeView(Point point) {
+        NodeView nodeView = new NodeViewImpl(new Node(), point.x, point.y);
+        return nodeView;
+    }
+
+    protected void fillShape(Graphics2D g2) {
+        g2.fillOval(myMousePosition.x, myMousePosition.y,
+                CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
+    }
+
+    protected void drawShape(Graphics2D g2) {
+        g2.drawOval(myMousePosition.x, myMousePosition.y,
+                CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
     }
 }

@@ -8,6 +8,7 @@ import edu.kpi.pzks.gui.utils.CONSTANTS;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.RectangularShape;
 import javax.swing.*;
 
 /**
@@ -15,9 +16,8 @@ import javax.swing.*;
  */
 public class NodeViewImpl implements NodeView {
 
-    protected Ellipse2D.Double ellipse;
-    protected boolean selected;
-    private final Node node;
+    protected RectangularShape shape;
+    protected Node node;
 
     public NodeViewImpl(Node node, Point2D.Double point) {
         this(node, point.x, point.y);
@@ -29,7 +29,7 @@ public class NodeViewImpl implements NodeView {
 
     public NodeViewImpl(Node node, double x, double y) {
         this.node = node;
-        this.ellipse = new Ellipse2D.Double(x, y,
+        this.shape = new Ellipse2D.Double(x, y,
                 CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
     }
 
@@ -40,28 +40,27 @@ public class NodeViewImpl implements NodeView {
 
     @Override
     public Point getUpperLeftCorner() {
-        return new Point((int) ellipse.getX(), (int) ellipse.getY());
+        return new Point((int) shape.getX(), (int) shape.getY());
     }
 
     @Override
     public void setUpperLeftCorner(Point point) {
-        ellipse.x = point.getX();
-        ellipse.y = point.getY();
+        shape.setFrame(point.getX(),point.getY(), CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
     }
 
     @Override
     public int getWidth() {
-        return (int) this.ellipse.getWidth();
+        return (int) this.shape.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return (int) this.ellipse.getHeight();
+        return (int) this.shape.getHeight();
     }
 
     @Override
     public Point getCenter() {
-        return new Point((int) ellipse.getCenterX(), (int) ellipse.getCenterY());
+        return new Point((int) shape.getCenterX(), (int) shape.getCenterY());
     }
 
     @Override
@@ -76,25 +75,14 @@ public class NodeViewImpl implements NodeView {
 
     @Override
     public void paint(Graphics2D g2) {
-        g2.setColor(COLORS.NODE_COLOR);
-        g2.fill(ellipse);
-        g2.setColor(COLORS.NODE_BORDER_COLOR);
-        g2.setStroke(new BasicStroke(1.5f));
-        g2.draw(ellipse);
-        String fontFamily = CONSTANTS.FONT_FAMILY;
-        int fontSize = CONSTANTS.FONT_SIZE;
-        int fontWeight = CONSTANTS.FONT_WEIGHT;
-        g2.setFont(new Font(fontFamily, fontWeight, fontSize));
-        FontMetrics metrics = g2.getFontMetrics(g2.getFont());
-        String caption = Integer.toString(node.getWeight());
-        int x = (int) (ellipse.x + ellipse.width / 2 - metrics.stringWidth(caption) / 2);
-        int y = (int) (ellipse.y + ellipse.height / 2 + metrics.getHeight() / 3);
-        g2.drawString(caption, x, y);
+        paintNodeEllipse(g2);
+        paintNodeEllipseBorder(g2);
+        paintWeightString(g2);
     }
 
     @Override
     public boolean contains(int x, int y) {
-        return this.ellipse.contains(x, y);
+        return this.shape.contains(x, y);
     }
 
     @Override
@@ -110,5 +98,28 @@ public class NodeViewImpl implements NodeView {
     @Override
     public int getWeight() {
         return this.node.getWeight();
+    }
+
+    protected void paintWeightString(Graphics2D g2) {
+        String fontFamily = CONSTANTS.FONT_FAMILY;
+        int fontSize = CONSTANTS.FONT_SIZE;
+        int fontWeight = CONSTANTS.FONT_WEIGHT;
+        g2.setFont(new Font(fontFamily, fontWeight, fontSize));
+        FontMetrics metrics = g2.getFontMetrics(g2.getFont());
+        String weightString = Integer.toString(node.getWeight());
+        int x = (int) (shape.getX() + shape.getWidth() / 2 - metrics.stringWidth(weightString) / 2);
+        int y = (int) (shape.getY() + shape.getHeight() / 2 + metrics.getHeight() / 3);
+        g2.drawString(weightString, x, y);
+    }
+
+    protected void paintNodeEllipseBorder(Graphics2D g2) {
+        g2.setColor(COLORS.NODE_BORDER_COLOR);
+        g2.setStroke(new BasicStroke(1.5f));
+        g2.draw(shape);
+    }
+
+    protected void paintNodeEllipse(Graphics2D g2) {
+        g2.setColor(COLORS.NODE_COLOR);
+        g2.fill(shape);
     }
 }

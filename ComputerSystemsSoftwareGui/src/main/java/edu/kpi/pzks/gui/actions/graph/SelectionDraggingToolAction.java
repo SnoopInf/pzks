@@ -44,7 +44,7 @@ public class SelectionDraggingToolAction extends AbstractAction {
         graphPanel.addKeyListener(removeKeyTool);
         tools.add(removeKeyTool);
         tools.add(new LinkSelectionTool(graphPanel));
-        tools.add(new NodeSelectionTool(graphPanel));
+        tools.add(NodeSelectionTool.newNodeSelectionTool(graphPanel));
         tools.add(new NodeDraggingTool(graphPanel));
         tools.add(new LinkDraggingTool(graphPanel));
         tools.add(new RectangleSelectionTool(graphPanel));
