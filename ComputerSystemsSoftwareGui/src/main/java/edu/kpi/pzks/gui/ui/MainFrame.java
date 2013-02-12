@@ -125,12 +125,15 @@ public class MainFrame extends JFrame {
 
         toolBar.add(openButton);
         toolBar.add(saveButton);
-        toolBar.add(genTaskGraphButton);
-        toolBar.add(genSystemGraphButton);
+        toolBar.addSeparator();
         toolBar.add(newNodeButton);
         toolBar.add(newLinkButton);
         toolBar.add(selectButton);
         toolBar.add(removeButton);
+        toolBar.addSeparator();
+        toolBar.add(genTaskGraphButton);
+        toolBar.add(genSystemGraphButton);
+        toolBar.addSeparator();
 
         return toolBar;
     }
