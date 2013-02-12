@@ -11,6 +11,7 @@ import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl;
 import edu.kpi.pzks.gui.modelview.impl.LinkViewImpl;
 import edu.kpi.pzks.gui.modelview.impl.NodeViewImpl;
+import edu.kpi.pzks.gui.modelview.impl.SystemNodeViewImpl;
 import edu.kpi.pzks.gui.ui.GraphPanel.NodeType;
 import java.awt.Point;
 import java.io.File;
@@ -104,6 +105,8 @@ public class XmlGraphLoader implements GraphLoader {
                 Node node = (Node) idNodeMap.get(nodeId);
                 if (type.equals(NodeType.Task)) {
                     nodeView = new NodeViewImpl(node);
+                } else if(type.equals(NodeType.System)) {
+                    nodeView = new SystemNodeViewImpl(node);
                 }
                 idNodeViewMap.put(nodeId, nodeView);
             }

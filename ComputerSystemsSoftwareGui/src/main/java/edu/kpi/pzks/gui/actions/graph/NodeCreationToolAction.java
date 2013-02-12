@@ -2,6 +2,7 @@ package edu.kpi.pzks.gui.actions.graph;
 
 import edu.kpi.pzks.gui.ui.MainFrame;
 import edu.kpi.pzks.gui.ui.tools.NodeCreationTool;
+import edu.kpi.pzks.gui.ui.tools.SystemNodeCreationTool;
 import edu.kpi.pzks.gui.ui.tools.Tool;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
@@ -19,7 +20,7 @@ public class NodeCreationToolAction extends AbstractAction {
     public NodeCreationToolAction(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.taskNodeCreationTool = new NodeCreationTool(mainFrame.getTaskPanel());
-        this.systemNodeCreationTool = new NodeCreationTool(mainFrame.getSystemPanel());
+        this.systemNodeCreationTool = new SystemNodeCreationTool(mainFrame.getSystemPanel());
     }
 
     @Override
