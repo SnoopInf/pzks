@@ -10,6 +10,7 @@ import edu.kpi.pzks.gui.actions.ui.ExitAction;
 import edu.kpi.pzks.gui.actions.ui.OpenAction;
 import edu.kpi.pzks.gui.actions.ui.SaveAsAction;
 import edu.kpi.pzks.gui.utils.STRINGS;
+import edu.kpi.pzks.gui.utils.Utils;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.util.logging.Level;
@@ -111,37 +112,37 @@ public class MainFrame extends JFrame {
         JToolBar toolBar = new JToolBar(orientation);
         toolBar.setFloatable(false);
 
-        ImageIcon openIcon = new ImageIcon(getClass().getResource(iconsPath + "/open.png"));
+        ImageIcon openIcon = Utils.createImageIcon(iconsPath + "/open.png");
         JButton openButton = new JButton(openAction);
         openButton.setIcon(openIcon);
         openButton.setToolTipText(STRINGS.OPEN);
 
-        ImageIcon saveIcon = new ImageIcon(getClass().getResource(iconsPath + "/save.png"));
+        ImageIcon saveIcon = Utils.createImageIcon(iconsPath + "/save.png");
         JButton saveButton = new JButton(saveAsAction);
         saveButton.setIcon(saveIcon);
         saveButton.setToolTipText(STRINGS.SAVE);
 
-        ImageIcon taskIcon = new ImageIcon(getClass().getResource(iconsPath + "/task.png"));
+        ImageIcon taskIcon = Utils.createImageIcon(iconsPath + "/task.png");
         JButton genTaskGraphButton = new JButton(taskIcon);
         genTaskGraphButton.setToolTipText(STRINGS.GEN_TASK_GRAPH);
 
-        ImageIcon systemIcon = new ImageIcon(getClass().getResource(iconsPath + "/system.png"));
+        ImageIcon systemIcon = Utils.createImageIcon(iconsPath + "/system.png");
         JButton genSystemGraphButton = new JButton(systemIcon);
         genSystemGraphButton.setToolTipText(STRINGS.GEN_SYSTEM_GRAPH);
 
-        ImageIcon nodeIcon = new ImageIcon(getClass().getResource(iconsPath + "/node.png"));
+        ImageIcon nodeIcon = Utils.createImageIcon(iconsPath + "/node.png");
         JButton newNodeButton = new JButton(new NodeCreationToolAction(this));
         newNodeButton.setIcon(nodeIcon);
 
-        ImageIcon linkIcon = new ImageIcon(getClass().getResource(iconsPath + "/link.png"));
+        ImageIcon linkIcon = Utils.createImageIcon(iconsPath + "/link.png");
         JButton newLinkButton = new JButton(new LinkCreationToolAction(this));
         newLinkButton.setIcon(linkIcon);
 
-        ImageIcon selectIcon = new ImageIcon(getClass().getResource(iconsPath + "/select.png"));
+        ImageIcon selectIcon = Utils.createImageIcon(iconsPath + "/select.png");
         JButton selectButton = new JButton(new SelectionDraggingToolAction(this));
         selectButton.setIcon(selectIcon);
 
-        ImageIcon removeIcon = new ImageIcon(getClass().getResource(iconsPath + "/remove.png"));
+        ImageIcon removeIcon = Utils.createImageIcon(iconsPath + "/remove.png");
         JButton removeButton = new JButton(new RemoveAction(this));
         removeButton.setIcon(removeIcon);
 
