@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
  * Author: Kirill Davidenko Date: 12.02.13 Time: 00:50
  */
 public class Messages {
+    //а какого хрена засовывать ресорсбандл внутрь кора? фейспалм
     private static Map<Locale, ResourceBundle> propertiesMap = new HashMap<>();
 
     public static final String VALIDATION_ERROR_GRAPH_INCONSISTENT = "core.validation.error.graph.inconsistent";
