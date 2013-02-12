@@ -2,9 +2,8 @@ package edu.kpi.pzks.gui.actions.graph;
 
 import edu.kpi.pzks.gui.ui.MainFrame;
 import edu.kpi.pzks.gui.ui.tools.RemoveTool;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
+import javax.swing.*;
 
 /**
  * @author asmirnova
