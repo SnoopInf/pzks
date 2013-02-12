@@ -1,6 +1,5 @@
 package edu.kpi.pzks.gui.ui;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.NodeType;
 import edu.kpi.pzks.core.validator.ConsistencyValidator;
 import edu.kpi.pzks.core.validator.CyclingValidator;
 import edu.kpi.pzks.gui.actions.graph.LinkCreationToolAction;
@@ -179,7 +178,7 @@ public class MainFrame extends JFrame {
         GraphPanel localTaskPanel = new GraphPanel(GraphPanel.NodeType.Task);
         localTaskPanel.setName("taskPanel");
         localTaskPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.TASK_GRAPH));
-        localTaskPanel.getGraphView().getGraph().addValidator(new CyclingValidator());
+        localTaskPanel.addValidator(new CyclingValidator());
         return localTaskPanel;
 
     }
@@ -188,7 +187,7 @@ public class MainFrame extends JFrame {
         GraphPanel localSystemPanel = new GraphPanel(GraphPanel.NodeType.System);
         localSystemPanel.setName("systemPanel");
         localSystemPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.SYSTEM_GRAPH));
-        localSystemPanel.getGraphView().getGraph().addValidator(new ConsistencyValidator());
+        localSystemPanel.addValidator(new ConsistencyValidator());
         return localSystemPanel;
     }
 
