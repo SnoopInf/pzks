@@ -1,6 +1,7 @@
 package edu.kpi.pzks.gui.ui;
 
 import edu.kpi.pzks.core.model.Graph;
+import edu.kpi.pzks.core.validator.Validator;
 import edu.kpi.pzks.gui.modelview.GraphView;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
@@ -176,6 +177,18 @@ public class GraphPanel extends JPanel {
     public void removeSelectedNodeViews() {
         graphView.removeNodeViews(selectedNodeViews);
         selectedNodeViews.clear();
+    }
+
+    public void checkGraphIsValid() {
+        if (graphView.getGraph().isValid()) {
+            setValid(true, null);
+        } else {
+            setValid(false, graphView.getGraph().getErrorMessage());
+        }
+    }
+
+    public void addValidator(Validator validator) {
+        graphView.getGraph().addValidator(validator);
     }
 
     public NodeType getType() {
