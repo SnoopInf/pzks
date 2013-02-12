@@ -2,13 +2,13 @@ package edu.kpi.pzks.gui.actions.graph;
 
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.ui.tools.Tool;
-import java.awt.Graphics2D;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 
 /**
- *
  * @author asmirnova
  */
 public class RemoveKeyTool implements Tool, KeyListener {

@@ -2,10 +2,10 @@ package edu.kpi.pzks.gui.modelview;
 
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.gui.ui.popups.NodeViewPopup;
-import java.awt.Point;
+
+import java.awt.*;
 
 /**
- *
  * @author Aloren
  */
 public interface NodeView extends GraphObjectView {

@@ -3,12 +3,12 @@ package edu.kpi.pzks.gui.modelview;
 import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
-import java.awt.Graphics2D;
+
+import java.awt.*;
 import java.util.Collection;
 import java.util.Set;
 
 /**
- *
  * @author Aloren
  */
 public interface GraphView {

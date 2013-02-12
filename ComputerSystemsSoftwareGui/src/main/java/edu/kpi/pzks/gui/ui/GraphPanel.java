@@ -7,10 +7,12 @@ import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl;
 import edu.kpi.pzks.gui.ui.tools.Tool;
 import edu.kpi.pzks.gui.ui.utils.Grid;
+import edu.kpi.pzks.gui.utils.CONSTANTS;
+
+import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
-import javax.swing.*;
 
 /**
  * @author Aloren
@@ -41,8 +43,8 @@ public class GraphPanel extends JPanel {
     }
 
     protected void createValidationLabel() {
-        valid = createImageIcon(iconsPath + "/yes1.png");
-        invalid = createImageIcon(iconsPath + "/no1.png");
+        valid = createImageIcon(iconsPath + CONSTANTS.YES_ICON);
+        invalid = createImageIcon(iconsPath + CONSTANTS.NO_ICON);
         validationLabel = new JLabel(valid);
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.add(validationLabel, BorderLayout.LINE_END);

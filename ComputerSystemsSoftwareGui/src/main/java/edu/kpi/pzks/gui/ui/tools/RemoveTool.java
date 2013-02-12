@@ -3,13 +3,13 @@ package edu.kpi.pzks.gui.ui.tools;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.ui.GraphPanel;
-import java.awt.Graphics2D;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 
 /**
- *
  * @author Aloren
  */
 public class RemoveTool implements Tool, KeyListener {
@@ -38,6 +38,12 @@ public class RemoveTool implements Tool, KeyListener {
                 graphPanel.getGraphView().removeLinkView(selectedLinkView);
                 graphPanel.repaint();
             }
+        }
+
+        if (graphPanel.getGraphView().getGraph().isValid()) {
+            graphPanel.setValid(true, null);
+        } else {
+            graphPanel.setValid(false, graphPanel.getGraphView().getGraph().getErrorMessage());
         }
     }
 

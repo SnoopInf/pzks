@@ -3,7 +3,6 @@ package edu.kpi.pzks.gui.utils;
 import java.util.ResourceBundle;
 
 /**
- *
  * @author asmirnova
  */
 public class STRINGS {
@@ -29,4 +28,5 @@ public class STRINGS {
     public static final String GEN_SYSTEM_GRAPH = menu.getString("generateSystemGraph");
     public static final String TASK_GRAPH = menu.getString("taskGraph");
     public static final String SYSTEM_GRAPH = menu.getString("systemGraph");
+
 }

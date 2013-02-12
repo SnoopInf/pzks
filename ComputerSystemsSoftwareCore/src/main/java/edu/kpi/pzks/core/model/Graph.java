@@ -18,6 +18,7 @@ public class Graph implements Serializable {
     private Links links = new Links();
     private transient Set<IChangeListener> changeListeners = new HashSet<>();
     private transient Set<Validator> validators = new HashSet<>();
+    private String errorMessage;
 
     public Graph() {
     }
@@ -54,13 +55,18 @@ public class Graph implements Serializable {
      *
      * @return null if graph is valid, String message otherwise
      */
-    public String isValid() {
-        String errorMessage = null;
+    public boolean isValid() {
+        boolean isValid = true;
         try {
             validate();
         } catch (ValidationException e) {
+            isValid = false;
             errorMessage = e.getMessage();
         }
+        return isValid;
+    }
+
+    public String getErrorMessage() {
         return errorMessage;
     }
 

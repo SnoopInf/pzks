@@ -6,13 +6,13 @@ import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.gui.modelview.GraphView;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
-import java.awt.Graphics2D;
+
+import java.awt.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
  * @author asmirnova
  */
 public class GraphViewImpl implements GraphView {
@@ -76,8 +76,8 @@ public class GraphViewImpl implements GraphView {
     public void removeNodeView(NodeView nodeView) {
         nodeViews.remove(nodeView);
         Set<LinkView> linksToDelete = new HashSet<>();
-        for(LinkView linkView : linkViews) {
-            if(linkView.getFromNodeView().equals(nodeView) ||
+        for (LinkView linkView : linkViews) {
+            if (linkView.getFromNodeView().equals(nodeView) ||
                     linkView.getToNodeView().equals(nodeView)) {
                 linksToDelete.add(linkView);
             }
@@ -124,14 +124,14 @@ public class GraphViewImpl implements GraphView {
 
     @Override
     public void removeLinkViews(Set<LinkView> selectedLinkViews) {
-        for(LinkView selectedLinkView : selectedLinkViews) {
+        for (LinkView selectedLinkView : selectedLinkViews) {
             removeLinkView(selectedLinkView);
         }
     }
 
     @Override
     public void removeNodeViews(Set<NodeView> selectedNodeViews) {
-        for(NodeView selectedNodeView : selectedNodeViews) {
+        for (NodeView selectedNodeView : selectedNodeViews) {
             removeNodeView(selectedNodeView);
         }
     }

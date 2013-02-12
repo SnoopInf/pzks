@@ -2,22 +2,13 @@ package edu.kpi.pzks.gui.ui.popups;
 
 import edu.kpi.pzks.gui.modelview.GraphObjectView;
 import edu.kpi.pzks.gui.utils.STRINGS;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
- *
  * @author asmirnova
  */
 public class ChangeWeightDialog extends JDialog {
@@ -38,7 +29,7 @@ public class ChangeWeightDialog extends JDialog {
         c.insets = new Insets(10, 5, 5, 5);
         c.gridx = 0;
         c.gridy = 0;
-        form.add(new JLabel(STRINGS.WEIGHT+": "), c);
+        form.add(new JLabel(STRINGS.WEIGHT + ": "), c);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0, 0, 0, 5);
         c.weightx = 0.5;

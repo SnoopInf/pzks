@@ -77,11 +77,10 @@ public class NodeCreationTool implements Tool {
         Point point = graphPanel.getGrid().getSnapToGridPoint(me.getX(), me.getY());
         NodeView nodeView = createNodeView(point);
         graphPanel.getGraphView().addNodeView(nodeView);
-        String validatorMessage = graphPanel.getGraphView().getGraph().isValid();
-        if (validatorMessage == null) {
+        if (graphPanel.getGraphView().getGraph().isValid()) {
             graphPanel.setValid(true, null);
         } else {
-            graphPanel.setValid(false, validatorMessage);
+            graphPanel.setValid(false, graphPanel.getGraphView().getGraph().getErrorMessage());
         }
     }
 

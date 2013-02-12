@@ -49,11 +49,10 @@ public class LinkCreationTool implements Tool {
                     graphPanel.getSelectedNodeViews().clear();
                     removeActiveLinkView();
 
-                    String validatorMessage = graphPanel.getGraphView().getGraph().isValid();
-                    if (validatorMessage == null) {
+                    if (graphPanel.getGraphView().getGraph().isValid()) {
                         graphPanel.setValid(true, null);
                     } else {
-                        graphPanel.setValid(false, validatorMessage);
+                        graphPanel.setValid(false, graphPanel.getGraphView().getGraph().getErrorMessage());
                     }
                 }
             }

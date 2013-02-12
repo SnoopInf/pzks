@@ -2,12 +2,11 @@ package edu.kpi.pzks.gui.modelview;
 
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.gui.ui.popups.LinkViewPopup;
-import java.awt.Graphics2D;
-import java.awt.Point;
+
+import java.awt.*;
 import java.awt.geom.Line2D;
 
 /**
- *
  * @author Aloren
  */
 public interface LinkView extends GraphObjectView {
