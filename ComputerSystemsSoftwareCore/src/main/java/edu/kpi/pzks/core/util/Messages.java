@@ -10,8 +10,8 @@ import java.util.ResourceBundle;
  */
 public class Messages {
     //а какого хрена засовывать ресорсбандл внутрь кора? фейспалм
-    private static Map<Locale, ResourceBundle> propertiesMap = new HashMap<>();
 
+    private static Map<Locale, ResourceBundle> propertiesMap = new HashMap<>();
     public static final String VALIDATION_ERROR_GRAPH_INCONSISTENT = "core.validation.error.graph.inconsistent";
     public static final String VALIDATION_ERROR_CYCLES_PRESENT = "core.validation.error.cycles.present";
 

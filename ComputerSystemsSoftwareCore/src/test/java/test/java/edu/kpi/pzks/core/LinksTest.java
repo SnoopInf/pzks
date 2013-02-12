@@ -3,10 +3,9 @@ package test.java.edu.kpi.pzks.core;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Links;
 import edu.kpi.pzks.core.model.Node;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Kirill Davidenko

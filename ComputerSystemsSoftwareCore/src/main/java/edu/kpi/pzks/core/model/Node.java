@@ -12,7 +12,7 @@ public class Node extends GraphObject {
     private static final long serialVersionUID = 4;
     protected Set<Node> inputNodes = new HashSet<>();
     protected Set<Node> outputNodes = new HashSet<>();
-    
+
     public Node() {
         super();
     }

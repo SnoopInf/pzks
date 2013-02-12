@@ -60,9 +60,9 @@ public class Links extends HashSet<Link> {
     public boolean contains(Link link) {
         return super.contains(link);
     }
-    
+
     private void removeAllLinks(Collection<Link> linksToRemove) {
-        for(Link link : linksToRemove) {
+        for (Link link : linksToRemove) {
             remove(link);
         }
     }

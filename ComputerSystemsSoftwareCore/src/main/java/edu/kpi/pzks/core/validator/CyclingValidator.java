@@ -4,7 +4,6 @@ import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.core.util.Messages;
-
 import java.util.*;
 
 /**
@@ -12,6 +11,7 @@ import java.util.*;
  */
 public class CyclingValidator implements Validator {
 
+    @Override
     public void validate(Collection<Node> nodes, Collection<Link> links) {
         validateCycles(nodes, links);
     }

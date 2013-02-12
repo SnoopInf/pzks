@@ -9,7 +9,7 @@ import java.io.Serializable;
 public abstract class GraphObject implements Serializable {
 
     protected int weight;
-    
+
     public GraphObject() {
         this(0);
     }

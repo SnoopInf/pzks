@@ -1,6 +1,5 @@
 package edu.kpi.pzks.core.model;
 
-
 import java.util.Locale;
 import java.util.Objects;
 

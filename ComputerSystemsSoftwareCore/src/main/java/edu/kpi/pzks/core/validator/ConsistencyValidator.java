@@ -1,11 +1,9 @@
 package edu.kpi.pzks.core.validator;
 
-
 import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.core.util.Messages;
-
 import java.util.Collection;
 import java.util.Locale;
 
@@ -14,14 +12,14 @@ import java.util.Locale;
  */
 public class ConsistencyValidator implements Validator {
 
-
+    @Override
     public void validate(Collection<Node> nodes, Collection<Link> links) {
         validateConsistency(nodes, links);
     }
 
     /* Checks for consistency.
-    *  I suppose that graph is inconsistent if there's a single Node which has no input and output.
-    */
+     *  I suppose that graph is inconsistent if there's a single Node which has no input and output.
+     */
     public void validateConsistency(Collection<Node> nodes, Collection<Link> edges) {
         if (nodes.size() < 2) {
             return;

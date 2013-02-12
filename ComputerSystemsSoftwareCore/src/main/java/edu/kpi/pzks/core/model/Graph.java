@@ -3,7 +3,6 @@ package edu.kpi.pzks.core.model;
 import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.listener.IChangeListener;
 import edu.kpi.pzks.core.validator.Validator;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -50,8 +49,8 @@ public class Graph implements Serializable {
     }
 
     /**
-     * Safe validation - no exception thrown
-     * I recommend to use this method in UI actions
+     * Safe validation - no exception thrown I recommend to use this method in
+     * UI actions
      *
      * @return null if graph is valid, String message otherwise
      */
@@ -71,8 +70,8 @@ public class Graph implements Serializable {
     }
 
     /**
-     * Force validation - exception is thrown if invalid
-     * I recommend to use this method before statistic generation or modelling
+     * Force validation - exception is thrown if invalid I recommend to use this
+     * method before statistic generation or modelling
      */
     public void validate() throws ValidationException {
         for (Validator validator : validators) {
