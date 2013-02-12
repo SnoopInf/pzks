@@ -5,6 +5,7 @@ import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
 import java.awt.Graphics2D;
 import java.util.Collection;
+import java.util.Set;
 
 /**
  *
@@ -28,15 +29,15 @@ public interface GraphView {
 
     LinkView getLinkView(Link link);
 
-    void removeNode(Node node);
-
-    void removeLink(Link link);
-
     void removeNodeView(NodeView nodeView);
 
     void removeLinkView(LinkView linkView);
-    
+
     Collection<LinkView> getLinkViews();
-    
+
     Collection<NodeView> getNodeViews();
+
+    void removeLinkViews(Set<LinkView> selectedLinkViews);
+
+    void removeNodeViews(Set<NodeView> selectedNodeViews);
 }

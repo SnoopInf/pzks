@@ -73,35 +73,23 @@ public class GraphViewImpl implements GraphView {
     }
 
     @Override
-    public void removeNode(Node node) {
-        for (NodeView nodeView : nodeViews) {
-            if (nodeView.getNode().equals(node)) {
-                nodeViews.remove(nodeView);
-                graph.removeNode(node);
-                return;
-            }
-        }
-    }
-
-    @Override
-    public void removeLink(Link link) {
-        for (LinkView linkView : linkViews) {
-            if (linkView.getLink().equals(link)) {
-                linkViews.remove(linkView);
-                graph.removeLink(link);
-                return;
-            }
-        }
-    }
-
-    @Override
     public void removeNodeView(NodeView nodeView) {
         nodeViews.remove(nodeView);
+        Set<LinkView> linksToDelete = new HashSet<>();
+        for(LinkView linkView : linkViews) {
+            if(linkView.getFromNodeView().equals(nodeView) ||
+                    linkView.getToNodeView().equals(nodeView)) {
+                linksToDelete.add(linkView);
+            }
+        }
+        linkViews.removeAll(linksToDelete);
+        graph.removeNode(nodeView.getNode());
     }
 
     @Override
     public void removeLinkView(LinkView linkView) {
         linkViews.remove(linkView);
+        graph.removeLink(linkView.getLink());
     }
 
     @Override
@@ -132,5 +120,19 @@ public class GraphViewImpl implements GraphView {
     @Override
     public Collection<NodeView> getNodeViews() {
         return nodeViews;
+    }
+
+    @Override
+    public void removeLinkViews(Set<LinkView> selectedLinkViews) {
+        for(LinkView selectedLinkView : selectedLinkViews) {
+            removeLinkView(selectedLinkView);
+        }
+    }
+
+    @Override
+    public void removeNodeViews(Set<NodeView> selectedNodeViews) {
+        for(NodeView selectedNodeView : selectedNodeViews) {
+            removeNodeView(selectedNodeView);
+        }
     }
 }
