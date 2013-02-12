@@ -19,6 +19,8 @@ public class STRINGS {
     public static final String OPEN = menu.getString("open");
     public static final String SAVE = menu.getString("save");
     public static final String EXIT = menu.getString("exit");
+    public static final String OKAY = menu.getString("okay");
+    public static final String CANCEL = menu.getString("cancel");
     public static final String GEN_TASK_GRAPH = menu.getString("generateTaskGraph");
     public static final String GEN_SYSTEM_GRAPH = menu.getString("generateSystemGraph");
     public static final String TASK_GRAPH = menu.getString("taskGraph");
