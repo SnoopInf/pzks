@@ -1,6 +1,7 @@
 package edu.kpi.pzks.gui.modelview;
 
 import edu.kpi.pzks.core.model.Link;
+import edu.kpi.pzks.gui.ui.popups.LinkViewPopup;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Line2D;
@@ -32,4 +33,6 @@ public interface LinkView extends GraphObjectView {
     void setLink(Link link);
 
     Line2D.Double[] getLines();
+
+    LinkViewPopup getPopup();
 }

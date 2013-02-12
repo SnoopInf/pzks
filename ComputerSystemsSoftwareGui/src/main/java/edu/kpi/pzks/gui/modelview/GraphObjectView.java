@@ -14,4 +14,8 @@ public interface GraphObjectView {
     boolean contains(int x, int y);
 
     JPopupMenu getPopupMenu();
+
+    void setWeight(int weight);
+
+    int getWeight();
 }
