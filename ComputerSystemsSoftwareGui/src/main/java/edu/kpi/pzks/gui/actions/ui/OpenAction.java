@@ -56,6 +56,7 @@ public class OpenAction extends MainAction {
         }
         GraphView graphView = loader.loadFromFile(selectedFile);
         graphPanel.setGraphView(graphView);
+        graphPanel.checkGraphIsValid();
 //      graphPanel.prepareForOpenedGraph(gr);
         graphPanel.checkSize();
     }

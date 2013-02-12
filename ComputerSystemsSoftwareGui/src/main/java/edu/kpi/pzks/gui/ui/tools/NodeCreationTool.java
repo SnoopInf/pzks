@@ -77,11 +77,7 @@ public class NodeCreationTool implements Tool {
         Point point = graphPanel.getGrid().getSnapToGridPoint(me.getX(), me.getY());
         NodeView nodeView = createNodeView(point);
         graphPanel.getGraphView().addNodeView(nodeView);
-        if (graphPanel.getGraphView().getGraph().isValid()) {
-            graphPanel.setValid(true, null);
-        } else {
-            graphPanel.setValid(false, graphPanel.getGraphView().getGraph().getErrorMessage());
-        }
+        graphPanel.checkGraphIsValid();
     }
 
     private void paintNodeBorder(Graphics2D g2) {

@@ -7,7 +7,6 @@ import edu.kpi.pzks.gui.modelview.impl.LinkViewImpl;
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.utils.COLORS;
 import edu.kpi.pzks.gui.utils.PaintUtils;
-
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -48,12 +47,7 @@ public class LinkCreationTool implements Tool {
                     graphPanel.getGraphView().addLinkView(activeLinkView);
                     graphPanel.getSelectedNodeViews().clear();
                     removeActiveLinkView();
-
-                    if (graphPanel.getGraphView().getGraph().isValid()) {
-                        graphPanel.setValid(true, null);
-                    } else {
-                        graphPanel.setValid(false, graphPanel.getGraphView().getGraph().getErrorMessage());
-                    }
+                    graphPanel.checkGraphIsValid();
                 }
             }
         }

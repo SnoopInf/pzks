@@ -3,7 +3,6 @@ package edu.kpi.pzks.gui.ui.tools;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.ui.GraphPanel;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -31,19 +30,15 @@ public class RemoveTool implements Tool, KeyListener {
         NodeView selectedNodeView = graphPanel.getGraphView().getNodeViewAtPoint(x, y);
         if (selectedNodeView != null) {
             graphPanel.getGraphView().removeNodeView(selectedNodeView);
+            graphPanel.checkGraphIsValid();
             graphPanel.repaint();
         } else {
             LinkView selectedLinkView = graphPanel.getGraphView().getLinkViewAtPoint(x, y);
             if (selectedLinkView != null) {
                 graphPanel.getGraphView().removeLinkView(selectedLinkView);
+                graphPanel.checkGraphIsValid();
                 graphPanel.repaint();
             }
-        }
-
-        if (graphPanel.getGraphView().getGraph().isValid()) {
-            graphPanel.setValid(true, null);
-        } else {
-            graphPanel.setValid(false, graphPanel.getGraphView().getGraph().getErrorMessage());
         }
     }
 

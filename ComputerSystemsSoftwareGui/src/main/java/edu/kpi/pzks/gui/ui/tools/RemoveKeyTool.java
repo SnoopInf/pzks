@@ -1,4 +1,4 @@
-package edu.kpi.pzks.gui.actions.graph;
+package edu.kpi.pzks.gui.ui.tools;
 
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.ui.tools.Tool;
@@ -65,6 +65,7 @@ public class RemoveKeyTool implements Tool, KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_DELETE) {
             graphPanel.removeSelectedLinkViews();
             graphPanel.removeSelectedNodeViews();
+            graphPanel.checkGraphIsValid();
             graphPanel.checkSize();
             graphPanel.repaint();
         }
