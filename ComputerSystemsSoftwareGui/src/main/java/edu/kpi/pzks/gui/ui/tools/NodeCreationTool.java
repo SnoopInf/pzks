@@ -6,13 +6,11 @@ import edu.kpi.pzks.gui.modelview.impl.NodeViewImpl;
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.utils.COLORS;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
-import java.awt.Point;
+
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 /**
- *
  * @author Aloren
  */
 public class NodeCreationTool implements Tool {
@@ -81,6 +79,12 @@ public class NodeCreationTool implements Tool {
         Point point = graphPanel.getGrid().getSnapToGridPoint(me.getX(), me.getY());
         NodeView nodeView = new NodeViewImpl(new Node(), point.x, point.y);
         graphPanel.getGraphView().addNodeView(nodeView);
+        String validatorMessage = graphPanel.getGraphView().getGraph().isValid();
+        if (validatorMessage == null) {
+            graphPanel.setValid(true, null);
+        } else {
+            graphPanel.setValid(false, validatorMessage);
+        }
     }
 
     private void paintNodeBorder(Graphics2D g2) {

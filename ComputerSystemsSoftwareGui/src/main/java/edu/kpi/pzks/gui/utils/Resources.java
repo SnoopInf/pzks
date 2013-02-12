@@ -6,17 +6,21 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
- *
  * @author asmirnova
  */
 public class Resources {
 
     public enum ResourceName {
 
-        Settings, Strings, Colors, Menu, Locale
-    };
+        Settings, Strings, Colors, Menu, Locale, messages
+    }
+
     public static final ResourceBundle localeBundle = ResourceBundle.getBundle(ResourceName.Locale.toString(), Locale.getDefault());
     public static final Locale locale = Locale.forLanguageTag(localeBundle.getString("locale"));
+
+    static {
+        Locale.setDefault(locale);
+    }
 
     public static final ResourceBundle settings = ResourceBundle.getBundle(ResourceName.Settings.toString(), Locale.forLanguageTag("en"));
 

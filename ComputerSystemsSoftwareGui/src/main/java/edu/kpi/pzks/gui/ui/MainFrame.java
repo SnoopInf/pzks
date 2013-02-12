@@ -1,15 +1,18 @@
 package edu.kpi.pzks.gui.ui;
 
+import edu.kpi.pzks.core.validator.ConsistencyValidator;
+import edu.kpi.pzks.core.validator.CyclingValidator;
 import edu.kpi.pzks.gui.actions.graph.LinkCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.NodeCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.SelectionDraggingToolAction;
 import edu.kpi.pzks.gui.actions.ui.OpenAction;
 import edu.kpi.pzks.gui.actions.ui.SaveAsAction;
 import edu.kpi.pzks.gui.utils.STRINGS;
+
+import javax.swing.*;
 import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.*;
 
 /**
  * @author Aloren
@@ -144,6 +147,7 @@ public class MainFrame extends JFrame {
         GraphPanel localTaskPanel = new GraphPanel();
         localTaskPanel.setName("taskPanel");
         localTaskPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.TASK_GRAPH));
+        localTaskPanel.getGraphView().getGraph().addValidator(new CyclingValidator());
         return localTaskPanel;
 
     }
@@ -152,6 +156,7 @@ public class MainFrame extends JFrame {
         GraphPanel localSystemPanel = new GraphPanel();
         localSystemPanel.setName("systemPanel");
         localSystemPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.SYSTEM_GRAPH));
+        localSystemPanel.getGraphView().getGraph().addValidator(new ConsistencyValidator());
         return localSystemPanel;
     }
 

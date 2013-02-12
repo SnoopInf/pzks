@@ -7,18 +7,13 @@ import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl;
 import edu.kpi.pzks.gui.ui.tools.Tool;
 import edu.kpi.pzks.gui.ui.utils.Grid;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.RenderingHints;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
-import javax.swing.JPanel;
 
 /**
- *
  * @author Aloren
  */
 public class GraphPanel extends JPanel {
@@ -28,9 +23,35 @@ public class GraphPanel extends JPanel {
     private GraphView graphView = new GraphViewImpl(new Graph());
     private Set<NodeView> selectedNodeViews = new HashSet<>();
     private Set<LinkView> selectedLinkViews = new HashSet<>();
+    private JLabel validationLabel;
+    private final String iconsPath = "/icons";
+    private ImageIcon valid;
+    private ImageIcon invalid;
+
 
     public GraphPanel() {
+        super(new BorderLayout());
         setBackground(Color.WHITE);
+        createValidationLabel();
+    }
+
+    protected void createValidationLabel() {
+        valid = createImageIcon(iconsPath + "/yes1.png");
+        invalid = createImageIcon(iconsPath + "/no1.png");
+        validationLabel = new JLabel(valid);
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.add(validationLabel, BorderLayout.LINE_END);
+        bottomPanel.setOpaque(false);
+        add(bottomPanel, BorderLayout.PAGE_END);
+    }
+
+    public void setValid(boolean valid, String message) {
+        if (valid) {
+            validationLabel.setIcon(this.valid);
+        } else {
+            validationLabel.setIcon(this.invalid);
+            validationLabel.setToolTipText(message);
+        }
     }
 
     @Override
@@ -125,5 +146,18 @@ public class GraphPanel extends JPanel {
 
     public void addSelectedLinkView(LinkView linkView) {
         this.selectedLinkViews.add(linkView);
+    }
+
+    /**
+     * Returns an ImageIcon, or null if the path was invalid.
+     */
+    protected ImageIcon createImageIcon(String path) {
+        java.net.URL imgURL = GraphPanel.class.getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
     }
 }
