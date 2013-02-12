@@ -57,9 +57,7 @@ public class Graph implements Serializable {
     public String isValid() {
         String errorMessage = null;
         try {
-            for (Validator validator : validators) {
-                validator.validate(nodes, links);
-            }
+            validate();
         } catch (ValidationException e) {
             errorMessage = e.getMessage();
         }
