@@ -7,11 +7,10 @@ import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl;
 import edu.kpi.pzks.gui.ui.tools.Tool;
 import edu.kpi.pzks.gui.ui.utils.Grid;
-
-import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.*;
 
 /**
  * @author Aloren
@@ -28,10 +27,10 @@ public class GraphPanel extends JPanel {
     private ImageIcon valid;
     private ImageIcon invalid;
 
-
     public GraphPanel() {
         super(new BorderLayout());
         setBackground(Color.WHITE);
+        setFocusable(true);
         createValidationLabel();
     }
 
@@ -159,5 +158,15 @@ public class GraphPanel extends JPanel {
             System.err.println("Couldn't find file: " + path);
             return null;
         }
+    }
+
+    public void removeSelectedLinkViews() {
+        graphView.removeLinkViews(selectedLinkViews);
+        selectedLinkViews.clear();
+    }
+
+    public void removeSelectedNodeViews() {
+        graphView.removeNodeViews(selectedNodeViews);
+        selectedNodeViews.clear();
     }
 }
