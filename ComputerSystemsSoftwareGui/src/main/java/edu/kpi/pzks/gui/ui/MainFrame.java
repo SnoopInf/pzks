@@ -36,7 +36,8 @@ public class MainFrame extends JFrame {
 
     public static final int INIT_HEIGHT = 600;
     public static final int INIT_WIDTH = 800;
-    private final int TOOLBAR_ORIENTATION = JToolBar.HORIZONTAL;
+    protected int TOOLBAR_ORIENTATION = JToolBar.HORIZONTAL;
+    protected String TOOLBAR_PLACEMENT = BorderLayout.NORTH;
     private final String iconsPath = "/icons";
     protected GraphPanel systemPanel;
     protected GraphPanel taskPanel;
@@ -54,17 +55,16 @@ public class MainFrame extends JFrame {
         MainFrame frame = new MainFrame(STRINGS.MAIN_TITLE);
         frame.setVisible(true);
     }
-
+    
     public MainFrame(String title) {
+        this(title, true);
+    }
+       
+    public MainFrame(String title, boolean init) {
         super(title);
-        this.taskPanel = createTaskPanel();
-        this.systemPanel = createSystemPanel();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setJMenuBar(getMainMenuBar());
-        add(getToolBar(TOOLBAR_ORIENTATION), BorderLayout.NORTH);
-        add(getMainPane(taskPanel, systemPanel), BorderLayout.CENTER);
-        setSize(INIT_WIDTH, INIT_HEIGHT);
-        setLocationRelativeTo(null);
+        if (init) {
+            initFrame();
+        }
     }
 
     protected JMenuBar getMainMenuBar() {
@@ -198,5 +198,16 @@ public class MainFrame extends JFrame {
 
     public GraphPanel getTaskPanel() {
         return taskPanel;
+    }
+
+    protected void initFrame() {
+        this.taskPanel = createTaskPanel();
+        this.systemPanel = createSystemPanel();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setJMenuBar(getMainMenuBar());
+        add(getToolBar(TOOLBAR_ORIENTATION), TOOLBAR_PLACEMENT);
+        add(getMainPane(taskPanel, systemPanel), BorderLayout.CENTER);
+        setSize(INIT_WIDTH, INIT_HEIGHT);
+        setLocationRelativeTo(null);
     }
 }
