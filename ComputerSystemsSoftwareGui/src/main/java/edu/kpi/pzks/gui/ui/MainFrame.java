@@ -52,7 +52,7 @@ public class MainFrame extends JFrame {
                 IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        MainFrame frame = new MainFrame(STRINGS.MAIN_TITLE);
+        MainFrame frame = new MainSmarxFrame(STRINGS.MAIN_TITLE);
         frame.setVisible(true);
     }
     

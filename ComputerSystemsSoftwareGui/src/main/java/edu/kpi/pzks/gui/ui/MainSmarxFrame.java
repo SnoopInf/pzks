@@ -12,11 +12,7 @@ import javax.swing.*;
 public class MainSmarxFrame extends MainFrame {
 
     public MainSmarxFrame(String title) {
-        this(title, true);
-    }
-
-    public MainSmarxFrame(String title, boolean init) {
-        super(title);
+        super(title, false);
         TOOLBAR_PLACEMENT = BorderLayout.WEST;
         TOOLBAR_ORIENTATION = JToolBar.VERTICAL;
         initFrame();
