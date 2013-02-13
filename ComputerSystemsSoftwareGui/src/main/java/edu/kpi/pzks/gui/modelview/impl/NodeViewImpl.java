@@ -99,12 +99,11 @@ public class NodeViewImpl implements NodeView {
 
     @Override
     public void paint(Graphics2D g2) {
-        if(!isSelected()) {
-        paintNodeEllipse(g2);
-        paintNodeEllipseBorder(g2);
-        paintWeightString(g2);
-        }
-        else{
+        if (!isSelected()) {
+            paintNodeEllipse(g2);
+            paintNodeEllipseBorder(g2);
+            paintWeightString(g2);
+        } else {
             paintSelectedNode(g2);
             paintWeightString(g2);
         }
@@ -151,6 +150,7 @@ public class NodeViewImpl implements NodeView {
     protected void paintNodeEllipseBorder(Graphics2D g2) {
         g2.setColor(COLORS.NODE_BORDER_COLOR);
         g2.setStroke(new BasicStroke(1.5f));
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
         g2.draw(shape);
     }
 
