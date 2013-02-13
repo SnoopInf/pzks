@@ -91,53 +91,26 @@ public class NodeSelectionTool implements SelectionDraggingTool {
     }
 
     private void clearSelected() {
+        for (NodeView node : graphPanel.getSelectedNodeViews()) {
+            node.deselect();
+        }
         graphPanel.getSelectedNodeViews().clear();
     }
 
-    private boolean isNodeSelected(NodeView nodeViewAtPoint) {
+    private boolean isNodeSelected(NodeView nodeViewAtPoint) {       
         return !(nodeViewAtPoint != null
                 && !graphPanel.getSelectedNodeViews().contains(nodeViewAtPoint));
     }
 
     private void addToSelected(NodeView nodeViewAtPoint) {
+        nodeViewAtPoint.select();
         graphPanel.getSelectedNodeViews().add(nodeViewAtPoint);
     }
 
     private void paintSelectedNodeViews(Graphics2D g2) {
         for (NodeView selectedNodeView : graphPanel.getSelectedNodeViews()) {
-            paintSelectedNode(g2, selectedNodeView);
+            selectedNodeView.paint(g2);
         }
-    }
-
-    private void paintSelectedNode(Graphics2D g2, NodeView selectedNodeView) {
-        paintSelectedNodeBorder(g2, selectedNodeView);
-        paintSelectedNodeInside(g2, selectedNodeView);
-    }
-
-    private void paintSelectedNodeBorder(Graphics2D g2, NodeView selectedNodeView) {
-        g2.setStroke(new BasicStroke(3));
-        g2.setColor(COLORS.NODE_BORDER_SELECTED_COLOR);
-        drawShape(g2, selectedNodeView);
-    }
-
-    private void paintSelectedNodeInside(Graphics2D g2, NodeView selectedNodeView) {
-        g2.setColor(COLORS.FILL_BLUE);
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 6 * 0.1f));
-        fillShape(g2, selectedNodeView);
-    }
-
-    protected void drawShape(Graphics2D g2, NodeView selectedNodeView) {
-        g2.drawOval(selectedNodeView.getUpperLeftCorner().x,
-                selectedNodeView.getUpperLeftCorner().y,
-                selectedNodeView.getWidth(),
-                selectedNodeView.getHeight());
-    }
-
-    protected void fillShape(Graphics2D g2, NodeView selectedNodeView) {
-        g2.fillOval(selectedNodeView.getUpperLeftCorner().x,
-                selectedNodeView.getUpperLeftCorner().y,
-                selectedNodeView.getWidth(),
-                selectedNodeView.getHeight());
     }
     
 }

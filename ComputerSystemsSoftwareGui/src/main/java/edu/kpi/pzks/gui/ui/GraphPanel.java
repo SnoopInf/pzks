@@ -115,9 +115,11 @@ public class GraphPanel extends JPanel {
             this.removeMouseMotionListener(tool);
         }
         this.currentTools.clear();
+        clearSelectedNodeViews();
     }
 
     public void addSelectedNodeView(NodeView nodeView) {
+        nodeView.select();
         this.selectedNodeViews.add(nodeView);
     }
 
@@ -126,7 +128,14 @@ public class GraphPanel extends JPanel {
     }
 
     public void setSelectedNodeViews(Set<NodeView> selectedNodeViews) {
+        clearSelectedNodeViews();
         this.selectedNodeViews = selectedNodeViews;
+    }
+    
+    protected void clearSelectedNodeViews(){
+        for(NodeView node : selectedNodeViews) {
+            node.deselect();
+        }
     }
 
     public void checkSize() {
