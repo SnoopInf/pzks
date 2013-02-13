@@ -140,6 +140,16 @@ public class GraphPanel extends JPanel {
             if ((point.y + nodeView.getHeight()) > dimension.height) {
                 dimension.height = point.y + nodeView.getHeight() + 10;
             }
+
+            if (point.x < CONSTANTS.MARGIN_LEFT || point.y < CONSTANTS.MARGIN_TOP) {
+                if (point.x < CONSTANTS.MARGIN_LEFT) {
+                    point.x = CONSTANTS.MARGIN_LEFT;
+                }
+                if (point.y < CONSTANTS.MARGIN_TOP) {
+                    point.y = CONSTANTS.MARGIN_TOP;
+                }
+                nodeView.setUpperLeftCorner(point);
+            }
         }
         this.setSize(dimension);
         this.setPreferredSize(dimension);
