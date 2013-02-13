@@ -59,7 +59,9 @@ public class NodeSelectionTool implements SelectionDraggingTool {
         int x = me.getX();
         int y = me.getY();
         NodeView nodeViewAtPoint = graphPanel.getGraphView().getNodeViewAtPoint(x, y);
-        if (!isNodeSelected(nodeViewAtPoint)) {
+        if (nodeViewAtPoint == null) {
+            clearSelected();
+        } else if (!isNodeSelected(nodeViewAtPoint)) {
             setSelectedNodeView(nodeViewAtPoint);
         }
         graphPanel.repaint();
