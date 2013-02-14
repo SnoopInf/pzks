@@ -8,6 +8,7 @@ import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.util.Set;
 import javax.swing.JPopupMenu;
 
 /**
@@ -95,8 +96,8 @@ public class NodeSelectionTool implements SelectionDraggingTool {
     }
 
     private boolean isNodeSelected(NodeView nodeViewAtPoint) {
-        return !(nodeViewAtPoint != null
-                && !graphPanel.getSelectedNodeViews().contains(nodeViewAtPoint));
+        final Set<NodeView> selectedNodeViews = graphPanel.getSelectedNodeViews();
+        return !(nodeViewAtPoint != null && !selectedNodeViews.contains(nodeViewAtPoint));
     }
 
     private void addToSelected(NodeView nodeViewAtPoint) {
