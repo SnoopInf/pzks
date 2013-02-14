@@ -13,9 +13,6 @@ import javax.swing.*;
  * @author Andrew
  */
 public class MainSmarxFrame extends MainFrame {
-
-    protected int TOOLBAR_ORIENTATION = JToolBar.VERTICAL;
-    protected String TOOLBAR_CONSTRAINT = BorderLayout.WEST;
     
     public static void main(String[] args) {
         try {
@@ -45,5 +42,15 @@ public class MainSmarxFrame extends MainFrame {
         systemPane.setViewportView(systemPanel);
         pane.add("SYSTEM", systemPane);
         return pane;
+    }
+    
+    @Override
+    protected int getToolbarOrientation() {
+        return JToolBar.VERTICAL;
+    }
+
+    @Override
+    protected String getToolbarConstraint() {
+        return BorderLayout.WEST;
     }
 }
