@@ -57,14 +57,8 @@ public class MainFrame extends JFrame {
 
     public MainFrame(String title) {
         super(title);
-        this.taskPanel = createTaskPanel();
-        this.systemPanel = createSystemPanel();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setJMenuBar(getMainMenuBar());
-        add(getToolBar(TOOLBAR_ORIENTATION), BorderLayout.NORTH);
-        add(getMainPane(taskPanel, systemPanel), BorderLayout.CENTER);
-        setSize(INIT_WIDTH, INIT_HEIGHT);
-        setLocationRelativeTo(null);
+        setComponents();
+        setSizeAndPosition();
     }
 
     protected JMenuBar getMainMenuBar() {
@@ -198,5 +192,19 @@ public class MainFrame extends JFrame {
 
     public GraphPanel getTaskPanel() {
         return taskPanel;
+    }
+
+    protected void setComponents() {
+        this.taskPanel = createTaskPanel();
+        this.systemPanel = createSystemPanel();
+        setJMenuBar(getMainMenuBar());
+        add(getToolBar(TOOLBAR_ORIENTATION), BorderLayout.NORTH);
+        add(getMainPane(taskPanel, systemPanel), BorderLayout.CENTER);
+    }
+
+    protected void setSizeAndPosition() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(INIT_WIDTH, INIT_HEIGHT);
+        setLocationRelativeTo(null);
     }
 }
