@@ -74,6 +74,7 @@ public class GraphViewImpl implements GraphView {
 
     @Override
     public void removeNodeView(NodeView nodeView) {
+        nodeView.deselect();
         nodeViews.remove(nodeView);
         Set<LinkView> linksToDelete = new HashSet<>();
         for (LinkView linkView : linkViews) {
