@@ -36,7 +36,8 @@ public class MainFrame extends JFrame {
 
     public static final int INIT_HEIGHT = 600;
     public static final int INIT_WIDTH = 800;
-    private final int TOOLBAR_ORIENTATION = JToolBar.HORIZONTAL;
+    protected int TOOLBAR_ORIENTATION = JToolBar.HORIZONTAL;
+    protected String TOOLBAR_CONSTRAINT = BorderLayout.NORTH;
     private final String iconsPath = "/icons";
     protected GraphPanel systemPanel;
     protected GraphPanel taskPanel;
@@ -198,7 +199,7 @@ public class MainFrame extends JFrame {
         this.taskPanel = createTaskPanel();
         this.systemPanel = createSystemPanel();
         setJMenuBar(getMainMenuBar());
-        add(getToolBar(TOOLBAR_ORIENTATION), BorderLayout.NORTH);
+        add(getToolBar(TOOLBAR_ORIENTATION), TOOLBAR_CONSTRAINT);
         add(getMainPane(taskPanel, systemPanel), BorderLayout.CENTER);
     }
 
