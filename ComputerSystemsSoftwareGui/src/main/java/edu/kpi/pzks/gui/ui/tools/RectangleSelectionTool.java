@@ -173,6 +173,7 @@ public class RectangleSelectionTool implements SelectionDraggingTool {
     }
 
     private void addToSelected(NodeView nodeViewAtPoint) {
+        nodeViewAtPoint.select();
         graphPanel.getSelectedNodeViews().add(nodeViewAtPoint);
     }
 
@@ -201,6 +202,9 @@ public class RectangleSelectionTool implements SelectionDraggingTool {
     }
 
     private void clearSelected() {
+        for (NodeView nodeView : graphPanel.getSelectedNodeViews()) {
+            nodeView.deselect();
+        }
         graphPanel.getSelectedNodeViews().clear();
         graphPanel.getSelectedLinkViews().clear();
     }
