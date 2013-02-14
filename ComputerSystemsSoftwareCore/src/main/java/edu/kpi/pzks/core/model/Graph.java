@@ -4,6 +4,7 @@ import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.listener.IChangeListener;
 import edu.kpi.pzks.core.validator.Validator;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -86,6 +87,12 @@ public class Graph implements Serializable {
         }
     }
 
+    public void addNodes(Collection<Node> nodesToAdd) {
+        for (Node node : nodesToAdd) {
+            addNode(node);
+        }
+    }
+
     public void removeNode(Node node) {
         if (node != null) {
             links.removeAllLinksForNode(node);
@@ -97,6 +104,12 @@ public class Graph implements Serializable {
     public void addLink(Link link) {
         if (link != null) {
             links.add(link);
+        }
+    }
+
+    public void addLinks(Collection<Link> linksToAdd) {
+        for (Link link : linksToAdd) {
+            addLink(link);
         }
     }
 
