@@ -10,11 +10,10 @@ import edu.kpi.pzks.gui.ui.tools.Tool;
 import edu.kpi.pzks.gui.ui.utils.Grid;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.Utils;
-
-import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.*;
 
 /**
  * @author Aloren
@@ -130,15 +129,23 @@ public class GraphPanel extends JPanel {
     }
 
     public void checkSize() {
-        //TODO bug if drag Node up
         Dimension dimension = new Dimension(0, 0);
         for (NodeView nodeView : graphView.getNodeViews()) {
-            Point point = nodeView.getUpperLeftCorner();
-            if ((point.x + nodeView.getWidth()) > dimension.width) {
-                dimension.width = point.x + nodeView.getWidth() + 10;
+            Point upperLeftCorner = nodeView.getUpperLeftCorner();
+            if ((upperLeftCorner.x + nodeView.getWidth()) > dimension.width) {
+                dimension.width = upperLeftCorner.x + nodeView.getWidth() + 10;
             }
-            if ((point.y + nodeView.getHeight()) > dimension.height) {
-                dimension.height = point.y + nodeView.getHeight() + 10;
+            if ((upperLeftCorner.y + nodeView.getHeight()) > dimension.height) {
+                dimension.height = upperLeftCorner.y + nodeView.getHeight() + 10;
+            }
+            final boolean isXMinus = upperLeftCorner.x < 0;
+            if (isXMinus || upperLeftCorner.y < 0) {
+                if (isXMinus) {
+                    upperLeftCorner.x = 0;
+                } else {
+                    upperLeftCorner.y = 0;
+                }
+                nodeView.setUpperLeftCorner(upperLeftCorner);
             }
         }
         this.setSize(dimension);
