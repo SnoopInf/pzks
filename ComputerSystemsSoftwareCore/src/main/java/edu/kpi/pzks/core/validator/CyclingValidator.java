@@ -12,16 +12,16 @@ import java.util.*;
 public class CyclingValidator implements Validator {
 
     @Override
-    public void validate(Collection<Node> nodes, Collection<Link> links) {
-        validateCycles(nodes, links);
+    public boolean validate(Collection<Node> nodes, Collection<Link> links) {
+        return validateCycles(nodes, links);
     }
 
     /*
      * Checks for cycles. I suppose that cycle is when we have path from child to one of it's parents.
      */
-    protected void validateCycles(Collection<Node> nodes, Collection<Link> edges) {
+    protected boolean validateCycles(Collection<Node> nodes, Collection<Link> edges) {
         if (edges.isEmpty()) {
-            return;
+            return true;
         }
 
         List<Node> roots = new ArrayList<>(nodes);
@@ -33,12 +33,18 @@ public class CyclingValidator implements Validator {
         roots.removeAll(notRoots);
 
         if (roots.isEmpty()) {
-            throw new ValidationException(Messages.getLocalizedMessage(Messages.VALIDATION_ERROR_CYCLES_PRESENT, Locale.getDefault()));
+            return false;
+//            throw new ValidationException(Messages.getLocalizedMessage(Messages.VALIDATION_ERROR_CYCLES_PRESENT, Locale.getDefault()));
         }
 
-        for (Node root : roots) {
-            deepSearch(root, new HashSet<>(Arrays.asList(root)));
+        try {
+            for (Node root : roots) {
+                deepSearch(root, new HashSet<>(Arrays.asList(root)));
+            }
+        } catch (ValidationException e) {
+            return false;
         }
+        return true;
 
     }
 

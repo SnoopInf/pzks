@@ -1,11 +1,8 @@
 package edu.kpi.pzks.core.validator;
 
-import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
-import edu.kpi.pzks.core.util.Messages;
 import java.util.Collection;
-import java.util.Locale;
 
 /**
  * Author: Kirill Davidenko Date: 07.02.13 Time: 21:14
@@ -13,16 +10,16 @@ import java.util.Locale;
 public class ConsistencyValidator implements Validator {
 
     @Override
-    public void validate(Collection<Node> nodes, Collection<Link> links) {
-        validateConsistency(nodes, links);
+    public boolean validate(Collection<Node> nodes, Collection<Link> links) {
+        return validateConsistency(nodes, links);
     }
 
     /* Checks for consistency.
      *  I suppose that graph is inconsistent if there's a single Node which has no input and output.
      */
-    public void validateConsistency(Collection<Node> nodes, Collection<Link> edges) {
+    public boolean validateConsistency(Collection<Node> nodes, Collection<Link> edges) {
         if (nodes.size() < 2) {
-            return;
+            return true;
         }
 
         for (Node node : nodes) {
@@ -33,8 +30,10 @@ public class ConsistencyValidator implements Validator {
                 }
             }
             if (!hasEdge) {
-                throw new ValidationException(Messages.getLocalizedMessage(Messages.VALIDATION_ERROR_GRAPH_INCONSISTENT, Locale.getDefault()));
+                return false;
+//                throw new ValidationException(Messages.getLocalizedMessage(Messages.VALIDATION_ERROR_GRAPH_INCONSISTENT, Locale.getDefault()));
             }
         }
+        return true;
     }
 }
