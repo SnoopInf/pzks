@@ -55,6 +55,7 @@ public class Graph implements Serializable {
      *
      * @return null if graph is valid, String message otherwise
      */
+    //TODO Critical: check it!!!! Interface was changed
     public boolean isValid() {
         boolean isValid = true;
         try {
@@ -74,6 +75,7 @@ public class Graph implements Serializable {
      * Force validation - exception is thrown if invalid I recommend to use this
      * method before statistic generation or modelling
      */
+    //TODO Critical: check it!!!! Interface was changed
     public void validate() throws ValidationException {
         for (Validator validator : validators) {
             validator.validate(nodes, links);
