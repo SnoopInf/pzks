@@ -14,6 +14,9 @@ import javax.swing.*;
  */
 public class MainSmarxFrame extends MainFrame {
 
+    protected int TOOLBAR_ORIENTATION = JToolBar.VERTICAL;
+    protected String TOOLBAR_CONSTRAINT = BorderLayout.WEST;
+    
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -21,7 +24,7 @@ public class MainSmarxFrame extends MainFrame {
                 IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        MainFrame frame = new MainSmarxFrame(STRINGS.MAIN_TITLE);
+        MainSmarxFrame frame = new MainSmarxFrame(STRINGS.MAIN_TITLE);
         frame.setVisible(true);
     }
     
@@ -42,14 +45,5 @@ public class MainSmarxFrame extends MainFrame {
         systemPane.setViewportView(systemPanel);
         pane.add("SYSTEM", systemPane);
         return pane;
-    }
-    
-    @Override
-    protected void setComponents() {
-        this.taskPanel = createTaskPanel();
-        this.systemPanel = createSystemPanel();
-        setJMenuBar(getMainMenuBar());
-        add(getToolBar(JToolBar.VERTICAL), BorderLayout.WEST);
-        add(getMainPane(taskPanel, systemPanel), BorderLayout.CENTER);
     }
 }
