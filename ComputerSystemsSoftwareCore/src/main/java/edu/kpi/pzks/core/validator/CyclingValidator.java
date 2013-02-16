@@ -34,7 +34,6 @@ public class CyclingValidator implements Validator {
 
         if (roots.isEmpty()) {
             return false;
-//            throw new ValidationException(Messages.getLocalizedMessage(Messages.VALIDATION_ERROR_CYCLES_PRESENT, Locale.getDefault()));
         }
 
         try {

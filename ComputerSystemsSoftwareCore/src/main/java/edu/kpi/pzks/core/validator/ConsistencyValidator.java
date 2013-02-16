@@ -31,7 +31,6 @@ public class ConsistencyValidator implements Validator {
             }
             if (!hasEdge) {
                 return false;
-//                throw new ValidationException(Messages.getLocalizedMessage(Messages.VALIDATION_ERROR_GRAPH_INCONSISTENT, Locale.getDefault()));
             }
         }
         return true;
