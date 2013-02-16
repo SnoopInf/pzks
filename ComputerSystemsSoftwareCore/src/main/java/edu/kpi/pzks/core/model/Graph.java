@@ -49,8 +49,7 @@ public class Graph implements Serializable {
     }
 
     /**
-     * Safe validation - no exception thrown I recommend to use this method in
-     * UI actions
+     * Validates the graph with its validators.
      */
     public boolean isValid() {
         boolean isValid = true;
