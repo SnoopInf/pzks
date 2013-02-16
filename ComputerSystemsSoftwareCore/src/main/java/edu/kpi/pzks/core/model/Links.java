@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Class that incapsulates all links inside the graph.
@@ -19,7 +18,7 @@ public class Links extends HashSet<Link> {
         super(10);
     }
 
-    public Links(Set<Link> links) {
+    public Links(Collection<Link> links) {
         super(links);
     }
 
