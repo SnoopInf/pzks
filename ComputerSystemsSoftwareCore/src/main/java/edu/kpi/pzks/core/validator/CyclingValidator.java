@@ -19,16 +19,16 @@ public class CyclingValidator implements Validator {
     /*
      * Checks for cycles. I suppose that cycle is when we have path from child to one of it's parents.
      */
-    protected boolean validateCycles(Collection<Node> nodes, Collection<Link> edges) {
-        if (edges.isEmpty()) {
+    protected boolean validateCycles(Collection<Node> nodes, Collection<Link> links) {
+        if (links.isEmpty()) {
             return true;
         }
 
         List<Node> roots = new ArrayList<>(nodes);
         Set<Node> notRoots = new HashSet<>();
 
-        for (Link edge : edges) {
-            notRoots.add(edge.getToNode());
+        for (Link link : links) {
+            notRoots.add(link.getToNode());
         }
         roots.removeAll(notRoots);
 
