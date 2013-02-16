@@ -3,6 +3,7 @@ package edu.kpi.pzks.core.model;
 import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.listener.IChangeListener;
 import edu.kpi.pzks.core.validator.Validator;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
@@ -53,7 +54,7 @@ public class Graph implements Serializable {
      * Safe validation - no exception thrown I recommend to use this method in
      * UI actions
      *
-     * @return null if graph is valid, String message otherwise
+     * @return if graph is valid
      */
     //TODO Critical: check it!!!! Interface was changed
     public boolean isValid() {
