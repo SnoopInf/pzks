@@ -1,6 +1,7 @@
 package test.java.edu.kpi.pzks.core;
 
 import edu.kpi.pzks.core.model.Link;
+import edu.kpi.pzks.core.model.Links;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.core.validator.ConsistencyValidator;
 import edu.kpi.pzks.core.validator.CyclingValidator;
@@ -18,7 +19,7 @@ import org.junit.Test;
 public class ValidatorTest {
 
     List<Node> nodes;
-    List<Link> links;
+    Links links;
 
     @Before
     public void before() {
@@ -31,17 +32,44 @@ public class ValidatorTest {
         Link l31 = new Link(n3, n1);
 
         nodes = Arrays.asList(new Node[]{n1, n2, n3});
-        links = Arrays.asList(new Link[]{l12, l23, l31});
+        links = new Links(Arrays.asList(l12, l23, l31));
     }
 
     @Test
     public void testCyclingValidator() {
         Validator validator = new CyclingValidator();
+        boolean valid = validator.isValid(nodes, links);
+        assertFalse(valid);
+
+        Node n1 = new Node();
+        Node n2 = new Node();
+
+        Link l12 = new Link(n1, n2);
+        Link l21 = new Link(n2, n1);
+
+        nodes = Arrays.asList(new Node[]{n1, n2});
+        links = new Links(Arrays.asList(l12, l21));
+
+        valid = validator.isValid(nodes, links);
+        assertFalse(valid);
+
+        Node n3 = new Node();
+        Node n4 = new Node();
+
+        Link l23 = new Link(n2, n3);
+
+        nodes = Arrays.asList(new Node[]{n1, n2, n3});
+        links = new Links(Arrays.asList(l12, l21, l23));
+
+        valid = validator.isValid(nodes, links);
+        assertFalse(valid);
 
 
-        boolean noErrors = validator.isValid(nodes, links);
-        assertFalse(noErrors);
+        nodes = Arrays.asList(new Node[]{n1, n2, n3, n4});
+        links = new Links(Arrays.asList(l12, l21, l23));
 
+        valid = validator.isValid(nodes, links);
+        assertFalse(valid);
     }
 
     @Test
