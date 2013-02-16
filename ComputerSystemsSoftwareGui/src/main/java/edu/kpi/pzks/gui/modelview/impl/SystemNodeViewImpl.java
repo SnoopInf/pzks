@@ -26,20 +26,20 @@ public class SystemNodeViewImpl extends NodeViewImpl {
         this.shape = new Rectangle2D.Double(x, y,
                 CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
     }
-    
-    @Override
-    protected void drawShape(Graphics2D g2) {
-        g2.drawRect(getUpperLeftCorner().x,
-                getUpperLeftCorner().y,
-                getWidth(),
-                getHeight());
-    }
-
-    @Override
-    protected void fillShape(Graphics2D g2) {
-        g2.fillRect(getUpperLeftCorner().x,
-                getUpperLeftCorner().y,
-                getWidth(),
-                getHeight());
-    }
+//    
+//    @Override
+//    protected void drawShape(Graphics2D g2) {
+//        g2.drawRect(getUpperLeftCorner().x,
+//                getUpperLeftCorner().y,
+//                getWidth(),
+//                getHeight());
+//    }
+//
+//    @Override
+//    protected void fillShape(Graphics2D g2) {
+//        g2.fillRect(getUpperLeftCorner().x,
+//                getUpperLeftCorner().y,
+//                getWidth(),
+//                getHeight());
+//    }
 }

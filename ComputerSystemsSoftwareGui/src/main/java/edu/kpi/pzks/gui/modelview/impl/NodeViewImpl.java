@@ -99,14 +99,27 @@ public class NodeViewImpl implements NodeView {
 
     @Override
     public void paint(Graphics2D g2) {
+        g2.setStroke(new BasicStroke(3));
+
         if (!isSelected()) {
-            paintNodeEllipse(g2);
-            paintNodeEllipseBorder(g2);
-            paintWeightString(g2);
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
+            g2.setColor(COLORS.NODE_BORDER_COLOR);
+            drawShape(g2);
+
+            g2.setColor(COLORS.NODE_COLOR);
+//            g2.setStroke(new BasicStroke(1.5f));
+            
+            fillShape(g2);
         } else {
-            paintSelectedNode(g2);
-            paintWeightString(g2);
+                        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
+            g2.setColor(COLORS.NODE_BORDER_SELECTED_COLOR);
+            g2.draw(shape);
+
+            g2.setColor(COLORS.NODE_SELECTED_COLOR);
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 6 * 0.1f));
+            g2.fill(shape);
         }
+        paintWeightString(g2);
     }
 
     @Override
@@ -146,48 +159,14 @@ public class NodeViewImpl implements NodeView {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         g2.drawString(weightString, x, y);
     }
-
-    protected void paintNodeEllipseBorder(Graphics2D g2) {
-        g2.setColor(COLORS.NODE_BORDER_COLOR);
-        g2.setStroke(new BasicStroke(1.5f));
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
-        g2.draw(shape);
-    }
-
-    protected void paintNodeEllipse(Graphics2D g2) {
-        g2.setColor(COLORS.NODE_COLOR);
-        g2.fill(shape);
-    }
     
-    
-    private void paintSelectedNode(Graphics2D g2) {
-        paintSelectedNodeBorder(g2);
-        paintSelectedNodeInside(g2);
-    }
-
-    private void paintSelectedNodeBorder(Graphics2D g2) {
-        g2.setStroke(new BasicStroke(3));
-        g2.setColor(COLORS.NODE_BORDER_SELECTED_COLOR);
-        drawShape(g2);
-    }
-
-    private void paintSelectedNodeInside(Graphics2D g2) {
-        g2.setColor(COLORS.FILL_BLUE);
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 6 * 0.1f));
-        fillShape(g2);
+    protected void fillShape(Graphics2D g2) {
+        g2.fillOval(shape.getBounds().x, shape.getBounds().y,
+                CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
     }
 
     protected void drawShape(Graphics2D g2) {
-        g2.drawOval(getUpperLeftCorner().x,
-                getUpperLeftCorner().y,
-                getWidth(),
-                getHeight());
-    }
-
-    protected void fillShape(Graphics2D g2) {
-        g2.fillOval(getUpperLeftCorner().x,
-                getUpperLeftCorner().y,
-                getWidth(),
-                getHeight());
+        g2.drawOval(shape.getBounds().x, shape.getBounds().y,
+                CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
     }
 }
