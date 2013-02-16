@@ -51,30 +51,15 @@ public class Graph implements Serializable {
     /**
      * Safe validation - no exception thrown I recommend to use this method in
      * UI actions
-     *
-     * @return null if graph is valid, String message otherwise
      */
-    //TODO Critical: check it!!!! Interface was changed
     public boolean isValid() {
         boolean isValid = true;
-        try {
-            validate();
-        } catch (ValidationException e) {
-            isValid = false;
+        for (Validator validator : validators) {
+            isValid = isValid & validator.isValid(nodes, links);
         }
         return isValid;
     }
 
-    /**
-     * Force validation - exception is thrown if invalid I recommend to use this
-     * method before statistic generation or modelling
-     */
-    //TODO Critical: check it!!!! Interface was changed
-    public void validate() throws ValidationException {
-        for (Validator validator : validators) {
-            validator.isValid(nodes, links);
-        }
-    }
 
     public void addNode(Node node) {
         if (node != null) {
