@@ -12,7 +12,7 @@ import java.util.*;
 public class CyclingValidator implements Validator {
 
     @Override
-    public boolean validate(Collection<Node> nodes, Collection<Link> links) {
+    public boolean isValid(Collection<Node> nodes, Collection<Link> links) {
         return validateCycles(nodes, links);
     }
 
@@ -48,7 +48,7 @@ public class CyclingValidator implements Validator {
 
     }
 
-    protected void deepSearch(Node root, Set<Node> path) {
+    protected void deepSearch(Node root, Set<Node> path) throws ValidationException {
         for (Node outputNode : root.getOutputNodes()) {
             if (path.contains(outputNode)) {
                 throw new ValidationException(Messages.getLocalizedMessage(Messages.VALIDATION_ERROR_CYCLES_PRESENT, Locale.getDefault()));

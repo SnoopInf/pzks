@@ -10,7 +10,7 @@ import java.util.Collection;
 public class ConsistencyValidator implements Validator {
 
     @Override
-    public boolean validate(Collection<Node> nodes, Collection<Link> links) {
+    public boolean isValid(Collection<Node> nodes, Collection<Link> links) {
         return validateConsistency(nodes, links);
     }
 

@@ -78,7 +78,7 @@ public class Graph implements Serializable {
     //TODO Critical: check it!!!! Interface was changed
     public void validate() throws ValidationException {
         for (Validator validator : validators) {
-            validator.validate(nodes, links);
+            validator.isValid(nodes, links);
         }
     }
 

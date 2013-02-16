@@ -39,7 +39,7 @@ public class ValidatorTest {
         Validator validator = new CyclingValidator();
 
 
-        boolean noErrors = validator.validate(nodes, links);
+        boolean noErrors = validator.isValid(nodes, links);
         assertFalse(noErrors);
 
     }
@@ -48,7 +48,7 @@ public class ValidatorTest {
     public void testConsistencyValidator() {
         Validator validator = new ConsistencyValidator();
 
-        boolean noErrors = validator.validate(nodes, links);
+        boolean noErrors = validator.isValid(nodes, links);
         assertTrue(noErrors);
     }
 }

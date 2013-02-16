@@ -13,5 +13,5 @@ public interface Validator {
      * Returns true if graph is validated.
      * Returns true if it consists errors.
      */
-    boolean validate(Collection<Node> nodes, Collection<Link> links);
+    boolean isValid(Collection<Node> nodes, Collection<Link> links);
 }

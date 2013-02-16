@@ -21,7 +21,7 @@ public class GraphFactoryTest {
         
         Graph graph = GraphFactory.newGraph(numberOfNodes, minNodeWeight, maxNodeWeight, connectivity);
         Validator validator = new CyclingValidator();
-        assertTrue(validator.validate(graph.getNodes(), graph.getLinks()));
+        assertTrue(validator.isValid(graph.getNodes(), graph.getLinks()));
         
     }
     

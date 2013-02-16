@@ -47,7 +47,7 @@ public class GraphFactory {
                 weight = generateWeight(generator, 0, (int) remainder);
                 link = new Link(fromNode, toNode, weight);
                 links.add(link);
-            } while (!validator.validate(nodes, links));
+            } while (!validator.isValid(nodes, links));
             remainder = linksWeightSum - weight;
         }
         graph.addNodes(nodes);
