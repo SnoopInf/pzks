@@ -10,8 +10,7 @@ import java.util.Collection;
 public interface Validator {
 
     /**
-     * Returns true if graph is validated.
-     * Returns true if it consists errors.
+     * Returns true if graph doesn't have validation errors.
      */
     boolean isValid(Collection<Node> nodes, Collection<Link> links);
 }
