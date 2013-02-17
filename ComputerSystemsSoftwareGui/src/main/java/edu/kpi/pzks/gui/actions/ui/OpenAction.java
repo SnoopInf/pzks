@@ -8,13 +8,13 @@ import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.ui.MainFrame;
 import edu.kpi.pzks.gui.ui.utils.FileExtension;
 import edu.kpi.pzks.gui.ui.utils.GraphFileFilter;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 /**
- *
  * @author Aloren
  */
 public class OpenAction extends MainAction {
@@ -32,8 +32,10 @@ public class OpenAction extends MainAction {
     public void actionPerformed(ActionEvent ae) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setAcceptAllFileFilterUsed(false);
-        fileChooser.addChoosableFileFilter(new GraphFileFilter(FileExtension.task));
+        FileFilter defaultTaskFileFilter = new GraphFileFilter(FileExtension.task);
+        fileChooser.addChoosableFileFilter(defaultTaskFileFilter);
         fileChooser.addChoosableFileFilter(new GraphFileFilter(FileExtension.system));
+        fileChooser.setFileFilter(defaultTaskFileFilter);
         int returnVal = fileChooser.showOpenDialog(mainFrame);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             try {

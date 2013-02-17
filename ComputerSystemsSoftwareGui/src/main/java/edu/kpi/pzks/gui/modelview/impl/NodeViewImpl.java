@@ -11,7 +11,6 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
-import javax.swing.*;
 
 /**
  * @author asmirnova
@@ -47,7 +46,7 @@ public class NodeViewImpl implements NodeView {
 
     @Override
     public void setUpperLeftCorner(Point point) {
-        shape.setFrame(point.getX(),point.getY(), CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
+        shape.setFrame(point.getX(), point.getY(), CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
     }
 
     @Override

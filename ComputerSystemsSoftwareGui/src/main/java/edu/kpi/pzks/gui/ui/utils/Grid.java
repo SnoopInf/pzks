@@ -1,26 +1,25 @@
 package edu.kpi.pzks.gui.ui.utils;
 
 import edu.kpi.pzks.gui.utils.COLORS;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import edu.kpi.pzks.gui.utils.CONSTANTS;
+
+import java.awt.*;
 
 /**
- *
  * @author Aloren
  */
 public class Grid {
 
-    public static final int STANDART_SPACING = 5;
     private int spacing;
     private boolean snapToGrid = true;
     private boolean showGrid = true;
 
     public Grid() {
-        this(true, true, STANDART_SPACING);
+        this(true, true, CONSTANTS.GRID_SPACING);
     }
 
     public Grid(boolean snapToGrid, boolean showGrid) {
-        this(snapToGrid, showGrid, STANDART_SPACING);
+        this(snapToGrid, showGrid, CONSTANTS.GRID_SPACING);
     }
 
     public Grid(boolean snapToGrid, boolean showGrid, int spacing) {

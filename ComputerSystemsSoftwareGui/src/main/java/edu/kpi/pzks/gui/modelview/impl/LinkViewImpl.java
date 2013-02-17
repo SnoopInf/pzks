@@ -24,6 +24,7 @@ public class LinkViewImpl implements LinkView {
     protected Point bendPoint;
     protected Link link;
     private static final int HIT_BOX_SIZE = 6;
+    private boolean isOriented;
 
     public LinkViewImpl(Link link) {
         this(null, null, link);
@@ -174,13 +175,17 @@ public class LinkViewImpl implements LinkView {
             drawWeightWithoutBendPoint(g2, srcX, destX, srcY, destY);
             g2.drawLine(srcX, srcY, destX, destY);
             double aDir = Math.atan2(srcX - destX, srcY - destY);
-            drawArrowHead(g2, aDir, srcX, srcY, destX, destY);
+            if (isOriented) {
+                drawArrowHead(g2, aDir, srcX, srcY, destX, destY);
+            }
         } else {
             drawWeightWithBendPoint(g2);
             g2.drawLine(srcX, srcY, bendPoint.x, bendPoint.y);
             g2.drawLine(bendPoint.x, bendPoint.y, destX, destY);
             double aDir = Math.atan2(bendPoint.getX() - destX, bendPoint.getY() - destY);
-            drawArrowHead(g2, aDir, (int) bendPoint.getX(), (int) bendPoint.getY(), destX, destY);
+            if (isOriented) {
+                drawArrowHead(g2, aDir, (int) bendPoint.getX(), (int) bendPoint.getY(), destX, destY);
+            }
         }
         g2.setStroke(new BasicStroke(1));
     }
@@ -198,5 +203,10 @@ public class LinkViewImpl implements LinkView {
     @Override
     public int getWeight() {
         return link.getWeight();
+    }
+
+    @Override
+    public void setOriented(boolean oriented) {
+        isOriented = oriented;
     }
 }

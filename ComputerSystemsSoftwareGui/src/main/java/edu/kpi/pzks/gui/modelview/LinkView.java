@@ -34,4 +34,6 @@ public interface LinkView extends GraphObjectView {
     Line2D.Double[] getLines();
 
     LinkViewPopup getPopup();
+
+    void setOriented(boolean oriented);
 }
