@@ -1,5 +1,6 @@
 package edu.kpi.pzks.gui.ui;
 
+import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.core.validator.Validator;
 import edu.kpi.pzks.gui.modelview.GraphView;
@@ -10,10 +11,11 @@ import edu.kpi.pzks.gui.ui.tools.Tool;
 import edu.kpi.pzks.gui.ui.utils.Grid;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.Utils;
+
+import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
-import javax.swing.*;
 
 /**
  * @author Aloren
@@ -23,7 +25,9 @@ public class GraphPanel extends JPanel {
     public enum NodeType {
 
         Task, System
-    };
+    }
+
+    ;
     private NodeType type;
     private Set<Tool> currentTools = new HashSet<>();
     private Grid grid = new Grid();
@@ -175,10 +179,11 @@ public class GraphPanel extends JPanel {
     }
 
     public void checkGraphIsValid() {
-        if (graphView.getGraph().isValid()) {
+        try {
+            graphView.getGraph().validate();
             setValid(true, null);
-        } else {
-            setValid(false, graphView.getGraph().getErrorMessage());
+        } catch (ValidationException e) {
+            setValid(false, e.getMessage());
         }
     }
 

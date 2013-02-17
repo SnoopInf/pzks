@@ -1,8 +1,8 @@
 package edu.kpi.pzks.core.model;
 
-import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.listener.IChangeListener;
 import edu.kpi.pzks.core.validator.Validator;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
@@ -51,14 +51,11 @@ public class Graph implements Serializable {
     /**
      * Validates the graph with its validators.
      */
-    public boolean isValid() {
-        boolean isValid = true;
+    public void validate() {
         for (Validator validator : validators) {
-            isValid = isValid & validator.isValid(nodes, links);
+            validator.validate(nodes, links);
         }
-        return isValid;
     }
-
 
     public void addNode(Node node) {
         if (node != null) {

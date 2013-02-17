@@ -4,6 +4,7 @@ import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.core.util.Messages;
+
 import java.util.*;
 
 /**
@@ -13,37 +14,31 @@ public class CyclingValidator implements Validator {
 
     @Override
     public boolean isValid(Collection<Node> nodes, Collection<Link> links) {
-        return validateCycles(nodes, links);
-    }
-
-    /*
-     * Checks for cycles. I suppose that cycle is when we have path from child to one of it's parents.
-     */
-    protected boolean validateCycles(Collection<Node> nodes, Collection<Link> links) {
-        if (links.isEmpty()) {
-            return true;
-        }
-
-        List<Node> roots = new ArrayList<>(nodes);
-        Set<Node> notRoots = new HashSet<>();
-
-        for (Link link : links) {
-            notRoots.add(link.getToNode());
-        }
-        roots.removeAll(notRoots);
-
-        if (roots.isEmpty()) {
-            return false;
-        }
-
         try {
-            for (Node root : roots) {
-                deepSearch(root, new HashSet<>(Arrays.asList(root)));
-            }
+            validateCycles(nodes, links);
+            return true;
         } catch (ValidationException e) {
             return false;
         }
-        return true;
+    }
+
+    @Override
+    public void validate(Collection<Node> nodes, Collection<Link> links) {
+        validateCycles(nodes, links);
+    }
+
+    /*
+    * Checks for cycles. I suppose that cycle is when we have path from child to one of it's parents.
+    */
+    protected void validateCycles(Collection<Node> nodes, Collection<Link> links) {
+
+        if (links.isEmpty()) {
+            return;
+        }
+
+        for (Node root : nodes) {
+            deepSearch(root, new HashSet<>(Arrays.asList(root)));
+        }
 
     }
 
