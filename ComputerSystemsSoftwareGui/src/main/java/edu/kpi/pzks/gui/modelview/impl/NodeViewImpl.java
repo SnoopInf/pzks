@@ -98,26 +98,25 @@ public class NodeViewImpl implements NodeView {
 
     @Override
     public void paint(Graphics2D g2) {
-        g2.setStroke(new BasicStroke(3));
+        g2.setStroke(new BasicStroke(CONSTANTS.LINE_THINKNESS));
 
         if (!isSelected()) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
+            g2.setColor(COLORS.NODE_COLOR);
+            fillShape(g2);
+
             g2.setColor(COLORS.NODE_BORDER_COLOR);
             drawShape(g2);
-
-            g2.setColor(COLORS.NODE_COLOR);
-//            g2.setStroke(new BasicStroke(1.5f));
-            
-            fillShape(g2);
         } else {
-                        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
-            g2.setColor(COLORS.NODE_BORDER_SELECTED_COLOR);
-            g2.draw(shape);
-
             g2.setColor(COLORS.NODE_SELECTED_COLOR);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 6 * 0.1f));
             g2.fill(shape);
+
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
+            g2.setColor(COLORS.NODE_BORDER_SELECTED_COLOR);
+            g2.draw(shape);
         }
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 10 * 0.1f));
         paintWeightString(g2);
     }
 
@@ -155,17 +154,14 @@ public class NodeViewImpl implements NodeView {
         } else {
             g2.setColor(COLORS.NODE_BORDER_COLOR);
         }
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         g2.drawString(weightString, x, y);
     }
 
     protected void fillShape(Graphics2D g2) {
-        g2.fillOval(shape.getBounds().x, shape.getBounds().y,
-                CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
+        g2.fill(shape);
     }
 
     protected void drawShape(Graphics2D g2) {
-        g2.drawOval(shape.getBounds().x, shape.getBounds().y,
-                CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
+        g2.draw(shape);
     }
 }
