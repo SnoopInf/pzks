@@ -1,9 +1,10 @@
 package edu.kpi.pzks.core.model;
 
-import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.listener.IChangeListener;
 import edu.kpi.pzks.core.validator.Validator;
+
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ public class Graph implements Serializable {
     private Links links = new Links();
     private transient Set<IChangeListener> changeListeners = new HashSet<>();
     private transient Set<Validator> validators = new HashSet<>();
-    private String errorMessage;
+    private boolean isOriented;
 
     public Graph() {
     }
@@ -49,31 +50,9 @@ public class Graph implements Serializable {
     }
 
     /**
-     * Safe validation - no exception thrown I recommend to use this method in
-     * UI actions
-     *
-     * @return null if graph is valid, String message otherwise
+     * Validates the graph with its validators.
      */
-    public boolean isValid() {
-        boolean isValid = true;
-        try {
-            validate();
-        } catch (ValidationException e) {
-            isValid = false;
-            errorMessage = e.getMessage();
-        }
-        return isValid;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    /**
-     * Force validation - exception is thrown if invalid I recommend to use this
-     * method before statistic generation or modelling
-     */
-    public void validate() throws ValidationException {
+    public void validate() {
         for (Validator validator : validators) {
             validator.validate(nodes, links);
         }
@@ -83,6 +62,12 @@ public class Graph implements Serializable {
         if (node != null) {
             nodes.add(node);
             notifyListener();
+        }
+    }
+
+    public void addNodes(Collection<Node> nodesToAdd) {
+        for (Node node : nodesToAdd) {
+            addNode(node);
         }
     }
 
@@ -97,6 +82,12 @@ public class Graph implements Serializable {
     public void addLink(Link link) {
         if (link != null) {
             links.add(link);
+        }
+    }
+
+    public void addLinks(Collection<Link> linksToAdd) {
+        for (Link link : linksToAdd) {
+            addLink(link);
         }
     }
 
@@ -120,5 +111,13 @@ public class Graph implements Serializable {
 
     public boolean isLinksEmpty() {
         return links.isEmpty();
+    }
+
+    public boolean isOriented() {
+        return isOriented;
+    }
+
+    public void setOriented(boolean oriented) {
+        isOriented = oriented;
     }
 }

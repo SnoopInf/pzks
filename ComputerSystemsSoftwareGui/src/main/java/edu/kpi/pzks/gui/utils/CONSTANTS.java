@@ -15,7 +15,9 @@ public class CONSTANTS {
 
     public static final String YES_ICON = defaults.getString("yes.icon");
     public static final String NO_ICON = defaults.getString("no.icon");
+
     public static final int MARGIN_TOP = Integer.parseInt(defaults.getString("margin.top"));
     public static final int MARGIN_LEFT = Integer.parseInt(defaults.getString("margin.left"));
 
+    public static final int GRID_SPACING = Integer.parseInt(defaults.getString("grid.spacing"));
 }

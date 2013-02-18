@@ -4,6 +4,7 @@ import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.core.util.Messages;
+
 import java.util.*;
 
 /**
@@ -12,37 +13,36 @@ import java.util.*;
 public class CyclingValidator implements Validator {
 
     @Override
+    public boolean isValid(Collection<Node> nodes, Collection<Link> links) {
+        try {
+            validateCycles(nodes, links);
+            return true;
+        } catch (ValidationException e) {
+            return false;
+        }
+    }
+
+    @Override
     public void validate(Collection<Node> nodes, Collection<Link> links) {
         validateCycles(nodes, links);
     }
 
     /*
-     * Checks for cycles. I suppose that cycle is when we have path from child to one of it's parents.
-     */
-    protected void validateCycles(Collection<Node> nodes, Collection<Link> edges) {
-        if (edges.isEmpty()) {
+    * Checks for cycles. I suppose that cycle is when we have path from child to one of it's parents.
+    */
+    protected void validateCycles(Collection<Node> nodes, Collection<Link> links) {
+
+        if (links.isEmpty()) {
             return;
         }
 
-        List<Node> roots = new ArrayList<>(nodes);
-        Set<Node> notRoots = new HashSet<>();
-
-        for (Link edge : edges) {
-            notRoots.add(edge.getToNode());
-        }
-        roots.removeAll(notRoots);
-
-        if (roots.isEmpty()) {
-            throw new ValidationException(Messages.getLocalizedMessage(Messages.VALIDATION_ERROR_CYCLES_PRESENT, Locale.getDefault()));
-        }
-
-        for (Node root : roots) {
+        for (Node root : nodes) {
             deepSearch(root, new HashSet<>(Arrays.asList(root)));
         }
 
     }
 
-    protected void deepSearch(Node root, Set<Node> path) {
+    protected void deepSearch(Node root, Set<Node> path) throws ValidationException {
         for (Node outputNode : root.getOutputNodes()) {
             if (path.contains(outputNode)) {
                 throw new ValidationException(Messages.getLocalizedMessage(Messages.VALIDATION_ERROR_CYCLES_PRESENT, Locale.getDefault()));

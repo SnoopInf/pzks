@@ -40,4 +40,9 @@ public class Node extends GraphObject {
             outputNodes.add(node);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Node "+getName()+" w: "+getWeight();
+    }
 }

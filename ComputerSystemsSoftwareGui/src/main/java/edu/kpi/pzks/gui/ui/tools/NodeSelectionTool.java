@@ -4,28 +4,27 @@ import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.ui.GraphPanel.NodeType;
 import edu.kpi.pzks.gui.utils.COLORS;
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
-import javax.swing.JPopupMenu;
+import java.util.Set;
 
 /**
- *
  * @author Aloren
  */
 public class NodeSelectionTool implements SelectionDraggingTool {
 
     protected final GraphPanel graphPanel;
-    
+
     public static Tool newNodeSelectionTool(GraphPanel graphPanel) {
         final NodeType type = graphPanel.getType();
-        if(type.equals(NodeType.System)) {
+        if (type.equals(NodeType.System)) {
             return new SystemNodeSelectionTool(graphPanel);
-        } else if(type.equals(NodeType.Task)) {
+        } else if (type.equals(NodeType.Task)) {
             return new NodeSelectionTool(graphPanel);
         }
-        throw new IllegalArgumentException("Not supported type of panel: "+type);
+        throw new IllegalArgumentException("Not supported type of panel: " + type);
     }
 
     protected NodeSelectionTool(GraphPanel graphPanel) {
@@ -59,9 +58,7 @@ public class NodeSelectionTool implements SelectionDraggingTool {
         int x = me.getX();
         int y = me.getY();
         NodeView nodeViewAtPoint = graphPanel.getGraphView().getNodeViewAtPoint(x, y);
-        if (nodeViewAtPoint == null) {
-            clearSelected();
-        } else if (!isNodeSelected(nodeViewAtPoint)) {
+        if (!isNodeSelected(nodeViewAtPoint)) {
             setSelectedNodeView(nodeViewAtPoint);
         }
         graphPanel.repaint();

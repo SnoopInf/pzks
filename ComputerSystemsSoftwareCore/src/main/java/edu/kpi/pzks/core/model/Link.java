@@ -88,4 +88,9 @@ public class Link extends GraphObject {
         final Link other = (Link) obj;
         return Objects.equals(this.fromNode, other.fromNode) && Objects.equals(this.toNode, other.toNode);
     }
+
+    @Override
+    public String toString() {
+        return "Link " + fromNode.getName() + " : " + toNode.getName()+" w: "+getWeight();
+    }
 }

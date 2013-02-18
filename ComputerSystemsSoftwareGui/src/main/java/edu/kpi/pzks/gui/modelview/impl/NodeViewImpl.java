@@ -11,7 +11,6 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
-import javax.swing.*;
 
 /**
  * @author asmirnova
@@ -49,7 +48,7 @@ public class NodeViewImpl implements NodeView {
 
     @Override
     public void setUpperLeftCorner(Point point) {
-        shape.setFrame(point.getX(),point.getY(), CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
+        shape.setFrame(point.getX(), point.getY(), CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
     }
 
     @Override
@@ -159,14 +158,15 @@ public class NodeViewImpl implements NodeView {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         g2.drawString(weightString, x, y);
     }
-    
-    protected void fillShape(Graphics2D g2) {
-        g2.fillOval(shape.getBounds().x, shape.getBounds().y,
-                CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
+
+    protected void paintNodeEllipseBorder(Graphics2D g2) {
+        g2.setColor(COLORS.NODE_BORDER_COLOR);
+        g2.setStroke(new BasicStroke(1.5f));
+        g2.draw(shape);
     }
 
-    protected void drawShape(Graphics2D g2) {
-        g2.drawOval(shape.getBounds().x, shape.getBounds().y,
-                CONSTANTS.NODE_WIDTH, CONSTANTS.NODE_HEIGHT);
+    protected void paintNodeEllipse(Graphics2D g2) {
+        g2.setColor(COLORS.NODE_COLOR);
+        g2.fill(shape);
     }
 }
