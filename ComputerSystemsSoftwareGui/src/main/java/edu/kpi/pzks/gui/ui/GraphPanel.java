@@ -168,14 +168,14 @@ public class GraphPanel extends JPanel {
                 nodeView.setUpperLeftCorner(upperLeftCorner);
             }
 
-            if (point.x < CONSTANTS.MARGIN_LEFT || point.y < CONSTANTS.MARGIN_TOP) {
-                if (point.x < CONSTANTS.MARGIN_LEFT) {
-                    point.x = CONSTANTS.MARGIN_LEFT;
+            if (upperLeftCorner.x < CONSTANTS.MARGIN_LEFT || upperLeftCorner.y < CONSTANTS.MARGIN_TOP) {
+                if (upperLeftCorner.x < CONSTANTS.MARGIN_LEFT) {
+                    upperLeftCorner.x = CONSTANTS.MARGIN_LEFT;
                 }
-                if (point.y < CONSTANTS.MARGIN_TOP) {
-                    point.y = CONSTANTS.MARGIN_TOP;
+                if (upperLeftCorner.y < CONSTANTS.MARGIN_TOP) {
+                    upperLeftCorner.y = CONSTANTS.MARGIN_TOP;
                 }
-                nodeView.setUpperLeftCorner(point);
+                nodeView.setUpperLeftCorner(upperLeftCorner);
             }
         }
         this.setSize(dimension);
