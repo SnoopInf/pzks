@@ -1,5 +1,6 @@
 package edu.kpi.pzks.gui.utils;
 
+import java.awt.BasicStroke;
 import java.util.ResourceBundle;
 
 public class CONSTANTS {
@@ -20,4 +21,5 @@ public class CONSTANTS {
     public static final int MARGIN_LEFT = Integer.parseInt(defaults.getString("margin.left"));
 
     public static final int GRID_SPACING = Integer.parseInt(defaults.getString("grid.spacing"));
+    public static final float LINE_THINKNESS = 1.5F;
 }

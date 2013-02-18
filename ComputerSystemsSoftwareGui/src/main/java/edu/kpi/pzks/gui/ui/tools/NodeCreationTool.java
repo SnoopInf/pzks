@@ -87,7 +87,7 @@ public class NodeCreationTool implements Tool {
 
     private void paintNodeInside(Graphics2D g2) {
         g2.setColor(COLORS.NODE_BORDER_COLOR);
-        g2.setStroke(new BasicStroke(1.5f));
+        g2.setStroke(new BasicStroke(CONSTANTS.LINE_THINKNESS));
         drawShape(g2);
     }
 

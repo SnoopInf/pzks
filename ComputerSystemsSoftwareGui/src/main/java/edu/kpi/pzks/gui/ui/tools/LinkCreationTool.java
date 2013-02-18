@@ -6,6 +6,7 @@ import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.LinkViewImpl;
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.utils.COLORS;
+import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.PaintUtils;
 
 import java.awt.*;
@@ -96,7 +97,7 @@ public class LinkCreationTool implements Tool {
     private void paintLink(Graphics2D g2) {
         if (activeLinkView != null) {
             g2.setColor(COLORS.LINK_COLOR);
-            g2.setStroke(new BasicStroke(1.5f));
+            g2.setStroke(new BasicStroke(CONSTANTS.LINE_THINKNESS));
             final NodeView fromNodeView = activeLinkView.getFromNodeView();
             final Point fromNodeViewCenter = fromNodeView.getCenter();
             double dx = PaintUtils.getLength(fromNodeViewCenter.x, mousePosition.x);

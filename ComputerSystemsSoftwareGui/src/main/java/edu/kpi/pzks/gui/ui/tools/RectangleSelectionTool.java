@@ -4,6 +4,7 @@ import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.utils.COLORS;
+import edu.kpi.pzks.gui.utils.CONSTANTS;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
@@ -127,7 +128,7 @@ public class RectangleSelectionTool implements SelectionDraggingTool {
         int startX = getSelectionStartX();
         int startY = getSelectionStartY();
         g2.setColor(COLORS.BLUE);
-        g2.setStroke(new BasicStroke(1.5f));
+        g2.setStroke(new BasicStroke(CONSTANTS.LINE_THINKNESS));
         g2.drawRect(startX, startY,
                 Math.abs(mousePosition.x - selectionStartPoint.x),
                 Math.abs(mousePosition.y - selectionStartPoint.y));
