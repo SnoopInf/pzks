@@ -10,6 +10,7 @@ import edu.kpi.pzks.gui.utils.PaintUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
@@ -25,6 +26,7 @@ public class LinkViewImpl implements LinkView {
     protected Link link;
     private static final int HIT_BOX_SIZE = 6;
     private boolean isOriented;
+    private GeneralPath _shape;
 
     public LinkViewImpl(Link link) {
         this(null, null, link);
@@ -125,6 +127,13 @@ public class LinkViewImpl implements LinkView {
                 return true;
             }
         }
+        
+        if(_shape != null) {
+            if(_shape.contains(x, y)) {
+                return true;
+            }
+        }
+        
         return false;
     }
 
@@ -171,20 +180,33 @@ public class LinkViewImpl implements LinkView {
         int fontWeight = CONSTANTS.FONT_WEIGHT;
         g2.setFont(new Font(fontFamily, fontWeight, fontSize));
 
-        if (!hasBendPoint()) {
-            drawWeightWithoutBendPoint(g2, srcX, destX, srcY, destY);
-            g2.drawLine(srcX, srcY, destX, destY);
-            double aDir = Math.atan2(srcX - destX, srcY - destY);
+        if (fromNodeView == toNodeView) {
+            GeneralPath shape = new GeneralPath();
+            shape.moveTo(srcX, srcY + 15);
+            shape.lineTo(srcX, srcY + 15);
+            shape.quadTo(srcX + 30, srcY + 45, srcX + 15, srcY);
+            _shape = shape;
+            g2.draw(shape);
             if (isOriented) {
-                drawArrowHead(g2, aDir, srcX, srcY, destX, destY);
+                double aDir = Math.atan2(1, 1);
+                drawArrowHead(g2, aDir, srcX, srcY + 30, destX + 4, destY + 2);
             }
         } else {
-            drawWeightWithBendPoint(g2);
-            g2.drawLine(srcX, srcY, bendPoint.x, bendPoint.y);
-            g2.drawLine(bendPoint.x, bendPoint.y, destX, destY);
-            double aDir = Math.atan2(bendPoint.getX() - destX, bendPoint.getY() - destY);
-            if (isOriented) {
-                drawArrowHead(g2, aDir, (int) bendPoint.getX(), (int) bendPoint.getY(), destX, destY);
+            if (!hasBendPoint()) {
+                drawWeightWithoutBendPoint(g2, srcX, destX, srcY, destY);
+                g2.drawLine(srcX, srcY, destX, destY);
+                double aDir = Math.atan2(srcX - destX, srcY - destY);
+                if (isOriented) {
+                    drawArrowHead(g2, aDir, srcX, srcY, destX, destY);
+                }
+            } else {
+                drawWeightWithBendPoint(g2);
+                g2.drawLine(srcX, srcY, bendPoint.x, bendPoint.y);
+                g2.drawLine(bendPoint.x, bendPoint.y, destX, destY);
+                double aDir = Math.atan2(bendPoint.getX() - destX, bendPoint.getY() - destY);
+                if (isOriented) {
+                    drawArrowHead(g2, aDir, (int) bendPoint.getX(), (int) bendPoint.getY(), destX, destY);
+                }
             }
         }
         g2.setStroke(new BasicStroke(1));
