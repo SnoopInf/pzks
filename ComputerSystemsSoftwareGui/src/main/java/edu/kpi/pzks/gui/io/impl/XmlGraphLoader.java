@@ -13,23 +13,23 @@ import edu.kpi.pzks.gui.modelview.impl.LinkViewImpl;
 import edu.kpi.pzks.gui.modelview.impl.NodeViewImpl;
 import edu.kpi.pzks.gui.modelview.impl.SystemNodeViewImpl;
 import edu.kpi.pzks.gui.ui.GraphPanel.NodeType;
-import java.awt.Point;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 import org.apache.commons.collections.BidiMap;
 import org.apache.commons.collections.bidimap.DualHashBidiMap;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- *
  * @author Aloren
  */
 public class XmlGraphLoader implements GraphLoader {
@@ -80,7 +80,7 @@ public class XmlGraphLoader implements GraphLoader {
 
         @Override
         public void startElement(String uri, String localName, String qName,
-                Attributes attributes) throws SAXException {
+                                 Attributes attributes) throws SAXException {
             if (qName.equalsIgnoreCase(XmlConst.NODE)) {
                 int weight = Integer.parseInt(attributes.getValue(XmlConst.WEIGHT));
                 Node node = new Node(weight);
@@ -105,7 +105,8 @@ public class XmlGraphLoader implements GraphLoader {
                 Node node = (Node) idNodeMap.get(nodeId);
                 if (type.equals(NodeType.Task)) {
                     nodeView = new NodeViewImpl(node);
-                } else if(type.equals(NodeType.System)) {
+
+                } else if (type.equals(NodeType.System)) {
                     nodeView = new SystemNodeViewImpl(node);
                 }
                 idNodeViewMap.put(nodeId, nodeView);

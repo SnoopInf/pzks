@@ -18,6 +18,7 @@ public class Graph implements Serializable {
     private Links links = new Links();
     private transient Set<IChangeListener> changeListeners = new HashSet<>();
     private transient Set<Validator> validators = new HashSet<>();
+    private boolean isOriented;
 
     public Graph() {
     }

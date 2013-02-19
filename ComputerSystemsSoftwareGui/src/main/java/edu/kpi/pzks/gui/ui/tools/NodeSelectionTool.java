@@ -4,29 +4,27 @@ import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.ui.GraphPanel;
 import edu.kpi.pzks.gui.ui.GraphPanel.NodeType;
 import edu.kpi.pzks.gui.utils.COLORS;
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Set;
-import javax.swing.JPopupMenu;
 
 /**
- *
  * @author Aloren
  */
 public class NodeSelectionTool implements SelectionDraggingTool {
 
     protected final GraphPanel graphPanel;
-    
+
     public static Tool newNodeSelectionTool(GraphPanel graphPanel) {
         final NodeType type = graphPanel.getType();
-        if(type.equals(NodeType.System)) {
+        if (type.equals(NodeType.System)) {
             return new SystemNodeSelectionTool(graphPanel);
-        } else if(type.equals(NodeType.Task)) {
+        } else if (type.equals(NodeType.Task)) {
             return new NodeSelectionTool(graphPanel);
         }
-        throw new IllegalArgumentException("Not supported type of panel: "+type);
+        throw new IllegalArgumentException("Not supported type of panel: " + type);
     }
 
     protected NodeSelectionTool(GraphPanel graphPanel) {
@@ -122,7 +120,7 @@ public class NodeSelectionTool implements SelectionDraggingTool {
     }
 
     private void paintSelectedNodeInside(Graphics2D g2, NodeView selectedNodeView) {
-        g2.setColor(COLORS.FILL_BLUE);
+        g2.setColor(COLORS.NODE_SELECTED_COLOR);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 6 * 0.1f));
         fillShape(g2, selectedNodeView);
     }
@@ -140,5 +138,5 @@ public class NodeSelectionTool implements SelectionDraggingTool {
                 selectedNodeView.getWidth(),
                 selectedNodeView.getHeight());
     }
-    
+
 }

@@ -27,7 +27,6 @@ public class GraphPanel extends JPanel {
         Task, System
     }
 
-    ;
     private NodeType type;
     private Set<Tool> currentTools = new HashSet<>();
     private Grid grid = new Grid();
@@ -42,6 +41,14 @@ public class GraphPanel extends JPanel {
     public GraphPanel(NodeType type) {
         super(new BorderLayout());
         this.type = type;
+        switch (this.type) {
+            case Task:
+                graphView.getGraph().setOriented(true);
+                break;
+            case System:
+                graphView.getGraph().setOriented(false);
+                break;
+        }
         setBackground(Color.WHITE);
         setFocusable(true);
         createValidationLabel();
