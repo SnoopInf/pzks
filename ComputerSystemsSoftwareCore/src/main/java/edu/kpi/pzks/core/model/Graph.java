@@ -113,15 +113,23 @@ public class Graph implements Serializable {
         return links.isEmpty();
     }
 
+    public boolean isOriented() {
+        return isOriented;
+    }
+
+    public void setOriented(boolean oriented) {
+        isOriented = oriented;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Graph: ");
         sb.append("\r\nNodes: ");
-        for(Node node : nodes) {
+        for (Node node : nodes) {
             sb.append(node).append("\r\n");
         }
         sb.append("Links: ");
-        for(Link link : links) {
+        for (Link link : links) {
             sb.append(link).append("\r\n");
 
         }
