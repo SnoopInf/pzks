@@ -28,5 +28,9 @@ public class STRINGS {
     public static final String GEN_SYSTEM_GRAPH = menu.getString("generateSystemGraph");
     public static final String TASK_GRAPH = menu.getString("taskGraph");
     public static final String SYSTEM_GRAPH = menu.getString("systemGraph");
+    
+    public static final String GANTT = menu.getString("modeling.gantt");
+    public static final String CPU_PARAMETERS = menu.getString("modeling.cpu_param");
+
 
 }
