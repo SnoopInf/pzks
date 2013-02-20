@@ -103,6 +103,7 @@ public class XmlGraphLoader implements GraphLoader {
             if (qName.equalsIgnoreCase(XmlConst.NODE_VIEW)) {
                 final int nodeId = Integer.parseInt(attributes.getValue(XmlConst.NODE_ID));
                 Node node = (Node) idNodeMap.get(nodeId);
+                node.setName("" + nodeId);
                 if (type.equals(NodeType.Task)) {
                     nodeView = new NodeViewImpl(node);
 

@@ -67,6 +67,7 @@ public class GraphPanel extends JPanel {
     public void setValid(boolean valid, String message) {
         if (valid) {
             validationLabel.setIcon(this.valid);
+            validationLabel.setToolTipText("");
         } else {
             validationLabel.setIcon(this.invalid);
             validationLabel.setToolTipText(message);

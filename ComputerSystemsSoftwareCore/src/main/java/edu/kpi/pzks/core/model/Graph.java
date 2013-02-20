@@ -20,6 +20,8 @@ public class Graph implements Serializable {
     private transient Set<Validator> validators = new HashSet<>();
     private boolean isOriented;
 
+    private int incrementer;
+
     public Graph() {
     }
 
@@ -61,6 +63,7 @@ public class Graph implements Serializable {
     public void addNode(Node node) {
         if (node != null) {
             nodes.add(node);
+            node.setId(incrementer++);
             notifyListener();
         }
     }
@@ -119,5 +122,20 @@ public class Graph implements Serializable {
 
     public void setOriented(boolean oriented) {
         isOriented = oriented;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Graph: ");
+        sb.append("\r\nNodes: ");
+        for (Node node : nodes) {
+            sb.append(node).append("\r\n");
+        }
+        sb.append("Links: ");
+        for (Link link : links) {
+            sb.append(link).append("\r\n");
+
+        }
+        return sb.toString();
     }
 }
