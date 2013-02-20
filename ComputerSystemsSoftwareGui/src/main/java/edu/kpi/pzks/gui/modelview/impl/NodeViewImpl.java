@@ -79,6 +79,7 @@ public class NodeViewImpl implements NodeView {
         paintNodeEllipse(g2);
         paintNodeEllipseBorder(g2);
         paintWeightString(g2);
+        paintIdString(g2);
     }
 
     @Override
@@ -111,6 +112,19 @@ public class NodeViewImpl implements NodeView {
         int x = (int) (shape.getX() + shape.getWidth() / 2 - metrics.stringWidth(weightString) / 2);
         int y = (int) (shape.getY() + shape.getHeight() / 2 + metrics.getHeight() / 3);
         g2.drawString(weightString, x, y);
+    }
+
+
+    private void paintIdString(Graphics2D g2) {
+        String fontFamily = CONSTANTS.FONT_FAMILY;
+        int fontSize = CONSTANTS.FONT_SIZE;
+        int fontWeight = CONSTANTS.FONT_WEIGHT;
+        g2.setFont(new Font(fontFamily, fontWeight, fontSize));
+        FontMetrics metrics = g2.getFontMetrics(g2.getFont());
+        String idString = "" + node.getId();
+        int x = (int) (shape.getX() - metrics.stringWidth(idString) / 4);
+        int y = (int) (shape.getY() - metrics.getHeight() / 4);
+        g2.drawString(idString, x, y);
     }
 
     protected void paintNodeEllipseBorder(Graphics2D g2) {

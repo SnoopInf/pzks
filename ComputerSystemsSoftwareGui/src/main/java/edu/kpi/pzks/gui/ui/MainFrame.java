@@ -2,6 +2,7 @@ package edu.kpi.pzks.gui.ui;
 
 import edu.kpi.pzks.core.validator.ConsistencyValidator;
 import edu.kpi.pzks.core.validator.CyclingValidator;
+import edu.kpi.pzks.core.validator.SubGraphValidator;
 import edu.kpi.pzks.gui.actions.graph.LinkCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.NodeCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.RemoveAction;
@@ -171,6 +172,7 @@ public class MainFrame extends JFrame {
         localSystemPanel.setName("systemPanel");
         localSystemPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.SYSTEM_GRAPH));
         localSystemPanel.addValidator(new ConsistencyValidator());
+        localSystemPanel.addValidator(new SubGraphValidator());
         return localSystemPanel;
     }
 
