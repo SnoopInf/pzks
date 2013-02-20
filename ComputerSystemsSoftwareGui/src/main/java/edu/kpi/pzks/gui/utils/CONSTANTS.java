@@ -22,4 +22,8 @@ public class CONSTANTS {
 
     public static final int GRID_SPACING = Integer.parseInt(defaults.getString("grid.spacing"));
     public static final float LINE_THINKNESS = 1.5F;
+    
+    public static final boolean GRID_SNAP = Boolean.parseBoolean(defaults.getString("grid.snap"));
+    public static final boolean GRID_ENABLED = Boolean.parseBoolean(defaults.getString("grid.enabled"));
+    
 }

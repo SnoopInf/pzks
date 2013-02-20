@@ -29,7 +29,7 @@ public class GraphPanel extends JPanel {
 
     private NodeType type;
     private Set<Tool> currentTools = new HashSet<>();
-    private Grid grid = new Grid();
+    private Grid grid = new Grid(CONSTANTS.GRID_SNAP, CONSTANTS.GRID_ENABLED);
     private GraphView graphView = new GraphViewImpl(new Graph());
     private Set<NodeView> selectedNodeViews = new HashSet<>();
     private Set<LinkView> selectedLinkViews = new HashSet<>();
