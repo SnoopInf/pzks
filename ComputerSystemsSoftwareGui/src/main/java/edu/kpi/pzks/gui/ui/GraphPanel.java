@@ -9,6 +9,7 @@ import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl;
 import edu.kpi.pzks.gui.ui.tools.Tool;
 import edu.kpi.pzks.gui.ui.utils.Grid;
+import edu.kpi.pzks.gui.utils.COLORS;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.Utils;
 
@@ -49,7 +50,7 @@ public class GraphPanel extends JPanel {
                 graphView.getGraph().setOriented(false);
                 break;
         }
-        setBackground(Color.WHITE);
+        setBackground(COLORS.PANEL_BACKGROUND);
         setFocusable(true);
         createValidationLabel();
     }

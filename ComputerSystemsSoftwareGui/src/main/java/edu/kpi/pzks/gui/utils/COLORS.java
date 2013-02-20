@@ -23,5 +23,6 @@ public class COLORS {
     public static Color FILL_BLUE = Color.decode(colors.getString("color.fill.blue"));
 
     public static final Color GRID_COLOR = Color.decode(colors.getString("color.grid"));
+    public static final Color PANEL_BACKGROUND = Color.decode(colors.getString("color.panel"));
 
 }
