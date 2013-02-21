@@ -25,10 +25,10 @@ public class GraphFactory {
         //TODO check other params
 
         Validator validator = new CyclingValidator();
-        Graph graph = new Graph();
+        Graph graph = new Graph(true);
         Random generator = new Random();
         nodesWeightSum = 0;
-        List<Node> nodes = generateNodes(numberOfNodes, generator, maxNodeWeight, minNodeWeight);
+        List<Node> nodes = generateNodes(numberOfNodes, maxNodeWeight, minNodeWeight);
 
         double linksWeightSum = (double) (nodesWeightSum / connectivity) - nodesWeightSum;
         double remainder = linksWeightSum;
@@ -47,7 +47,7 @@ public class GraphFactory {
                 }
                 fromNode = nodes.get(generator.nextInt(nodes.size()));
                 toNode = nodes.get(generator.nextInt(nodes.size()));
-                weight = generateWeight(generator, 0, (int) remainder);
+                weight = generateWeight(0, (int) remainder);
                 link = new Link(fromNode, toNode, weight);
                 links.add(link);
                 System.out.println("Generated link: " + link);
@@ -65,10 +65,10 @@ public class GraphFactory {
         return graph;
     }
 
-    protected static List<Node> generateNodes(int numberOfNodes, Random generator, int maxNodeWeight, int minNodeWeight) {
+    protected static List<Node> generateNodes(int numberOfNodes, int maxNodeWeight, int minNodeWeight) {
         List<Node> nodes = new ArrayList<>();
         for (int i = 0; i < numberOfNodes; i++) {
-            int weight = generateWeight(generator, minNodeWeight, maxNodeWeight);
+            int weight = generateWeight(minNodeWeight, maxNodeWeight);
             nodesWeightSum += weight;
             Node node = new Node(weight);
             node.setName("N" + i);
@@ -78,8 +78,8 @@ public class GraphFactory {
         return nodes;
     }
 
-    private static int generateWeight(Random generator, int minNodeWeight, int maxNodeWeight) {
-        int weight = generator.nextInt(maxNodeWeight) + minNodeWeight;
+    private static int generateWeight(int minNodeWeight, int maxNodeWeight) {
+        int weight = minNodeWeight + (int)(Math.random() * ((maxNodeWeight - minNodeWeight) + 1));
         return weight;
     }
 

@@ -24,7 +24,7 @@ public class GraphTest {
     //TODO refactor
     @Before
     public void before() {
-        g = new Graph();
+        g = new Graph(true);
         nodes = new LinkedList<>();
         links = new LinkedList<>();
 
