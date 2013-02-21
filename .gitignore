@@ -1,3 +1,5 @@
 .idea/
 
 *.iml
+/SmarxComputerSystemsSoftwareGui/nbproject/private/
+/SmarxComputerSystemsSoftwareGui/target/
