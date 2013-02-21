@@ -40,6 +40,8 @@ public class XmlGraphSaver implements GraphSaver {
             Document doc = builder.newDocument();
 
             Element graphElement = doc.createElement(XmlConst.GRAPH);
+            graphElement.setAttribute(XmlConst.ORIENTED, Boolean.toString(graphView.getGraph().isOriented()));
+            graphElement.setAttribute(XmlConst.TYPE, graphView.getType().toString());
             doc.appendChild(graphElement);
 
             Graph graph = graphView.getGraph();

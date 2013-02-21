@@ -9,10 +9,10 @@ import edu.kpi.pzks.gui.modelview.GraphView;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl;
+import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl.TYPE;
 import edu.kpi.pzks.gui.modelview.impl.LinkViewImpl;
 import edu.kpi.pzks.gui.modelview.impl.NodeViewImpl;
 import edu.kpi.pzks.gui.modelview.impl.SystemNodeViewImpl;
-import edu.kpi.pzks.gui.ui.GraphPanel.NodeType;
 import org.apache.commons.collections.BidiMap;
 import org.apache.commons.collections.bidimap.DualHashBidiMap;
 import org.xml.sax.Attributes;
@@ -35,7 +35,6 @@ import java.util.Map;
 public class XmlGraphLoader implements GraphLoader {
 
     protected GraphView graphView;
-    private NodeType type = NodeType.Task;
 
     //TODO throw specific GraphException, so that client can handle it appropriately
     @Override
@@ -54,7 +53,7 @@ public class XmlGraphLoader implements GraphLoader {
 
     protected void parseDocument(File file)
             throws ParserConfigurationException, SAXException, FileNotFoundException, IOException {
-        graphView = new GraphViewImpl(new Graph());
+        graphView = new GraphViewImpl(new Graph(false));
         SAXParserFactory spf = SAXParserFactory.newInstance();
         SAXParser sp = spf.newSAXParser();
         if (file.exists()) {
@@ -62,11 +61,6 @@ public class XmlGraphLoader implements GraphLoader {
         } else {
             throw new FileNotFoundException("No file to parse");
         }
-    }
-
-    @Override
-    public void setNodeType(NodeType type) {
-        this.type = type;
     }
 
     private class GraphXmlHandler extends DefaultHandler {
@@ -77,10 +71,17 @@ public class XmlGraphLoader implements GraphLoader {
         private Map<Integer, Link> idLinkMap = new HashMap<>();
         private DualHashBidiMap idNodeMap = new DualHashBidiMap();
         private Map<Integer, NodeView> idNodeViewMap = new HashMap<>();
+        private TYPE type;
+        private boolean oriented;
 
         @Override
         public void startElement(String uri, String localName, String qName,
-                                 Attributes attributes) throws SAXException {
+                Attributes attributes) throws SAXException {
+            if (qName.equalsIgnoreCase(XmlConst.GRAPH)) {
+                oriented = Boolean.parseBoolean(attributes.getValue(XmlConst.ORIENTED));
+                type = TYPE.valueOf(attributes.getValue(XmlConst.TYPE));
+                graphView.getGraph().setOriented(oriented);
+            }
             if (qName.equalsIgnoreCase(XmlConst.NODE)) {
                 int weight = Integer.parseInt(attributes.getValue(XmlConst.WEIGHT));
                 Node node = new Node(weight);
@@ -104,10 +105,9 @@ public class XmlGraphLoader implements GraphLoader {
                 final int nodeId = Integer.parseInt(attributes.getValue(XmlConst.NODE_ID));
                 Node node = (Node) idNodeMap.get(nodeId);
                 node.setName("" + nodeId);
-                if (type.equals(NodeType.Task)) {
+                if (type.equals(TYPE.TASK)) {
                     nodeView = new NodeViewImpl(node);
-
-                } else if (type.equals(NodeType.System)) {
+                } else if (type.equals(TYPE.SYSTEM)) {
                     nodeView = new SystemNodeViewImpl(node);
                 }
                 idNodeViewMap.put(nodeId, nodeView);
@@ -127,6 +127,7 @@ public class XmlGraphLoader implements GraphLoader {
                 NodeView fromNodeView = idNodeViewMap.get(idFromNode);
                 NodeView toNodeView = idNodeViewMap.get(idToNode);
                 linkView = new LinkViewImpl(fromNodeView, toNodeView, curLink);
+                linkView.setOriented(oriented);
             }
             if (qName.equalsIgnoreCase(XmlConst.BEND_POINT)) {
                 double y = Double.parseDouble(attributes.getValue(XmlConst.Y));

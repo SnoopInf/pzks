@@ -55,7 +55,6 @@ public class OpenAction extends MainAction {
         } else if (selectedExt.equals(FileExtension.system)) {
             graphPanel = mainFrame.getSystemPanel();
         }
-        loader.setNodeType(graphPanel.getType());
         GraphView graphView = loader.loadFromFile(selectedFile);
         graphPanel.setGraphView(graphView);
         graphPanel.checkGraphIsValid();

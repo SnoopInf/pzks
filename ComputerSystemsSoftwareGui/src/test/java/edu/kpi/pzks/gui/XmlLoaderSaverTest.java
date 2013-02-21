@@ -66,9 +66,11 @@ public class XmlLoaderSaverTest {
         when(graph.getLinks()).thenReturn(new Links(links));
         when(graph.getNodes()).thenReturn(nodes);
         when(graphView.getGraph()).thenReturn(graph);
+        when(graph.isOriented()).thenReturn(Boolean.TRUE);
 
         when(graphView.getLinkViews()).thenReturn(linkViews);
         when(graphView.getNodeViews()).thenReturn(nodeViews);
+        when(graphView.getType()).thenReturn(GraphViewImpl.TYPE.TASK);
         try {
             saver.saveToFile(graphView, file);
         } catch (GraphException ex) {
