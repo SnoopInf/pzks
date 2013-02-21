@@ -137,13 +137,11 @@ public class MainSmarxFrame extends MainFrame {
         return toolBar;
     }
     
-    @Override
-    protected int getToolbarOrientation() {
-        return JToolBar.VERTICAL;
-    }
-
-    @Override
-    protected String getToolbarConstraint() {
-        return BorderLayout.WEST;
+    protected void setComponents() {
+        this.taskPanel = createTaskPanel();
+        this.systemPanel = createSystemPanel();
+        setJMenuBar(getMainMenuBar());
+        add(getToolBar(JToolBar.VERTICAL), BorderLayout.WEST);
+        add(getMainPane(taskPanel, systemPanel), BorderLayout.CENTER);
     }
 }
