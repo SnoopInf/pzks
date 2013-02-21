@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPopupMenu;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public interface GraphObjectView {
 

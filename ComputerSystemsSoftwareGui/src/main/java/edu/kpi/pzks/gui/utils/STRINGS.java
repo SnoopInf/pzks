@@ -3,7 +3,7 @@ package edu.kpi.pzks.gui.utils;
 import java.util.ResourceBundle;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public class STRINGS {
 

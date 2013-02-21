@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public class RemoveAction extends AbstractAction {
 

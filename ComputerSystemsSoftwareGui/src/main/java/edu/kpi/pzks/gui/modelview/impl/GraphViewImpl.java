@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public class GraphViewImpl implements GraphView {
 

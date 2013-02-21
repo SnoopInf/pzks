@@ -3,7 +3,7 @@ package edu.kpi.pzks.gui.ui.popups;
 import edu.kpi.pzks.gui.modelview.NodeView;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public class NodeViewPopup extends GraphPopup {
 

@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public abstract class GraphPopup extends JPopupMenu {
 

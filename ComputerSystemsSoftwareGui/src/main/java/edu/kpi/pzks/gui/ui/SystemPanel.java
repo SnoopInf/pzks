@@ -5,7 +5,7 @@ import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl;
 
 /**
  *
- * @author asmirnova
+ * @author aloren
  */
 public class SystemPanel extends GraphPanel {
 

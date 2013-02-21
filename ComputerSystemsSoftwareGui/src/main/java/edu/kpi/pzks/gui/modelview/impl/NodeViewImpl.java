@@ -16,7 +16,7 @@ import java.awt.geom.RectangularShape;
 import javax.swing.JPopupMenu;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public class NodeViewImpl implements NodeView {
 

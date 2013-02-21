@@ -2,7 +2,7 @@ package edu.kpi.pzks.gui.io.impl;
 
 /**
  *
- * @author asmirnova
+ * @author aloren
  */
 public class XmlConst {
 

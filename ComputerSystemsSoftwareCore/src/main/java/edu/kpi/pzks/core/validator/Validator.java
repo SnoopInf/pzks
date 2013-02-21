@@ -6,7 +6,7 @@ import edu.kpi.pzks.core.model.Node;
 import java.util.Collection;
 
 /**
- * Author: Kirill Davidenko Date: 12.02.13 Time: 00:10
+ * Author: snoop Date: 12.02.13 Time: 00:10
  */
 public interface Validator {
 

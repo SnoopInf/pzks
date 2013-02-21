@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public class ChangeWeightDialog extends JDialog {
 

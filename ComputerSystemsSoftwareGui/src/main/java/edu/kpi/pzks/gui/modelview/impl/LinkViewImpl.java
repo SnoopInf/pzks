@@ -15,7 +15,7 @@ import java.awt.geom.Point2D;
 import javax.swing.JPopupMenu;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public class LinkViewImpl implements LinkView {
 

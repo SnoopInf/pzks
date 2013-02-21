@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Kirill Davidenko
+ * @author snoop
  */
 public class LinksTest {
 

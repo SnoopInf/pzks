@@ -14,7 +14,7 @@ import java.awt.geom.Line2D;
 
 /**
  *
- * @author asmirnova
+ * @author aloren
  */
 public class RectangleSelectionTool implements SelectionDraggingTool {
 

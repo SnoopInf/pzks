@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public class RemoveKeyTool implements Tool, KeyListener {
 
