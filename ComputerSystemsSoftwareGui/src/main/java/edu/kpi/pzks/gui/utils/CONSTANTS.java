@@ -4,6 +4,8 @@ import java.util.ResourceBundle;
 
 public class CONSTANTS {
 
+    public static final String iconsPath = "/icons";
+
     private static final ResourceBundle defaults = Resources.settings;
 
     public static final int NODE_WIDTH = Integer.parseInt(defaults.getString("node.width"));
