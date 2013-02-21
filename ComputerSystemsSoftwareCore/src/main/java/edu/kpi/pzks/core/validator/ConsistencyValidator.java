@@ -32,8 +32,8 @@ public class ConsistencyValidator implements Validator {
      *  I suppose that graph is inconsistent if there's a single Node which has no input and output.
      */
     public void validateConsistency(Collection<Node> nodes, Collection<Link> edges) {
-        if (nodes.size() < 2) {
-            throw new ValidationException(Messages.getLocalizedMessage(Messages.VALIDATION_ERROR_GRAPH_INCONSISTENT, Locale.getDefault()));
+        if (nodes.size() == 1) {
+            return;
         }
 
         for (Node node : nodes) {
