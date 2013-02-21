@@ -17,12 +17,24 @@ import java.util.Set;
  */
 public class GraphViewImpl implements GraphView {
 
+    private final TYPE type;
+
+    public enum TYPE {
+
+        TASK, SYSTEM
+    };
     private Graph graph;
     private Set<NodeView> nodeViews = new HashSet<>();
     private Set<LinkView> linkViews = new HashSet<>();
 
     public GraphViewImpl(Graph graph) {
         this.graph = graph;
+        if (graph.isOriented()) {
+            this.type = TYPE.TASK;
+        } else {
+            this.type = TYPE.SYSTEM;
+        }
+
     }
 
     @Override
@@ -77,8 +89,8 @@ public class GraphViewImpl implements GraphView {
         nodeViews.remove(nodeView);
         Set<LinkView> linksToDelete = new HashSet<>();
         for (LinkView linkView : linkViews) {
-            if (linkView.getFromNodeView().equals(nodeView) ||
-                    linkView.getToNodeView().equals(nodeView)) {
+            if (linkView.getFromNodeView().equals(nodeView)
+                    || linkView.getToNodeView().equals(nodeView)) {
                 linksToDelete.add(linkView);
             }
         }
@@ -134,5 +146,10 @@ public class GraphViewImpl implements GraphView {
         for (NodeView selectedNodeView : selectedNodeViews) {
             removeNodeView(selectedNodeView);
         }
+    }
+
+    @Override
+    public TYPE getType() {
+        return this.type;
     }
 }
