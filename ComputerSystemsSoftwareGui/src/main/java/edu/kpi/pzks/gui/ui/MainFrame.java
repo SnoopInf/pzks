@@ -10,6 +10,7 @@ import edu.kpi.pzks.gui.actions.graph.SelectionDraggingToolAction;
 import edu.kpi.pzks.gui.actions.ui.ExitAction;
 import edu.kpi.pzks.gui.actions.ui.OpenAction;
 import edu.kpi.pzks.gui.actions.ui.SaveAsAction;
+import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.STRINGS;
 import edu.kpi.pzks.gui.utils.Utils;
 
@@ -26,7 +27,7 @@ public class MainFrame extends JFrame {
     public static final int INIT_HEIGHT = 600;
     public static final int INIT_WIDTH = 800;
     private final int TOOLBAR_ORIENTATION = JToolBar.HORIZONTAL;
-    protected final String iconsPath = "/icons";
+
     protected GraphPanel systemPanel;
     protected GraphPanel taskPanel;
     protected final OpenAction openAction = new OpenAction(this);
@@ -95,37 +96,37 @@ public class MainFrame extends JFrame {
         JToolBar toolBar = new JToolBar(orientation);
         toolBar.setFloatable(false);
 
-        ImageIcon openIcon = Utils.createImageIcon(iconsPath + "/open.png");
+        ImageIcon openIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/open.png");
         JButton openButton = new JButton(openAction);
         openButton.setIcon(openIcon);
         openButton.setToolTipText(STRINGS.OPEN);
 
-        ImageIcon saveIcon = Utils.createImageIcon(iconsPath + "/save.png");
+        ImageIcon saveIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/save.png");
         JButton saveButton = new JButton(saveAsAction);
         saveButton.setIcon(saveIcon);
         saveButton.setToolTipText(STRINGS.SAVE);
 
-        ImageIcon taskIcon = Utils.createImageIcon(iconsPath + "/task.png");
+        ImageIcon taskIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/task.png");
         JButton genTaskGraphButton = new JButton(taskIcon);
         genTaskGraphButton.setToolTipText(STRINGS.GEN_TASK_GRAPH);
 
-        ImageIcon systemIcon = Utils.createImageIcon(iconsPath + "/system.png");
+        ImageIcon systemIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/system.png");
         JButton genSystemGraphButton = new JButton(systemIcon);
         genSystemGraphButton.setToolTipText(STRINGS.GEN_SYSTEM_GRAPH);
 
-        ImageIcon nodeIcon = Utils.createImageIcon(iconsPath + "/node.png");
+        ImageIcon nodeIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/node.png");
         JButton newNodeButton = new JButton(new NodeCreationToolAction(this));
         newNodeButton.setIcon(nodeIcon);
 
-        ImageIcon linkIcon = Utils.createImageIcon(iconsPath + "/link.png");
+        ImageIcon linkIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/link.png");
         JButton newLinkButton = new JButton(new LinkCreationToolAction(this));
         newLinkButton.setIcon(linkIcon);
 
-        ImageIcon selectIcon = Utils.createImageIcon(iconsPath + "/select.png");
+        ImageIcon selectIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/select.png");
         JButton selectButton = new JButton(new SelectionDraggingToolAction(this));
         selectButton.setIcon(selectIcon);
 
-        ImageIcon removeIcon = Utils.createImageIcon(iconsPath + "/remove.png");
+        ImageIcon removeIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/remove.png");
         JButton removeButton = new JButton(new RemoveAction(this));
         removeButton.setIcon(removeIcon);
 
@@ -159,7 +160,7 @@ public class MainFrame extends JFrame {
     }
 
     protected GraphPanel createTaskPanel() {
-        GraphPanel localTaskPanel = new GraphPanel(GraphPanel.NodeType.Task);
+        GraphPanel localTaskPanel = new TaskPanel();
         localTaskPanel.setName("taskPanel");
         localTaskPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.TASK_GRAPH));
         localTaskPanel.addValidator(new CyclingValidator());
@@ -168,7 +169,7 @@ public class MainFrame extends JFrame {
     }
 
     protected GraphPanel createSystemPanel() {
-        GraphPanel localSystemPanel = new GraphPanel(GraphPanel.NodeType.System);
+        GraphPanel localSystemPanel = new SystemPanel();
         localSystemPanel.setName("systemPanel");
         localSystemPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.SYSTEM_GRAPH));
         localSystemPanel.addValidator(new ConsistencyValidator());
