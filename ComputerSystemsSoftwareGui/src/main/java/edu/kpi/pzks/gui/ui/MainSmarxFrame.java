@@ -17,7 +17,7 @@ import javax.swing.*;
 
 /**
  *
- * @author Andrew
+ * @author smarx
  */
 public class MainSmarxFrame extends MainFrame {
     
