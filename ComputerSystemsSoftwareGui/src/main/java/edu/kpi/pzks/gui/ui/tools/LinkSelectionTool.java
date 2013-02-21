@@ -78,6 +78,9 @@ public class LinkSelectionTool implements SelectionDraggingTool {
     }
 
     private void clearSelected() {
+        for(LinkView linkView : graphPanel.getSelectedLinkViews()) {
+            linkView.setSelected(false);
+        }
         graphPanel.getSelectedLinkViews().clear();
     }
 
@@ -87,18 +90,13 @@ public class LinkSelectionTool implements SelectionDraggingTool {
     }
 
     private void addToSelected(LinkView linkViewAtPoint) {
+        linkViewAtPoint.setSelected(true);
         graphPanel.getSelectedLinkViews().add(linkViewAtPoint);
     }
 
     private void paintSelectedLinkViews(Graphics2D g2) {
         for (LinkView selectedLinkView : graphPanel.getSelectedLinkViews()) {
-            paintSelectedLink(g2, selectedLinkView);
+            selectedLinkView.paint(g2);
         }
-    }
-
-    private void paintSelectedLink(Graphics2D g2, LinkView selectedLinkView) {
-        g2.setStroke(new BasicStroke(3));
-        g2.setColor(COLORS.LINK_SELECTED_COLOR);
-        selectedLinkView.paintWithoutColor(g2);
     }
 }

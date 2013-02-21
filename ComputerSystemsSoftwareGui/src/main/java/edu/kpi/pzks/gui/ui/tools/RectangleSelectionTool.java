@@ -173,11 +173,11 @@ public class RectangleSelectionTool implements SelectionDraggingTool {
     }
 
     private void addToSelected(NodeView nodeViewAtPoint) {
-        graphPanel.getSelectedNodeViews().add(nodeViewAtPoint);
+        graphPanel.addSelectedNodeView(nodeViewAtPoint);
     }
 
     private void addToSelected(LinkView linkViewAtPoint) {
-        graphPanel.getSelectedLinkViews().add(linkViewAtPoint);
+        graphPanel.addSelectedLinkView(linkViewAtPoint);
     }
 
     private boolean isNodeInsideRectangle(int startX, int startY, int width, int height, NodeView nodeView) {
@@ -201,7 +201,7 @@ public class RectangleSelectionTool implements SelectionDraggingTool {
     }
 
     private void clearSelected() {
-        graphPanel.getSelectedNodeViews().clear();
-        graphPanel.getSelectedLinkViews().clear();
+        graphPanel.clearSelectedLinkViews();
+        graphPanel.clearSelectedNodeViews();
     }
 }

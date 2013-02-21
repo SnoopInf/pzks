@@ -2,13 +2,10 @@ package edu.kpi.pzks.gui.ui.tools;
 
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.ui.GraphPanel;
-import edu.kpi.pzks.gui.ui.GraphPanel.NodeType;
-import edu.kpi.pzks.gui.utils.COLORS;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.Set;
 
 /**
  * @author Aloren
@@ -17,51 +14,44 @@ public class NodeSelectionTool implements SelectionDraggingTool {
 
     protected final GraphPanel graphPanel;
 
-    public static Tool newNodeSelectionTool(GraphPanel graphPanel) {
-        final NodeType type = graphPanel.getType();
-        if (type.equals(NodeType.System)) {
-            return new SystemNodeSelectionTool(graphPanel);
-        } else if (type.equals(NodeType.Task)) {
-            return new NodeSelectionTool(graphPanel);
-        }
-        throw new IllegalArgumentException("Not supported type of panel: " + type);
-    }
-
-    protected NodeSelectionTool(GraphPanel graphPanel) {
+    public NodeSelectionTool(GraphPanel graphPanel) {
         this.graphPanel = graphPanel;
     }
 
     @Override
     public void paint(Graphics2D g2) {
-        paintSelectedNodeViews(g2);
+        for (NodeView selectedNodeView : graphPanel.getSelectedNodeViews()) {
+            selectedNodeView.paint(g2);
+        }
     }
 
     @Override
     public void mouseClicked(MouseEvent me) {
         int x = me.getX();
         int y = me.getY();
-        NodeView selectedNodeView = graphPanel.getGraphView().getNodeViewAtPoint(x, y);
-        if (selectedNodeView != null) {
-            setSelectedNodeView(selectedNodeView);
+        NodeView nodeAtPoint = graphPanel.getGraphView().getNodeViewAtPoint(x, y);
+        if (nodeAtPoint != null) {
+            graphPanel.clearSelectedNodeViews();
+            graphPanel.addSelectedNodeView(nodeAtPoint);
             if (me.getModifiers() == MouseEvent.BUTTON3_MASK) {
-                JPopupMenu pp = selectedNodeView.getPopupMenu();
+                JPopupMenu pp = nodeAtPoint.getPopupMenu();
                 pp.show(me.getComponent(), me.getX(), me.getY());
             }
         } else {
-            clearSelected();
+            graphPanel.clearSelectedNodeViews();
         }
         graphPanel.repaint();
     }
 
     @Override
     public void mousePressed(MouseEvent me) {
-        int x = me.getX();
-        int y = me.getY();
-        NodeView nodeViewAtPoint = graphPanel.getGraphView().getNodeViewAtPoint(x, y);
-        if (!isNodeSelected(nodeViewAtPoint)) {
-            setSelectedNodeView(nodeViewAtPoint);
-        }
-        graphPanel.repaint();
+//        int x = me.getX();
+//        int y = me.getY();
+//        NodeView nodeViewAtPoint = graphPanel.getGraphView().getNodeViewAtPoint(x, y);
+//        if (!isNodeSelected(nodeViewAtPoint)) {
+//            setSelectedNodeView(nodeViewAtPoint);
+//        }
+//        graphPanel.repaint();
     }
 
     @Override
@@ -84,59 +74,9 @@ public class NodeSelectionTool implements SelectionDraggingTool {
     public void mouseMoved(MouseEvent me) {
     }
 
-    private void setSelectedNodeView(NodeView selectedNodeView) {
-        clearSelected();
-        addToSelected(selectedNodeView);
-    }
-
-    private void clearSelected() {
-        graphPanel.getSelectedNodeViews().clear();
-    }
-
-    private boolean isNodeSelected(NodeView nodeViewAtPoint) {
-        final Set<NodeView> selectedNodeViews = graphPanel.getSelectedNodeViews();
-        return !(nodeViewAtPoint != null && !selectedNodeViews.contains(nodeViewAtPoint));
-    }
-
-    private void addToSelected(NodeView nodeViewAtPoint) {
-        graphPanel.getSelectedNodeViews().add(nodeViewAtPoint);
-    }
-
-    private void paintSelectedNodeViews(Graphics2D g2) {
-        for (NodeView selectedNodeView : graphPanel.getSelectedNodeViews()) {
-            paintSelectedNode(g2, selectedNodeView);
-        }
-    }
-
-    private void paintSelectedNode(Graphics2D g2, NodeView selectedNodeView) {
-        paintSelectedNodeBorder(g2, selectedNodeView);
-        paintSelectedNodeInside(g2, selectedNodeView);
-    }
-
-    private void paintSelectedNodeBorder(Graphics2D g2, NodeView selectedNodeView) {
-        g2.setStroke(new BasicStroke(3));
-        g2.setColor(COLORS.NODE_BORDER_SELECTED_COLOR);
-        drawShape(g2, selectedNodeView);
-    }
-
-    private void paintSelectedNodeInside(Graphics2D g2, NodeView selectedNodeView) {
-        g2.setColor(COLORS.NODE_SELECTED_COLOR);
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 6 * 0.1f));
-        fillShape(g2, selectedNodeView);
-    }
-
-    protected void drawShape(Graphics2D g2, NodeView selectedNodeView) {
-        g2.drawOval(selectedNodeView.getUpperLeftCorner().x,
-                selectedNodeView.getUpperLeftCorner().y,
-                selectedNodeView.getWidth(),
-                selectedNodeView.getHeight());
-    }
-
-    protected void fillShape(Graphics2D g2, NodeView selectedNodeView) {
-        g2.fillOval(selectedNodeView.getUpperLeftCorner().x,
-                selectedNodeView.getUpperLeftCorner().y,
-                selectedNodeView.getWidth(),
-                selectedNodeView.getHeight());
-    }
+//    private boolean isNodeSelected(NodeView nodeViewAtPoint) {
+//        final Set<NodeView> selectedNodeViews = graphPanel.getSelectedNodeViews();
+//        return !(nodeViewAtPoint != null && !selectedNodeViews.contains(nodeViewAtPoint));
+//    }
 
 }
