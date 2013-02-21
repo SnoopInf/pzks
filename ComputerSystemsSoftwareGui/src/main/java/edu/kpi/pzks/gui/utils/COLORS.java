@@ -17,10 +17,7 @@ public class COLORS {
     public static final Color LINK_COLOR = Color.decode(colors.getString("color.link"));
     public static final Color LINK_SELECTED_COLOR = Color.decode(colors.getString("color.link.selected"));
 
-    public static Color BLUE = Color.decode(colors.getString("color.blue"));
-    public static Color GREY = Color.decode(colors.getString("color.grey"));
-    public static Color FILL_BLUE = Color.decode(colors.getString("color.fill.blue"));
-
     public static final Color GRID_COLOR = Color.decode(colors.getString("color.grid"));
+    public static final Color GRID_FILL_COLOR = Color.decode(colors.getString("color.fill.blue"));
 
 }
