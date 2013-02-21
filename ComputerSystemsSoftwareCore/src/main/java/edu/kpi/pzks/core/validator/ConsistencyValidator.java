@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Locale;
 
 /**
- * Author: snoop Date: 07.02.13 Time: 21:14
+ * @author snoop Date: 07.02.13 Time: 21:14
  */
 public class ConsistencyValidator implements Validator {
 

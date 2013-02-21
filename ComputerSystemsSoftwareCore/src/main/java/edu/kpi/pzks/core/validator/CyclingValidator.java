@@ -8,7 +8,7 @@ import edu.kpi.pzks.core.util.Messages;
 import java.util.*;
 
 /**
- * Author: snoop Date: 12.02.13 Time: 00:10
+ * @author snoop Date: 12.02.13 Time: 00:10
  */
 public class CyclingValidator implements Validator {
 
