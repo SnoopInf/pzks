@@ -1,10 +1,10 @@
 package edu.kpi.pzks.gui.modelview;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Graphics2D;
+import javax.swing.JPopupMenu;
 
 /**
- * @author Aloren
+ * @author asmirnova
  */
 public interface GraphObjectView {
 
@@ -17,4 +17,8 @@ public interface GraphObjectView {
     void setWeight(int weight);
 
     int getWeight();
+
+    boolean isSelected();
+
+    void setSelected(boolean selected);
 }

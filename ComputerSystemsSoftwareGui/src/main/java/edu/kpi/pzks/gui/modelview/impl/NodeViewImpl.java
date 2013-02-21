@@ -5,12 +5,15 @@ import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.ui.popups.NodeViewPopup;
 import edu.kpi.pzks.gui.utils.COLORS;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
-
-import javax.swing.*;
-import java.awt.*;
+import edu.kpi.pzks.gui.utils.PaintUtils;
+import java.awt.BasicStroke;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
+import javax.swing.JPopupMenu;
 
 /**
  * @author asmirnova
@@ -19,6 +22,7 @@ public class NodeViewImpl implements NodeView {
 
     protected RectangularShape shape;
     protected Node node;
+    protected boolean isSelected;
 
     public NodeViewImpl(Node node, Point2D.Double point) {
         this(node, point.x, point.y);
@@ -103,10 +107,7 @@ public class NodeViewImpl implements NodeView {
     }
 
     protected void paintWeightString(Graphics2D g2) {
-        String fontFamily = CONSTANTS.FONT_FAMILY;
-        int fontSize = CONSTANTS.FONT_SIZE;
-        int fontWeight = CONSTANTS.FONT_WEIGHT;
-        g2.setFont(new Font(fontFamily, fontWeight, fontSize));
+        g2.setFont(PaintUtils.getFont());
         FontMetrics metrics = g2.getFontMetrics(g2.getFont());
         String weightString = Integer.toString(node.getWeight());
         int x = (int) (shape.getX() + shape.getWidth() / 2 - metrics.stringWidth(weightString) / 2);
@@ -114,12 +115,8 @@ public class NodeViewImpl implements NodeView {
         g2.drawString(weightString, x, y);
     }
 
-
     private void paintIdString(Graphics2D g2) {
-        String fontFamily = CONSTANTS.FONT_FAMILY;
-        int fontSize = CONSTANTS.FONT_SIZE;
-        int fontWeight = CONSTANTS.FONT_WEIGHT;
-        g2.setFont(new Font(fontFamily, fontWeight, fontSize));
+        g2.setFont(PaintUtils.getFont());
         FontMetrics metrics = g2.getFontMetrics(g2.getFont());
         String idString = "" + node.getId();
         int x = (int) (shape.getX() - metrics.stringWidth(idString) / 4);
@@ -128,13 +125,34 @@ public class NodeViewImpl implements NodeView {
     }
 
     protected void paintNodeEllipseBorder(Graphics2D g2) {
-        g2.setColor(COLORS.NODE_BORDER_COLOR);
-        g2.setStroke(new BasicStroke(1.5f));
+        if (isSelected) {
+            g2.setStroke(new BasicStroke(3));
+            g2.setColor(COLORS.NODE_BORDER_SELECTED_COLOR);
+        } else {
+            g2.setStroke(new BasicStroke(1.5f));
+            g2.setColor(COLORS.NODE_BORDER_COLOR);
+        }
         g2.draw(shape);
     }
 
     protected void paintNodeEllipse(Graphics2D g2) {
-        g2.setColor(COLORS.NODE_COLOR);
+        if (isSelected) {
+//            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 6 * 0.1f));
+            g2.setColor(COLORS.NODE_SELECTED_COLOR);
+        } else {
+            g2.setColor(COLORS.NODE_COLOR);
+        }
         g2.fill(shape);
+//        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+    }
+
+    @Override
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    @Override
+    public void setSelected(boolean selected) {
+        this.isSelected = selected;
     }
 }

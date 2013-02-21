@@ -11,8 +11,6 @@ import java.awt.geom.Line2D;
  */
 public interface LinkView extends GraphObjectView {
 
-    void paintWithoutColor(Graphics2D g2);
-
     Link getLink();
 
     void setBendPoint(int x, int y);
