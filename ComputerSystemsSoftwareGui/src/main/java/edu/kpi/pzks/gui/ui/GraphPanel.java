@@ -1,62 +1,41 @@
 package edu.kpi.pzks.gui.ui;
 
 import edu.kpi.pzks.core.exceptions.ValidationException;
-import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.core.validator.Validator;
 import edu.kpi.pzks.gui.modelview.GraphView;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
-import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl;
 import edu.kpi.pzks.gui.ui.tools.Tool;
 import edu.kpi.pzks.gui.ui.utils.Grid;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.Utils;
-
-import javax.swing.*;
 import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.*;
 
 /**
  * @author Aloren
  */
-public class GraphPanel extends JPanel {
+public abstract class GraphPanel extends JPanel {
 
-    public enum NodeType {
+    protected JLabel validationLabel;
+    protected Set<Tool> currentTools = new HashSet<>();
+    protected Grid grid = new Grid();
+    protected GraphView graphView;
+    protected Set<NodeView> selectedNodeViews = new HashSet<>();
+    protected Set<LinkView> selectedLinkViews = new HashSet<>();
+    private static final ImageIcon valid = Utils.createImageIcon(CONSTANTS.iconsPath + CONSTANTS.YES_ICON);
+    private static final ImageIcon invalid = Utils.createImageIcon(CONSTANTS.iconsPath + CONSTANTS.NO_ICON);
 
-        Task, System
-    }
-
-    private NodeType type;
-    private Set<Tool> currentTools = new HashSet<>();
-    private Grid grid = new Grid();
-    private GraphView graphView = new GraphViewImpl(new Graph());
-    private Set<NodeView> selectedNodeViews = new HashSet<>();
-    private Set<LinkView> selectedLinkViews = new HashSet<>();
-    private JLabel validationLabel;
-    private final String iconsPath = "/icons";
-    private ImageIcon valid;
-    private ImageIcon invalid;
-
-    public GraphPanel(NodeType type) {
+    public GraphPanel() {
         super(new BorderLayout());
-        this.type = type;
-        switch (this.type) {
-            case Task:
-                graphView.getGraph().setOriented(true);
-                break;
-            case System:
-                graphView.getGraph().setOriented(false);
-                break;
-        }
         setBackground(Color.WHITE);
         setFocusable(true);
         createValidationLabel();
     }
 
     protected void createValidationLabel() {
-        valid = Utils.createImageIcon(iconsPath + CONSTANTS.YES_ICON);
-        invalid = Utils.createImageIcon(iconsPath + CONSTANTS.NO_ICON);
         validationLabel = new JLabel(valid);
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.add(validationLabel, BorderLayout.LINE_END);
@@ -130,6 +109,21 @@ public class GraphPanel extends JPanel {
 
     public void addSelectedNodeView(NodeView nodeView) {
         this.selectedNodeViews.add(nodeView);
+        nodeView.setSelected(true);
+    }
+
+    public void clearSelectedNodeViews() {
+        for (NodeView nodeView : selectedNodeViews) {
+            nodeView.setSelected(false);
+        }
+        selectedNodeViews.clear();
+    }
+
+    public void clearSelectedLinkViews() {
+        for (LinkView linkView : selectedLinkViews) {
+            linkView.setSelected(false);
+        }
+        selectedLinkViews.clear();
     }
 
     public Set<NodeView> getSelectedNodeViews() {
@@ -198,8 +192,7 @@ public class GraphPanel extends JPanel {
     public void addValidator(Validator validator) {
         graphView.getGraph().addValidator(validator);
     }
-
-    public NodeType getType() {
-        return type;
-    }
+//    public NodeType getType() {
+//        return type;
+//    }
 }
