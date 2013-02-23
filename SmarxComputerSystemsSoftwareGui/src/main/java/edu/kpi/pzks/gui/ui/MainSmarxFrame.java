@@ -10,8 +10,8 @@ import edu.kpi.pzks.gui.actions.graph.SelectionDraggingToolAction;
 import edu.kpi.pzks.gui.utils.STRINGS;
 import edu.kpi.pzks.gui.utils.Utils;
 import edu.kpi.pzks.gui.ui.panels.*;
-import java.awt.BorderLayout;
-import java.awt.Container;
+
+import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -23,7 +23,9 @@ import javax.swing.*;
 public class MainSmarxFrame extends MainFrame {
     
     private final String iconsPath = "/icons";
-        
+    private final int panelWidth = 800;
+    private final int panelHeight = 600;
+
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -141,6 +143,8 @@ public class MainSmarxFrame extends MainFrame {
     protected void setComponents() {
         this.taskPanel = createTaskPanel();
         this.systemPanel = createSystemPanel();
+        taskPanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
+        systemPanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
         setJMenuBar(getMainMenuBar());
         add(getToolBar(JToolBar.VERTICAL), BorderLayout.WEST);
         add(getMainPane(taskPanel, systemPanel), BorderLayout.CENTER);
