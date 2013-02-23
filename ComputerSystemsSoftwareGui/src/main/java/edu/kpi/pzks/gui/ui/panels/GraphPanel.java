@@ -23,7 +23,7 @@ public abstract class GraphPanel extends JPanel {
     public static final int INIT_WIDTH = 800;
     protected JLabel validationLabel;
     protected Set<Tool> currentTools = new HashSet<>();
-    protected Grid grid = new Grid();
+    private Grid grid = new Grid(CONSTANTS.GRID_SNAP, CONSTANTS.GRID_ENABLED);
     protected GraphView graphView;
     protected Set<NodeView> selectedNodeViews = new HashSet<>();
     protected Set<LinkView> selectedLinkViews = new HashSet<>();
@@ -64,7 +64,7 @@ public abstract class GraphPanel extends JPanel {
                 RenderingHints.VALUE_RENDER_QUALITY);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        grid.paint(g2, getWidth(), getHeight());
+        getGrid().paint(g2, getWidth(), getHeight());
         graphView.paint(g2);
         for (Tool selectionDraggingTool : currentTools) {
             selectionDraggingTool.paint(g2);
