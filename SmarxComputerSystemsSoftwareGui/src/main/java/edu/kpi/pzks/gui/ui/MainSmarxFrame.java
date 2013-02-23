@@ -9,6 +9,7 @@ import edu.kpi.pzks.gui.actions.graph.RemoveAction;
 import edu.kpi.pzks.gui.actions.graph.SelectionDraggingToolAction;
 import edu.kpi.pzks.gui.utils.STRINGS;
 import edu.kpi.pzks.gui.utils.Utils;
+import edu.kpi.pzks.gui.ui.panels.*;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.util.logging.Level;
