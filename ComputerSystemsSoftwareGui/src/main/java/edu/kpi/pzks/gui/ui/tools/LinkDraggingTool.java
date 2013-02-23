@@ -2,7 +2,7 @@ package edu.kpi.pzks.gui.ui.tools;
 
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
-import edu.kpi.pzks.gui.ui.GraphPanel;
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;

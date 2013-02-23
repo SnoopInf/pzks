@@ -1,5 +1,6 @@
-package edu.kpi.pzks.gui.ui;
+package edu.kpi.pzks.gui.ui.panels;
 
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl;
 import java.awt.Dimension;

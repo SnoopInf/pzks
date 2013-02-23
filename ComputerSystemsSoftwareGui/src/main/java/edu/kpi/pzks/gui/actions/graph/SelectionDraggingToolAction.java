@@ -1,6 +1,6 @@
 package edu.kpi.pzks.gui.actions.graph;
 
-import edu.kpi.pzks.gui.ui.GraphPanel;
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 import edu.kpi.pzks.gui.ui.MainFrame;
 import edu.kpi.pzks.gui.ui.tools.LinkDraggingTool;
 import edu.kpi.pzks.gui.ui.tools.LinkSelectionTool;

@@ -1,5 +1,8 @@
 package edu.kpi.pzks.gui.ui;
 
+import edu.kpi.pzks.gui.ui.panels.TaskPanel;
+import edu.kpi.pzks.gui.ui.panels.SystemPanel;
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 import edu.kpi.pzks.core.validator.ConsistencyValidator;
 import edu.kpi.pzks.core.validator.CyclingValidator;
 import edu.kpi.pzks.core.validator.SubGraphValidator;

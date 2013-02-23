@@ -1,7 +1,7 @@
 package edu.kpi.pzks.gui.ui.tools;
 
 import edu.kpi.pzks.gui.modelview.NodeView;
-import edu.kpi.pzks.gui.ui.GraphPanel;
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package edu.kpi.pzks.gui.ui.dialogs;
+package edu.kpi.pzks.gui.ui.panels;
 
 import edu.kpi.pzks.gui.ui.MainFrame;
 import edu.kpi.pzks.gui.utils.STRINGS;

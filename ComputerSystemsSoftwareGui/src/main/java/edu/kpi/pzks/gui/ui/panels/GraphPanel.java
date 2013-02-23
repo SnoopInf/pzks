@@ -1,4 +1,4 @@
-package edu.kpi.pzks.gui.ui;
+package edu.kpi.pzks.gui.ui.panels;
 
 import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.validator.Validator;
