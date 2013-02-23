@@ -13,8 +13,8 @@ public class CircleLayout implements Layout {
 
     private static double verticalPaddingPercent = 0.05;
     private static double horizontalPaddingPercent = 0.05;
-    private final double maxAngle = 50;
-    private final double minAngle = 3;
+    private final double maxAngle = 360;
+    private final double minAngle = 0;
 
     @Override
     public void layout(GraphView graphView) {
