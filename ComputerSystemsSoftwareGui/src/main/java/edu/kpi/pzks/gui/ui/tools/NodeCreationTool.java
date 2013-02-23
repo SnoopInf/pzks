@@ -3,7 +3,7 @@ package edu.kpi.pzks.gui.ui.tools;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.NodeViewImpl;
-import edu.kpi.pzks.gui.ui.GraphPanel;
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 import edu.kpi.pzks.gui.utils.COLORS;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
 import java.awt.*;
@@ -87,7 +87,7 @@ public class NodeCreationTool implements Tool {
 
     private void paintNodeInside(Graphics2D g2) {
         g2.setColor(COLORS.NODE_BORDER_COLOR);
-        g2.setStroke(new BasicStroke(CONSTANTS.LINE_THINKNESS));
+        g2.setStroke(new BasicStroke(1.5f));
         drawShape(g2);
     }
 

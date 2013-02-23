@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public class Resources {
 

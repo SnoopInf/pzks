@@ -3,6 +3,7 @@ package edu.kpi.pzks.gui.modelview.impl;
 import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
+import edu.kpi.pzks.gui.layout.Layout;
 import edu.kpi.pzks.gui.modelview.GraphView;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
@@ -13,16 +14,28 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public class GraphViewImpl implements GraphView {
 
+    private final TYPE type;
+
+    public enum TYPE {
+
+        TASK, SYSTEM
+    };
     private Graph graph;
     private Set<NodeView> nodeViews = new HashSet<>();
     private Set<LinkView> linkViews = new HashSet<>();
+    private Rectangle bounds;
 
     public GraphViewImpl(Graph graph) {
         this.graph = graph;
+        if (graph.isOriented()) {
+            this.type = TYPE.TASK;
+        } else {
+            this.type = TYPE.SYSTEM;
+        }
     }
 
     @Override
@@ -74,12 +87,11 @@ public class GraphViewImpl implements GraphView {
 
     @Override
     public void removeNodeView(NodeView nodeView) {
-        nodeView.deselect();
         nodeViews.remove(nodeView);
         Set<LinkView> linksToDelete = new HashSet<>();
         for (LinkView linkView : linkViews) {
-            if (linkView.getFromNodeView().equals(nodeView) ||
-                    linkView.getToNodeView().equals(nodeView)) {
+            if (linkView.getFromNodeView().equals(nodeView)
+                    || linkView.getToNodeView().equals(nodeView)) {
                 linksToDelete.add(linkView);
             }
         }
@@ -135,5 +147,42 @@ public class GraphViewImpl implements GraphView {
         for (NodeView selectedNodeView : selectedNodeViews) {
             removeNodeView(selectedNodeView);
         }
+    }
+
+    public static GraphView createView(Graph graph) {
+        GraphView view = new GraphViewImpl(graph);
+        for (Node node : graph.getNodes()) {
+            NodeView nodeView = new NodeViewImpl(node);
+            view.getNodeViews().add(nodeView);
+        }
+        final boolean oriented = graph.isOriented();
+        for (Link link : graph.getLinks()) {
+            NodeView fromNodeView = view.getNodeView(link.getFromNode());
+            NodeView toNodeView = view.getNodeView(link.getToNode());
+            LinkView linkView = new LinkViewImpl(fromNodeView, toNodeView, link);
+            linkView.setOriented(oriented);
+            view.getLinkViews().add(linkView);
+        }
+        return view;
+    }
+
+    @Override
+    public void layout(Layout layout) {
+        layout.layout(this);
+    }
+
+    @Override
+    public void setBounds(Rectangle bounds) {
+        this.bounds = bounds;
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return this.bounds;
+    }
+
+    @Override
+    public TYPE getType() {
+        return this.type;
     }
 }

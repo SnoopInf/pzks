@@ -3,4 +3,5 @@ nbproject/private/
 
 .classpath
 .project
-/nbactions.xml
+
+nb*.xml

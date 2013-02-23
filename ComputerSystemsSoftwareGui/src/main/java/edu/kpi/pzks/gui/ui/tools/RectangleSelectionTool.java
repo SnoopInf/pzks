@@ -2,9 +2,8 @@ package edu.kpi.pzks.gui.ui.tools;
 
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
-import edu.kpi.pzks.gui.ui.GraphPanel;
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 import edu.kpi.pzks.gui.utils.COLORS;
-import edu.kpi.pzks.gui.utils.CONSTANTS;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
@@ -15,7 +14,7 @@ import java.awt.geom.Line2D;
 
 /**
  *
- * @author asmirnova
+ * @author aloren
  */
 public class RectangleSelectionTool implements SelectionDraggingTool {
 
@@ -127,8 +126,8 @@ public class RectangleSelectionTool implements SelectionDraggingTool {
     private void paintRectangleSelectionBorder(Graphics2D g2) {
         int startX = getSelectionStartX();
         int startY = getSelectionStartY();
-        g2.setColor(COLORS.BLUE);
-        g2.setStroke(new BasicStroke(CONSTANTS.LINE_THINKNESS));
+        g2.setColor(COLORS.GRID_COLOR);
+        g2.setStroke(new BasicStroke(1.5f));
         g2.drawRect(startX, startY,
                 Math.abs(mousePosition.x - selectionStartPoint.x),
                 Math.abs(mousePosition.y - selectionStartPoint.y));
@@ -137,7 +136,7 @@ public class RectangleSelectionTool implements SelectionDraggingTool {
     private void paintRectangleSelectionInside(Graphics2D g2) {
         int startX = getSelectionStartX();
         int startY = getSelectionStartY();
-        g2.setColor(COLORS.FILL_BLUE);
+        g2.setColor(COLORS.SELECT_FILL_COLOR);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 6 * 0.1f));
         g2.fillRect(startX, startY,
                 Math.abs(mousePosition.x - selectionStartPoint.x),
@@ -174,12 +173,11 @@ public class RectangleSelectionTool implements SelectionDraggingTool {
     }
 
     private void addToSelected(NodeView nodeViewAtPoint) {
-        nodeViewAtPoint.select();
-        graphPanel.getSelectedNodeViews().add(nodeViewAtPoint);
+        graphPanel.addSelectedNodeView(nodeViewAtPoint);
     }
 
     private void addToSelected(LinkView linkViewAtPoint) {
-        graphPanel.getSelectedLinkViews().add(linkViewAtPoint);
+        graphPanel.addSelectedLinkView(linkViewAtPoint);
     }
 
     private boolean isNodeInsideRectangle(int startX, int startY, int width, int height, NodeView nodeView) {
@@ -203,10 +201,7 @@ public class RectangleSelectionTool implements SelectionDraggingTool {
     }
 
     private void clearSelected() {
-        for (NodeView nodeView : graphPanel.getSelectedNodeViews()) {
-            nodeView.deselect();
-        }
-        graphPanel.getSelectedNodeViews().clear();
-        graphPanel.getSelectedLinkViews().clear();
+        graphPanel.clearSelectedLinkViews();
+        graphPanel.clearSelectedNodeViews();
     }
 }

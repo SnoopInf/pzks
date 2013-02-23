@@ -1,12 +1,12 @@
 package edu.kpi.pzks.gui.ui.tools;
 
 import edu.kpi.pzks.core.model.Link;
+import edu.kpi.pzks.gui.modelview.GraphView;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.LinkViewImpl;
-import edu.kpi.pzks.gui.ui.GraphPanel;
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 import edu.kpi.pzks.gui.utils.COLORS;
-import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.PaintUtils;
 
 import java.awt.*;
@@ -37,7 +37,8 @@ public class LinkCreationTool implements Tool {
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        NodeView nodeView = graphPanel.getGraphView().getNodeViewAtPoint(me.getX(), me.getY());
+        final GraphView graphView = graphPanel.getGraphView();
+        NodeView nodeView = graphView.getNodeViewAtPoint(me.getX(), me.getY());
         if (nodeView != null) {
             if (graphPanel.getSelectedNodeViews().isEmpty()) { //first click
                 graphPanel.getSelectedNodeViews().add(nodeView);
@@ -46,8 +47,8 @@ public class LinkCreationTool implements Tool {
                 if (activeLinkView != null) {
                     activeLinkView.setToNodeView(nodeView);
                     activeLinkView.setLink(new Link(activeLinkView.getFromNodeView().getNode(), nodeView.getNode()));
-                    activeLinkView.setOriented(graphPanel.getGraphView().getGraph().isOriented());
-                    graphPanel.getGraphView().addLinkView(activeLinkView);
+                    activeLinkView.setOriented(graphView.getGraph().isOriented());
+                    graphView.addLinkView(activeLinkView);
                     graphPanel.getSelectedNodeViews().clear();
                     removeActiveLinkView();
                     graphPanel.checkGraphIsValid();
@@ -97,7 +98,7 @@ public class LinkCreationTool implements Tool {
     private void paintLink(Graphics2D g2) {
         if (activeLinkView != null) {
             g2.setColor(COLORS.LINK_COLOR);
-            g2.setStroke(new BasicStroke(CONSTANTS.LINE_THINKNESS));
+            g2.setStroke(new BasicStroke(1.5f));
             final NodeView fromNodeView = activeLinkView.getFromNodeView();
             final Point fromNodeViewCenter = fromNodeView.getCenter();
             double dx = PaintUtils.getLength(fromNodeViewCenter.x, mousePosition.x);

@@ -4,7 +4,7 @@ import edu.kpi.pzks.core.exceptions.GraphException;
 import edu.kpi.pzks.gui.io.GraphLoader;
 import edu.kpi.pzks.gui.io.impl.XmlGraphLoader;
 import edu.kpi.pzks.gui.modelview.GraphView;
-import edu.kpi.pzks.gui.ui.GraphPanel;
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 import edu.kpi.pzks.gui.ui.MainFrame;
 import edu.kpi.pzks.gui.ui.utils.FileExtension;
 import edu.kpi.pzks.gui.ui.utils.GraphFileFilter;
@@ -55,8 +55,8 @@ public class OpenAction extends MainAction {
         } else if (selectedExt.equals(FileExtension.system)) {
             graphPanel = mainFrame.getSystemPanel();
         }
-        loader.setNodeType(graphPanel.getType());
         GraphView graphView = loader.loadFromFile(selectedFile);
+        graphView.setBounds(graphPanel.getBounds());
         graphPanel.setGraphView(graphView);
         graphPanel.checkGraphIsValid();
 //      graphPanel.prepareForOpenedGraph(gr);

@@ -2,7 +2,7 @@ package edu.kpi.pzks.gui.io.impl;
 
 /**
  *
- * @author asmirnova
+ * @author aloren
  */
 public class XmlConst {
 
@@ -26,4 +26,6 @@ public class XmlConst {
     public static final String LINK_VIEW = "linkView";
     public static final String LINK_ID = "linkId";
     public static final String BEND_POINT = "bendPoint";
+    public static final String ORIENTED = "oriented";
+    public static final String TYPE = "type";
 }

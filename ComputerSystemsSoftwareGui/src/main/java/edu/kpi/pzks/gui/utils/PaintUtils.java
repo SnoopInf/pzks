@@ -1,5 +1,6 @@
 package edu.kpi.pzks.gui.utils;
 
+import java.awt.Font;
 import java.awt.geom.Point2D;
 
 /**
@@ -8,13 +9,19 @@ import java.awt.geom.Point2D;
  */
 public class PaintUtils {
 
-
     public static int yCor(int len, double dir) {
         return (int) (len * Math.cos(dir));
     }
 
     public static int xCor(int len, double dir) {
         return (int) (len * Math.sin(dir));
+    }
+
+    public static Font getFont() {
+        String fontFamily = CONSTANTS.FONT_FAMILY;
+        int fontSize = CONSTANTS.FONT_SIZE;
+        int fontWeight = CONSTANTS.FONT_WEIGHT;
+        return new Font(fontFamily, fontWeight, fontSize);
     }
 
     /**

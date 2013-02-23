@@ -1,9 +1,10 @@
 package edu.kpi.pzks.gui.utils;
 
-import java.awt.BasicStroke;
 import java.util.ResourceBundle;
 
 public class CONSTANTS {
+
+    public static final String iconsPath = "/icons";
 
     private static final ResourceBundle defaults = Resources.settings;
 
@@ -17,13 +18,5 @@ public class CONSTANTS {
     public static final String YES_ICON = defaults.getString("yes.icon");
     public static final String NO_ICON = defaults.getString("no.icon");
 
-    public static final int MARGIN_TOP = Integer.parseInt(defaults.getString("margin.top"));
-    public static final int MARGIN_LEFT = Integer.parseInt(defaults.getString("margin.left"));
-
     public static final int GRID_SPACING = Integer.parseInt(defaults.getString("grid.spacing"));
-    public static final float LINE_THINKNESS = 1.5F;
-    
-    public static final boolean GRID_SNAP = Boolean.parseBoolean(defaults.getString("grid.snap"));
-    public static final boolean GRID_ENABLED = Boolean.parseBoolean(defaults.getString("grid.enabled"));
-    
 }

@@ -18,7 +18,7 @@ public class Link extends GraphObject {
     }
 
     public Link(Node fromNode, Node toNode) {
-        this(fromNode, toNode, 0);
+        this(fromNode, toNode, 1);
     }
 
     public Link(Node fromNode, Node toNode, int weight) {

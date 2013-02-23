@@ -25,9 +25,6 @@ public interface NodeView extends GraphObjectView {
     Node getNode();
 
     NodeViewPopup getPopup();
-    
-    boolean isSelected();
-    void setSelected(boolean selected);
-    void select();
-    void deselect();
+
+    Point getTopLeftForCentreAt(int x, int y);
 }

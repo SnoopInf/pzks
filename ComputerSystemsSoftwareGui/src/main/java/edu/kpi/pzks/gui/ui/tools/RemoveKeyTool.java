@@ -1,6 +1,6 @@
 package edu.kpi.pzks.gui.ui.tools;
 
-import edu.kpi.pzks.gui.ui.GraphPanel;
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 import edu.kpi.pzks.gui.ui.tools.Tool;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public class RemoveKeyTool implements Tool, KeyListener {
 

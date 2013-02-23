@@ -3,7 +3,7 @@ package edu.kpi.pzks.gui.actions.ui;
 import edu.kpi.pzks.core.exceptions.GraphException;
 import edu.kpi.pzks.gui.io.GraphSaver;
 import edu.kpi.pzks.gui.io.impl.XmlGraphSaver;
-import edu.kpi.pzks.gui.ui.GraphPanel;
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 import edu.kpi.pzks.gui.ui.MainFrame;
 import edu.kpi.pzks.gui.ui.utils.FileExtension;
 import edu.kpi.pzks.gui.ui.utils.GraphFileFilter;

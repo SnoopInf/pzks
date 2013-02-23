@@ -54,7 +54,7 @@ public class MainSmarxFrame extends MainFrame {
     }
     
     protected GraphPanel createTaskPanel() {
-        GraphPanel localTaskPanel = new GraphPanel(GraphPanel.NodeType.Task);
+        GraphPanel localTaskPanel = new TaskPanel();
         localTaskPanel.setName("taskPanel");
         localTaskPanel.addValidator(new CyclingValidator());
         return localTaskPanel;
@@ -62,7 +62,7 @@ public class MainSmarxFrame extends MainFrame {
     }
 
     protected GraphPanel createSystemPanel() {
-        GraphPanel localSystemPanel = new GraphPanel(GraphPanel.NodeType.System);
+        GraphPanel localSystemPanel = new SystemPanel();
         localSystemPanel.setName("systemPanel");
         localSystemPanel.addValidator(new ConsistencyValidator());
         return localSystemPanel;
@@ -87,33 +87,33 @@ public class MainSmarxFrame extends MainFrame {
         JToolBar toolBar = new JToolBar(orientation);
         toolBar.setFloatable(false);
 
-        ImageIcon openIcon = Utils.createImageIcon(iconsPath + "/open2.png");
+        ImageIcon openIcon = Utils.createImageIcon(iconsPath + "/open.png");
         JButton openButton = new JButton(openAction);
         openButton.setIcon(openIcon);
         openButton.setToolTipText(STRINGS.OPEN);
 
-        ImageIcon saveIcon = Utils.createImageIcon(iconsPath + "/save2.png");
+        ImageIcon saveIcon = Utils.createImageIcon(iconsPath + "/save.png");
         JButton saveButton = new JButton(saveAsAction);
         saveButton.setIcon(saveIcon);
         saveButton.setToolTipText(STRINGS.SAVE);
 
-        ImageIcon taskIcon = Utils.createImageIcon(iconsPath + "/task2.png");
+        ImageIcon taskIcon = Utils.createImageIcon(iconsPath + "/task.png");
         JButton genTaskGraphButton = new JButton(taskIcon);
         genTaskGraphButton.setToolTipText(STRINGS.GEN_TASK_GRAPH);
 
-        ImageIcon systemIcon = Utils.createImageIcon(iconsPath + "/system2.png");
+        ImageIcon systemIcon = Utils.createImageIcon(iconsPath + "/system.png");
         JButton genSystemGraphButton = new JButton(systemIcon);
         genSystemGraphButton.setToolTipText(STRINGS.GEN_SYSTEM_GRAPH);
 
-        ImageIcon nodeIcon = Utils.createImageIcon(iconsPath + "/node2.png");
+        ImageIcon nodeIcon = Utils.createImageIcon(iconsPath + "/node.png");
         JButton newNodeButton = new JButton(new NodeCreationToolAction(this));
         newNodeButton.setIcon(nodeIcon);
 
-        ImageIcon linkIcon = Utils.createImageIcon(iconsPath + "/link2.png");
+        ImageIcon linkIcon = Utils.createImageIcon(iconsPath + "/link.png");
         JButton newLinkButton = new JButton(new LinkCreationToolAction(this));
         newLinkButton.setIcon(linkIcon);
 
-        ImageIcon selectIcon = Utils.createImageIcon(iconsPath + "/select2.png");
+        ImageIcon selectIcon = Utils.createImageIcon(iconsPath + "/select.png");
         JButton selectButton = new JButton(new SelectionDraggingToolAction(this));
         selectButton.setIcon(selectIcon);
 
@@ -137,13 +137,11 @@ public class MainSmarxFrame extends MainFrame {
         return toolBar;
     }
     
-    @Override
-    protected int getToolbarOrientation() {
-        return JToolBar.VERTICAL;
-    }
-
-    @Override
-    protected String getToolbarConstraint() {
-        return BorderLayout.WEST;
+    protected void setComponents() {
+        this.taskPanel = createTaskPanel();
+        this.systemPanel = createSystemPanel();
+        setJMenuBar(getMainMenuBar());
+        add(getToolBar(JToolBar.VERTICAL), BorderLayout.WEST);
+        add(getMainPane(taskPanel, systemPanel), BorderLayout.CENTER);
     }
 }

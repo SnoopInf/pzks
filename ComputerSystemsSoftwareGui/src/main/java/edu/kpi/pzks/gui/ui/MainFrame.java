@@ -1,8 +1,12 @@
 package edu.kpi.pzks.gui.ui;
 
+import edu.kpi.pzks.gui.ui.panels.TaskPanel;
+import edu.kpi.pzks.gui.ui.panels.SystemPanel;
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 import edu.kpi.pzks.core.validator.ConsistencyValidator;
 import edu.kpi.pzks.core.validator.CyclingValidator;
 import edu.kpi.pzks.core.validator.SubGraphValidator;
+import edu.kpi.pzks.gui.actions.graph.GenTaskGraphAction;
 import edu.kpi.pzks.gui.actions.graph.LinkCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.NodeCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.RemoveAction;
@@ -10,6 +14,7 @@ import edu.kpi.pzks.gui.actions.graph.SelectionDraggingToolAction;
 import edu.kpi.pzks.gui.actions.ui.ExitAction;
 import edu.kpi.pzks.gui.actions.ui.OpenAction;
 import edu.kpi.pzks.gui.actions.ui.SaveAsAction;
+import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.STRINGS;
 import edu.kpi.pzks.gui.utils.Utils;
 
@@ -23,14 +28,14 @@ import java.util.logging.Logger;
  */
 public class MainFrame extends JFrame {
 
-    public static final int INIT_HEIGHT = 600;
-    public static final int INIT_WIDTH = 800;
-    private final String iconsPath = "/icons";
+    private final int TOOLBAR_ORIENTATION = JToolBar.HORIZONTAL;
+
     protected GraphPanel systemPanel;
     protected GraphPanel taskPanel;
     protected final OpenAction openAction = new OpenAction(this);
     protected final SaveAsAction saveAsAction = new SaveAsAction(this);
     protected final ExitAction exitAction = new ExitAction(this);
+    protected final GenTaskGraphAction genTaskGraphAction = new GenTaskGraphAction(this);
 
     public static void main(String[] args) {
         try {
@@ -94,37 +99,38 @@ public class MainFrame extends JFrame {
         JToolBar toolBar = new JToolBar(orientation);
         toolBar.setFloatable(false);
 
-        ImageIcon openIcon = Utils.createImageIcon(iconsPath + "/open.png");
+        ImageIcon openIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/open.png");
         JButton openButton = new JButton(openAction);
         openButton.setIcon(openIcon);
         openButton.setToolTipText(STRINGS.OPEN);
 
-        ImageIcon saveIcon = Utils.createImageIcon(iconsPath + "/save.png");
+        ImageIcon saveIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/save.png");
         JButton saveButton = new JButton(saveAsAction);
         saveButton.setIcon(saveIcon);
         saveButton.setToolTipText(STRINGS.SAVE);
 
-        ImageIcon taskIcon = Utils.createImageIcon(iconsPath + "/task.png");
-        JButton genTaskGraphButton = new JButton(taskIcon);
+        ImageIcon taskIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/task.png");
+        JButton genTaskGraphButton = new JButton(genTaskGraphAction);
+        genTaskGraphButton.setIcon(taskIcon);
         genTaskGraphButton.setToolTipText(STRINGS.GEN_TASK_GRAPH);
 
-        ImageIcon systemIcon = Utils.createImageIcon(iconsPath + "/system.png");
-        JButton genSystemGraphButton = new JButton(systemIcon);
-        genSystemGraphButton.setToolTipText(STRINGS.GEN_SYSTEM_GRAPH);
+//        ImageIcon systemIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/system.png");
+//        JButton genSystemGraphButton = new JButton(systemIcon);
+//        genSystemGraphButton.setToolTipText(STRINGS.GEN_SYSTEM_GRAPH);
 
-        ImageIcon nodeIcon = Utils.createImageIcon(iconsPath + "/node.png");
+        ImageIcon nodeIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/node.png");
         JButton newNodeButton = new JButton(new NodeCreationToolAction(this));
         newNodeButton.setIcon(nodeIcon);
 
-        ImageIcon linkIcon = Utils.createImageIcon(iconsPath + "/link.png");
+        ImageIcon linkIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/link.png");
         JButton newLinkButton = new JButton(new LinkCreationToolAction(this));
         newLinkButton.setIcon(linkIcon);
 
-        ImageIcon selectIcon = Utils.createImageIcon(iconsPath + "/select.png");
+        ImageIcon selectIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/select.png");
         JButton selectButton = new JButton(new SelectionDraggingToolAction(this));
         selectButton.setIcon(selectIcon);
 
-        ImageIcon removeIcon = Utils.createImageIcon(iconsPath + "/remove.png");
+        ImageIcon removeIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/remove.png");
         JButton removeButton = new JButton(new RemoveAction(this));
         removeButton.setIcon(removeIcon);
 
@@ -137,7 +143,7 @@ public class MainFrame extends JFrame {
         toolBar.add(removeButton);
         toolBar.addSeparator();
         toolBar.add(genTaskGraphButton);
-        toolBar.add(genSystemGraphButton);
+//        toolBar.add(genSystemGraphButton);
         toolBar.addSeparator();
 
         return toolBar;
@@ -145,12 +151,11 @@ public class MainFrame extends JFrame {
 
     protected Container getMainPane(JPanel taskPanel, JPanel systemPanel) {
         JSplitPane pane = new JSplitPane();
-        pane.setDividerLocation(INIT_WIDTH / 2);
 
         JScrollPane taskPane = new JScrollPane();
         taskPane.setViewportView(taskPanel);
         pane.setLeftComponent(taskPane);
-
+        
         JScrollPane systemPane = new JScrollPane();
         systemPane.setViewportView(systemPanel);
         pane.setRightComponent(systemPane);
@@ -158,7 +163,7 @@ public class MainFrame extends JFrame {
     }
 
     protected GraphPanel createTaskPanel() {
-        GraphPanel localTaskPanel = new GraphPanel(GraphPanel.NodeType.Task);
+        GraphPanel localTaskPanel = new TaskPanel();
         localTaskPanel.setName("taskPanel");
         localTaskPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.TASK_GRAPH));
         localTaskPanel.addValidator(new CyclingValidator());
@@ -167,7 +172,7 @@ public class MainFrame extends JFrame {
     }
 
     protected GraphPanel createSystemPanel() {
-        GraphPanel localSystemPanel = new GraphPanel(GraphPanel.NodeType.System);
+        GraphPanel localSystemPanel = new SystemPanel();
         localSystemPanel.setName("systemPanel");
         localSystemPanel.setBorder(BorderFactory.createTitledBorder(STRINGS.SYSTEM_GRAPH));
         localSystemPanel.addValidator(new ConsistencyValidator());
@@ -187,21 +192,13 @@ public class MainFrame extends JFrame {
         this.taskPanel = createTaskPanel();
         this.systemPanel = createSystemPanel();
         setJMenuBar(getMainMenuBar());
-        add(getToolBar(getToolbarOrientation()), getToolbarConstraint());
+        add(getToolBar(TOOLBAR_ORIENTATION), BorderLayout.NORTH);
         add(getMainPane(taskPanel, systemPanel), BorderLayout.CENTER);
     }
 
     protected void setSizeAndPosition() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(INIT_WIDTH, INIT_HEIGHT);
+        pack();
         setLocationRelativeTo(null);
-    }
-
-    protected int getToolbarOrientation() {
-        return JToolBar.HORIZONTAL;
-    }
-
-    protected String getToolbarConstraint() {
-        return BorderLayout.NORTH;
     }
 }

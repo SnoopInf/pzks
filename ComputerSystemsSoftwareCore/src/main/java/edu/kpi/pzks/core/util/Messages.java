@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
- * Author: Kirill Davidenko Date: 12.02.13 Time: 00:50
+ * @author snoop Date: 12.02.13 Time: 00:50
  */
 public class Messages {
     //а какого хрена засовывать ресорсбандл внутрь кора? фейспалм

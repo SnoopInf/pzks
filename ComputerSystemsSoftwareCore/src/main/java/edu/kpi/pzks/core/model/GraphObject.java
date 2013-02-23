@@ -12,10 +12,11 @@ public abstract class GraphObject implements Serializable {
     protected String name = "";
 
     public GraphObject() {
-        this(0);
+        this(1);
     }
 
     public GraphObject(int weight) {
+        checkWeight(weight);
         this.weight = weight;
     }
 
@@ -24,6 +25,7 @@ public abstract class GraphObject implements Serializable {
     }
 
     public void setWeight(int weight) {
+        checkWeight(weight);
         this.weight = weight;
     }
 
@@ -34,7 +36,13 @@ public abstract class GraphObject implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     @Override
     public abstract String toString();
+
+    private void checkWeight(int weight) {
+        if (weight < 1) {
+            throw new IllegalArgumentException("Weight must be >=1, but was " + weight);
+        }
+    }
 }

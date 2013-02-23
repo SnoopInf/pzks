@@ -19,10 +19,10 @@ public class Graph implements Serializable {
     private transient Set<IChangeListener> changeListeners = new HashSet<>();
     private transient Set<Validator> validators = new HashSet<>();
     private boolean isOriented;
-
     private int incrementer;
 
-    public Graph() {
+    public Graph(boolean isOriented) {
+        this.isOriented = isOriented;
     }
 
     public void notifyListener() {

@@ -8,7 +8,7 @@ import edu.kpi.pzks.core.util.Messages;
 import java.util.*;
 
 /**
- * Author: Kirill Davidenko Date: 07.02.13 Time: 21:14
+ * @author snoop Date: 07.02.13 Time: 21:14
  */
 public class SubGraphValidator implements Validator {
 

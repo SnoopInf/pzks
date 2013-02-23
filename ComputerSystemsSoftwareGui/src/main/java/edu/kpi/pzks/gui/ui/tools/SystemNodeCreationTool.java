@@ -3,7 +3,7 @@ package edu.kpi.pzks.gui.ui.tools;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.modelview.impl.SystemNodeViewImpl;
-import edu.kpi.pzks.gui.ui.GraphPanel;
+import edu.kpi.pzks.gui.ui.panels.GraphPanel;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
 import java.awt.Graphics2D;
 import java.awt.Point;

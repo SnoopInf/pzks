@@ -3,7 +3,7 @@ package edu.kpi.pzks.gui.utils;
 import java.util.ResourceBundle;
 
 /**
- * @author asmirnova
+ * @author aloren
  */
 public class STRINGS {
 
@@ -26,11 +26,14 @@ public class STRINGS {
     public static final String CANCEL = menu.getString("cancel");
     public static final String GEN_TASK_GRAPH = menu.getString("generateTaskGraph");
     public static final String GEN_SYSTEM_GRAPH = menu.getString("generateSystemGraph");
+    public static final String GEN_GRAPH = menu.getString("generateGraph");
     public static final String TASK_GRAPH = menu.getString("taskGraph");
     public static final String SYSTEM_GRAPH = menu.getString("systemGraph");
     
-    public static final String GANTT = menu.getString("modeling.gantt");
-    public static final String CPU_PARAMETERS = menu.getString("modeling.cpu_param");
-
+    public static final String NUM_NODES = strings.getString("numberOfNodes");
+    public static final String NODE_WEIGHT = strings.getString("nodeWeight");
+    public static final String MIN_WEIGHT = strings.getString("minWeight");
+    public static final String MAX_WEIGHT = strings.getString("maxWeight");
+    public static final String CONNECTIVITY = strings.getString("connectivity");
 
 }
