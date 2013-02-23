@@ -25,4 +25,6 @@ public interface NodeView extends GraphObjectView {
     Node getNode();
 
     NodeViewPopup getPopup();
+
+    Point getTopLeftForCentreAt(int x, int y);
 }

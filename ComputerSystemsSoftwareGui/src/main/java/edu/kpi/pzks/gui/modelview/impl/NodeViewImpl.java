@@ -155,4 +155,9 @@ public class NodeViewImpl implements NodeView {
     public void setSelected(boolean selected) {
         this.isSelected = selected;
     }
+
+    @Override
+    public Point getTopLeftForCentreAt(int x, int y) {
+        return new Point(x - getWidth() / 2, y - getHeight() / 2);
+    }
 }
