@@ -153,7 +153,7 @@ public class GraphViewImpl implements GraphView {
         GraphView view = new GraphViewImpl(graph);
         for (Node node : graph.getNodes()) {
             NodeView nodeView = new NodeViewImpl(node);
-            view.addNodeView(nodeView);
+            view.getNodeViews().add(nodeView);
         }
         final boolean oriented = graph.isOriented();
         for (Link link : graph.getLinks()) {
@@ -161,7 +161,7 @@ public class GraphViewImpl implements GraphView {
             NodeView toNodeView = view.getNodeView(link.getToNode());
             LinkView linkView = new LinkViewImpl(fromNodeView, toNodeView, link);
             linkView.setOriented(oriented);
-            view.addLinkView(linkView);
+            view.getLinkViews().add(linkView);
         }
         return view;
     }
