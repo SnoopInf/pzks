@@ -26,6 +26,7 @@ public class STRINGS {
     public static final String CANCEL = menu.getString("cancel");
     public static final String GEN_TASK_GRAPH = menu.getString("generateTaskGraph");
     public static final String GEN_SYSTEM_GRAPH = menu.getString("generateSystemGraph");
+    public static final String GEN__GRAPH = menu.getString("generateGraph");
     public static final String TASK_GRAPH = menu.getString("taskGraph");
     public static final String SYSTEM_GRAPH = menu.getString("systemGraph");
 
