@@ -3,6 +3,7 @@ package edu.kpi.pzks.gui.ui;
 import edu.kpi.pzks.core.validator.ConsistencyValidator;
 import edu.kpi.pzks.core.validator.CyclingValidator;
 import edu.kpi.pzks.core.validator.SubGraphValidator;
+import edu.kpi.pzks.gui.actions.graph.GenTaskGraphAction;
 import edu.kpi.pzks.gui.actions.graph.LinkCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.NodeCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.RemoveAction;
@@ -33,6 +34,7 @@ public class MainFrame extends JFrame {
     protected final OpenAction openAction = new OpenAction(this);
     protected final SaveAsAction saveAsAction = new SaveAsAction(this);
     protected final ExitAction exitAction = new ExitAction(this);
+    protected final GenTaskGraphAction genTaskGraphAction = new GenTaskGraphAction(this);
 
     public static void main(String[] args) {
         try {
@@ -107,12 +109,13 @@ public class MainFrame extends JFrame {
         saveButton.setToolTipText(STRINGS.SAVE);
 
         ImageIcon taskIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/task.png");
-        JButton genTaskGraphButton = new JButton(taskIcon);
+        JButton genTaskGraphButton = new JButton(genTaskGraphAction);
+        genTaskGraphButton.setIcon(taskIcon);
         genTaskGraphButton.setToolTipText(STRINGS.GEN_TASK_GRAPH);
 
-        ImageIcon systemIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/system.png");
-        JButton genSystemGraphButton = new JButton(systemIcon);
-        genSystemGraphButton.setToolTipText(STRINGS.GEN_SYSTEM_GRAPH);
+//        ImageIcon systemIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/system.png");
+//        JButton genSystemGraphButton = new JButton(systemIcon);
+//        genSystemGraphButton.setToolTipText(STRINGS.GEN_SYSTEM_GRAPH);
 
         ImageIcon nodeIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/node.png");
         JButton newNodeButton = new JButton(new NodeCreationToolAction(this));
@@ -139,7 +142,7 @@ public class MainFrame extends JFrame {
         toolBar.add(removeButton);
         toolBar.addSeparator();
         toolBar.add(genTaskGraphButton);
-        toolBar.add(genSystemGraphButton);
+//        toolBar.add(genSystemGraphButton);
         toolBar.addSeparator();
 
         return toolBar;
