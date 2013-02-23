@@ -39,10 +39,9 @@ public class GraphFactory {
             Node fromNode, toNode;
             Link link = null;
             int weight;
-            //TODO check next code
             do {
                 if (link != null) {
-                    System.out.println("Removing link: " + link);
+//                    System.out.println("Removing link: " + link);
                     links.remove(link);
                 }
                 fromNode = nodes.get(generator.nextInt(nodes.size()));
@@ -50,13 +49,13 @@ public class GraphFactory {
                 weight = generateWeight(0, (int) remainder);
                 link = new Link(fromNode, toNode, weight);
                 links.add(link);
-                System.out.println("Generated link: " + link);
-                if(fromNode.equals(toNode)) {
-                    System.out.println("!!!!PANIC");
-                    outputAllNodeData(fromNode);
+//                System.out.println("Generated link: " + link);
+//                if(fromNode.equals(toNode)) {
+//                    System.out.println("!!!!PANIC");
+//                    outputAllNodeData(fromNode);
 //                    outputAllNodeData(toNode);
-                }
-                outputAllLinks(links);
+//                }
+//                outputAllLinks(links);
             } while (!validator.isValid(nodes, links));
             remainder = linksWeightSum - weight;
         }
