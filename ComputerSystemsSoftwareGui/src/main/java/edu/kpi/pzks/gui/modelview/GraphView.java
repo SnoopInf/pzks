@@ -3,6 +3,7 @@ package edu.kpi.pzks.gui.modelview;
 import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
+import edu.kpi.pzks.gui.layout.Layout;
 import edu.kpi.pzks.gui.modelview.impl.GraphViewImpl.TYPE;
 
 import java.awt.*;
@@ -14,7 +15,9 @@ import java.util.Set;
  */
 public interface GraphView {
 
-    public TYPE getType();
+    void layout(Layout layout);
+
+    TYPE getType();
 
     void paint(Graphics2D g2);
 
@@ -43,4 +46,8 @@ public interface GraphView {
     void removeLinkViews(Set<LinkView> selectedLinkViews);
 
     void removeNodeViews(Set<NodeView> selectedNodeViews);
+
+    void setBounds(Rectangle bounds);
+
+    Rectangle getBounds();
 }

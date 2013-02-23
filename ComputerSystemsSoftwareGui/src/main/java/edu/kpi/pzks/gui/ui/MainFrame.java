@@ -25,8 +25,6 @@ import java.util.logging.Logger;
  */
 public class MainFrame extends JFrame {
 
-    public static final int INIT_HEIGHT = 600;
-    public static final int INIT_WIDTH = 800;
     private final int TOOLBAR_ORIENTATION = JToolBar.HORIZONTAL;
 
     protected GraphPanel systemPanel;
@@ -150,12 +148,11 @@ public class MainFrame extends JFrame {
 
     protected Container getMainPane(JPanel taskPanel, JPanel systemPanel) {
         JSplitPane pane = new JSplitPane();
-        pane.setDividerLocation(INIT_WIDTH / 2);
 
         JScrollPane taskPane = new JScrollPane();
         taskPane.setViewportView(taskPanel);
         pane.setLeftComponent(taskPane);
-
+        
         JScrollPane systemPane = new JScrollPane();
         systemPane.setViewportView(systemPanel);
         pane.setRightComponent(systemPane);
@@ -198,7 +195,7 @@ public class MainFrame extends JFrame {
 
     protected void setSizeAndPosition() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(INIT_WIDTH, INIT_HEIGHT);
+        pack();
         setLocationRelativeTo(null);
     }
 }

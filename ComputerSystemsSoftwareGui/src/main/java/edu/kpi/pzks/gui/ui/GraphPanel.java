@@ -19,6 +19,8 @@ import javax.swing.*;
  */
 public abstract class GraphPanel extends JPanel {
 
+    public static final int INIT_HEIGHT = 400;
+    public static final int INIT_WIDTH = 800;
     protected JLabel validationLabel;
     protected Set<Tool> currentTools = new HashSet<>();
     protected Grid grid = new Grid();
@@ -30,6 +32,7 @@ public abstract class GraphPanel extends JPanel {
 
     public GraphPanel() {
         super(new BorderLayout());
+        setPreferredSize(new Dimension(INIT_WIDTH / 2, INIT_HEIGHT));
         setBackground(Color.WHITE);
         setFocusable(true);
         createValidationLabel();
@@ -154,6 +157,7 @@ public abstract class GraphPanel extends JPanel {
                 nodeView.setUpperLeftCorner(upperLeftCorner);
             }
         }
+        graphView.setBounds(getBounds());
         this.setSize(dimension);
         this.setPreferredSize(dimension);
     }

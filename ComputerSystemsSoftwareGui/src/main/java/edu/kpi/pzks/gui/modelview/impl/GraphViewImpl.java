@@ -3,6 +3,7 @@ package edu.kpi.pzks.gui.modelview.impl;
 import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
+import edu.kpi.pzks.gui.layout.Layout;
 import edu.kpi.pzks.gui.modelview.GraphView;
 import edu.kpi.pzks.gui.modelview.LinkView;
 import edu.kpi.pzks.gui.modelview.NodeView;
@@ -26,6 +27,7 @@ public class GraphViewImpl implements GraphView {
     private Graph graph;
     private Set<NodeView> nodeViews = new HashSet<>();
     private Set<LinkView> linkViews = new HashSet<>();
+    private Rectangle bounds;
 
     public GraphViewImpl(Graph graph) {
         this.graph = graph;
@@ -34,7 +36,6 @@ public class GraphViewImpl implements GraphView {
         } else {
             this.type = TYPE.SYSTEM;
         }
-
     }
 
     @Override
@@ -146,6 +147,38 @@ public class GraphViewImpl implements GraphView {
         for (NodeView selectedNodeView : selectedNodeViews) {
             removeNodeView(selectedNodeView);
         }
+    }
+
+    public static GraphView createView(Graph graph) {
+        GraphView view = new GraphViewImpl(graph);
+        for (Node node : graph.getNodes()) {
+            NodeView nodeView = new NodeViewImpl(node);
+            view.addNodeView(nodeView);
+        }
+        final boolean oriented = graph.isOriented();
+        for (Link link : graph.getLinks()) {
+            NodeView fromNodeView = view.getNodeView(link.getFromNode());
+            NodeView toNodeView = view.getNodeView(link.getToNode());
+            LinkView linkView = new LinkViewImpl(fromNodeView, toNodeView, link);
+            linkView.setOriented(oriented);
+            view.addLinkView(linkView);
+        }
+        return view;
+    }
+
+    @Override
+    public void layout(Layout layout) {
+        layout.layout(this);
+    }
+
+    @Override
+    public void setBounds(Rectangle bounds) {
+        this.bounds = bounds;
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return this.bounds;
     }
 
     @Override
