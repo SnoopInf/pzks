@@ -14,6 +14,9 @@ public class CONSTANTS {
     public static final String FONT_FAMILY = defaults.getString("font.family");
     public static final int FONT_SIZE = Integer.parseInt(defaults.getString("font.size"));
     public static final int FONT_WEIGHT = Integer.parseInt(defaults.getString("font.weight"));
+    public static final String FONT_ID_FAMILY = defaults.getString("font.id.family");
+    public static final int FONT_ID_SIZE = Integer.parseInt(defaults.getString("font.id.size"));
+    public static final int FONT_ID_WEIGHT = Integer.parseInt(defaults.getString("font.id.weight"));
 
     public static final String YES_ICON = defaults.getString("yes.icon");
     public static final String NO_ICON = defaults.getString("no.icon");

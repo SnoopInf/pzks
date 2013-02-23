@@ -24,6 +24,13 @@ public class PaintUtils {
         return new Font(fontFamily, fontWeight, fontSize);
     }
 
+    public static Font getIdFont() {
+        String fontFamily = CONSTANTS.FONT_ID_FAMILY;
+        int fontSize = CONSTANTS.FONT_ID_SIZE;
+        int fontWeight = CONSTANTS.FONT_ID_WEIGHT;
+        return new Font(fontFamily, fontWeight, fontSize);
+    }
+
     /**
      * Returns the length of a line ensuring it is not too small to render.
      */
