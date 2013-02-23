@@ -29,5 +29,11 @@ public class STRINGS {
     public static final String GEN_GRAPH = menu.getString("generateGraph");
     public static final String TASK_GRAPH = menu.getString("taskGraph");
     public static final String SYSTEM_GRAPH = menu.getString("systemGraph");
+    
+    public static final String NUM_NODES = strings.getString("numberOfNodes");
+    public static final String NODE_WEIGHT = strings.getString("nodeWeight");
+    public static final String MIN_WEIGHT = strings.getString("minWeight");
+    public static final String MAX_WEIGHT = strings.getString("maxWeight");
+    public static final String CONNECTIVITY = strings.getString("connectivity");
 
 }
