@@ -18,6 +18,6 @@ public class COLORS {
     public static final Color LINK_SELECTED_COLOR = Color.decode(colors.getString("color.link.selected"));
 
     public static final Color GRID_COLOR = Color.decode(colors.getString("color.grid"));
-    public static final Color GRID_FILL_COLOR = Color.decode(colors.getString("color.fill.grid"));
+    public static final Color SELECT_FILL_COLOR = Color.decode(colors.getString("color.fill.grid"));
 
 }

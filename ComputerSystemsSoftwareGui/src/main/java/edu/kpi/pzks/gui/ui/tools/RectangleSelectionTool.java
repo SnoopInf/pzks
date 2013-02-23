@@ -136,7 +136,7 @@ public class RectangleSelectionTool implements SelectionDraggingTool {
     private void paintRectangleSelectionInside(Graphics2D g2) {
         int startX = getSelectionStartX();
         int startY = getSelectionStartY();
-        g2.setColor(COLORS.GRID_FILL_COLOR);
+        g2.setColor(COLORS.SELECT_FILL_COLOR);
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 6 * 0.1f));
         g2.fillRect(startX, startY,
                 Math.abs(mousePosition.x - selectionStartPoint.x),
