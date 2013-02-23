@@ -46,7 +46,7 @@ public class GraphFactory {
                 }
                 fromNode = nodes.get(generator.nextInt(nodes.size()));
                 toNode = nodes.get(generator.nextInt(nodes.size()));
-                weight = generateWeight(0, (int) remainder);
+                weight = generateWeight(1, (int) remainder);
                 link = new Link(fromNode, toNode, weight);
                 links.add(link);
 //                System.out.println("Generated link: " + link);
