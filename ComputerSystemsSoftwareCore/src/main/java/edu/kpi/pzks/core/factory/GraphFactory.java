@@ -30,7 +30,8 @@ public class GraphFactory {
         double remainder = linksWeightSum;
         Node[] nodesArr = nodes.toArray(new Node[nodes.size()]);
         Links links = new Links();
-        final double shouldCreateLink = 0.2;
+        final double shouldCreateLink = 0.3;
+        final double shouldIncWeightLink = 0.5;
         final double remainderDelta = 0.5;
         int sum = 0;
         System.out.println("LinksWeightSum: " + linksWeightSum);
@@ -44,13 +45,23 @@ public class GraphFactory {
                     if (generator.nextDouble() <= shouldCreateLink) {
                         final Node fromNode = nodesArr[i];
                         final Node toNode = nodesArr[j];
-                        if (!links.containsLinkBetween(fromNode, toNode)) {
+                        final Link linkBetween = links.getLinkBetween(fromNode, toNode);
+                        if (linkBetween == null) {
                             int generatedWeight = generateWeight(1, (int) Math.ceil(remainder));
                             remainder -= generatedWeight;
                             Link link = new Link(fromNode, toNode, generatedWeight);
                             links.add(link);
                             sum += generatedWeight;
                             System.out.println("Gen link: " + link.getWeight());
+                        } else {
+                            if (generator.nextDouble() <= shouldIncWeightLink) {
+                                int generatedWeight = generateWeight(1, (int) Math.ceil(remainder));
+                                remainder -= generatedWeight;
+                                final int oldWeight = linkBetween.getWeight();
+                                linkBetween.setWeight(oldWeight + generatedWeight);
+                                sum += generatedWeight;
+                                System.out.println("Inc weight: " + oldWeight+" new weight: "+linkBetween.getWeight());
+                            }
                         }
                     }
                 }
