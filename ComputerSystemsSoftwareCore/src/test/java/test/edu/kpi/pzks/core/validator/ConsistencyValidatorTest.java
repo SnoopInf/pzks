@@ -4,6 +4,8 @@ import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.core.validator.ConsistencyValidator;
+import edu.kpi.pzks.core.validator.SubGraphValidator;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -18,14 +20,22 @@ import static org.junit.Assert.*;
 
 public class ConsistencyValidatorTest {
 
+    private ConsistencyValidator consistencyValidator;
+    private SubGraphValidator subGraphValidator;
+
+    @Before
+    public void initValidator() {
+        consistencyValidator = new ConsistencyValidator();
+        subGraphValidator = new SubGraphValidator();
+    }
+
     @Test
     public void testValidatesSingleNodeGraph() throws Exception {
-        ConsistencyValidator validator = new ConsistencyValidator();
-
         Collection<Node> nodes = Arrays.asList(new Node[]{new Node()});
         Collection<Link> links = new ArrayList<>();
 
-        validator.validateConsistency(nodes, links);
+        assertTrue(consistencyValidator.isValid(nodes, links));
+        assertTrue(subGraphValidator.isValid(nodes, links));
     }
 
     @Test(expected = ValidationException.class)
