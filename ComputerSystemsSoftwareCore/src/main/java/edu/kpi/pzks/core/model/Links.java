@@ -55,6 +55,16 @@ public class Links extends HashSet<Link> {
         }
         removeAllLinks(linksToRemove);
     }
+    
+    public boolean containsLinkBetween(Node fromNode, Node toNode) {
+        for (Link link : this) {
+            if (link.getFromNode().equals(fromNode)
+                    && link.getToNode().equals(toNode)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean contains(Link link) {
         return super.contains(link);
