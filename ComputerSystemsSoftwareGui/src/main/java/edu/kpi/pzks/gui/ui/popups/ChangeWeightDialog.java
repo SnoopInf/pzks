@@ -51,6 +51,7 @@ public class ChangeWeightDialog extends JDialog {
                 }
             }
         });
+        getRootPane().setDefaultButton(okButton);
         JButton cancelButton = new JButton(STRINGS.CANCEL);
         cancelButton.addActionListener(new ActionListener() {
             @Override

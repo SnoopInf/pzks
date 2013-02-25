@@ -31,7 +31,7 @@ public class ConsistencyValidator implements Validator {
     /* Checks for consistency.
      *  I suppose that graph is inconsistent if there's a single Node which has no input and output.
      */
-    public void validateConsistency(Collection<Node> nodes, Collection<Link> edges) {
+    private void validateConsistency(Collection<Node> nodes, Collection<Link> edges) {
         if (nodes.size() == 1) {
             return;
         }

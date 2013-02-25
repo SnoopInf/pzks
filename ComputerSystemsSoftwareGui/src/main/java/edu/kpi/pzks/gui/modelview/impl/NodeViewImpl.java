@@ -116,7 +116,7 @@ public class NodeViewImpl implements NodeView {
     }
 
     private void paintIdString(Graphics2D g2) {
-        g2.setFont(PaintUtils.getFont());
+        g2.setFont(PaintUtils.getIdFont());
         FontMetrics metrics = g2.getFontMetrics(g2.getFont());
         String idString = "" + node.getId();
         int x = (int) (shape.getX() - metrics.stringWidth(idString) / 4);

@@ -2,6 +2,7 @@ package edu.kpi.pzks.gui.ui.tools;
 
 import edu.kpi.pzks.gui.modelview.NodeView;
 import edu.kpi.pzks.gui.ui.panels.GraphPanel;
+import edu.kpi.pzks.gui.ui.popups.ChangeWeightDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,6 +37,12 @@ public class NodeSelectionTool implements SelectionDraggingTool {
             if (me.getModifiers() == MouseEvent.BUTTON3_MASK) {
                 JPopupMenu pp = nodeAtPoint.getPopupMenu();
                 pp.show(me.getComponent(), me.getX(), me.getY());
+            }
+            if(me.getClickCount() == 2) {
+                ChangeWeightDialog dialog = new ChangeWeightDialog(nodeAtPoint);
+                dialog.setLocationRelativeTo(null);
+                dialog.setModal(true);
+                dialog.setVisible(true);
             }
         } else {
             graphPanel.clearSelectedNodeViews();
