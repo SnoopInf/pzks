@@ -34,11 +34,10 @@ public class ConsistencyValidatorTest {
         Collection<Node> nodes = Arrays.asList(new Node[]{new Node()});
         Collection<Link> links = new ArrayList<>();
 
-        assertTrue(consistencyValidator.isValid(nodes, links));
-        assertTrue(subGraphValidator.isValid(nodes, links));
+        assertTrue(consistencyValidator.isValid(nodes, links) && subGraphValidator.isValid(nodes, links));
     }
 
-    @Test(expected = ValidationException.class)
+    @Test
     public void testInvalidatesDualNodeUnlinkedGraph() {
         ConsistencyValidator validator = new ConsistencyValidator();
 
@@ -47,10 +46,10 @@ public class ConsistencyValidatorTest {
         Collection<Node> nodes = Arrays.asList(new Node[]{nodeA, nodeB});
         Collection<Link> links = Arrays.asList(new Link[]{});
 
-        validator.validateConsistency(nodes, links);
+        assertTrue(consistencyValidator.isValid(nodes, links) && subGraphValidator.isValid(nodes, links));
     }
 
-    @Test()
+    @Test
     public void testValidatesDualNodeGraph() {
         ConsistencyValidator validator = new ConsistencyValidator();
 
@@ -59,14 +58,12 @@ public class ConsistencyValidatorTest {
         Collection<Node> nodes = Arrays.asList(new Node[]{nodeA, nodeB});
         Collection<Link> links = Arrays.asList(new Link[]{new Link(nodeA, nodeB)});
 
-        validator.validateConsistency(nodes, links);
+        assertTrue(consistencyValidator.isValid(nodes, links) && subGraphValidator.isValid(nodes, links));
     }
 
 
-    @Test(expected = ValidationException.class)
+    @Test
     public void testInvalidatesDualComponentGraph() {
-        ConsistencyValidator validator = new ConsistencyValidator();
-
         Node nodeA = new Node();
         Node nodeB = new Node();
         Node nodeC = new Node();
@@ -74,11 +71,11 @@ public class ConsistencyValidatorTest {
         Collection<Node> nodes = Arrays.asList(new Node[]{nodeA, nodeB, nodeC, nodeD});
         Collection<Link> links = Arrays.asList(new Link[]{new Link(nodeA, nodeB), new Link(nodeC, nodeD)});
 
-        validator.validateConsistency(nodes, links);
+        assertFalse(consistencyValidator.isValid(nodes, links) && subGraphValidator.isValid(nodes, links));
     }
 
 
-    @Test()
+    @Test
     public void testValidatesFullyConnectedGraph() {
         ConsistencyValidator validator = new ConsistencyValidator();
 
@@ -92,6 +89,6 @@ public class ConsistencyValidatorTest {
                 new Link(nodeB, nodeC), new Link(nodeB, nodeD), new Link(nodeC, nodeD)
         });
 
-        validator.validateConsistency(nodes, links);
+        assertTrue(consistencyValidator.isValid(nodes, links) && subGraphValidator.isValid(nodes, links));
     }
 }
