@@ -7,6 +7,7 @@ import edu.kpi.pzks.gui.actions.graph.LinkCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.NodeCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.RemoveAction;
 import edu.kpi.pzks.gui.actions.graph.SelectionDraggingToolAction;
+import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.STRINGS;
 import edu.kpi.pzks.gui.utils.Utils;
 import edu.kpi.pzks.gui.ui.panels.*;
@@ -39,6 +40,7 @@ public class MainSmarxFrame extends MainFrame {
     
     public MainSmarxFrame(String title) {
         super(title);
+        setSize(panelWidth, panelHeight);
     }
     
     @Override
@@ -100,8 +102,9 @@ public class MainSmarxFrame extends MainFrame {
         saveButton.setIcon(saveIcon);
         saveButton.setToolTipText(STRINGS.SAVE);
 
-        ImageIcon taskIcon = Utils.createImageIcon(iconsPath + "/task.png");
-        JButton genTaskGraphButton = new JButton(taskIcon);
+        ImageIcon taskIcon = Utils.createImageIcon(CONSTANTS.iconsPath + "/task.png");
+        JButton genTaskGraphButton = new JButton(genTaskGraphAction);
+        genTaskGraphButton.setIcon(taskIcon);
         genTaskGraphButton.setToolTipText(STRINGS.GEN_TASK_GRAPH);
 
         ImageIcon systemIcon = Utils.createImageIcon(iconsPath + "/system.png");
@@ -143,8 +146,8 @@ public class MainSmarxFrame extends MainFrame {
     protected void setComponents() {
         this.taskPanel = createTaskPanel();
         this.systemPanel = createSystemPanel();
-        taskPanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
-        systemPanel.setPreferredSize(new Dimension(panelWidth, panelHeight));
+        taskPanel.setPreferredSize(new Dimension(panelWidth/10, panelHeight/10));
+        systemPanel.setPreferredSize(new Dimension(panelWidth/10, panelHeight/10));
         setJMenuBar(getMainMenuBar());
         add(getToolBar(JToolBar.VERTICAL), BorderLayout.WEST);
         add(getMainPane(taskPanel, systemPanel), BorderLayout.CENTER);
