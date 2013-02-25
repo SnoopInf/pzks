@@ -38,12 +38,12 @@ public class GraphFactoryTest {
     public static Collection getParams() {
         Random gen = new Random();
         Object[][] params = new Object[][]{
-//            {4, 1, 5, gen.nextDouble()},
-//            {10, 5, 10, gen.nextDouble()},
+            {4, 1, 5, gen.nextDouble()},
+            {10, 5, 10, gen.nextDouble()},
             {20, 1, 10, gen.nextDouble()},
-//            {2, 8, 13, gen.nextDouble()},
-//            {15, 5, 10, gen.nextDouble()},
-//            {40, 1, 30, gen.nextDouble()},
+            {2, 8, 13, gen.nextDouble()},
+            {15, 5, 10, gen.nextDouble()},
+            {40, 1, 30, gen.nextDouble()},
         };
         return Arrays.asList(params);
     }
