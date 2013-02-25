@@ -46,7 +46,7 @@ public class ConsistencyValidatorTest {
         Collection<Node> nodes = Arrays.asList(new Node[]{nodeA, nodeB});
         Collection<Link> links = Arrays.asList(new Link[]{});
 
-        assertTrue(consistencyValidator.isValid(nodes, links) && subGraphValidator.isValid(nodes, links));
+        assertFalse(consistencyValidator.isValid(nodes, links) && subGraphValidator.isValid(nodes, links));
     }
 
     @Test
