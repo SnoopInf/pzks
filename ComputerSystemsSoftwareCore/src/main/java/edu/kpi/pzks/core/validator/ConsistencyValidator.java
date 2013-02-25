@@ -5,7 +5,6 @@ import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.core.util.Messages;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 
@@ -29,53 +28,23 @@ public class ConsistencyValidator implements Validator {
         validateConsistency(nodes, links);
     }
 
-    private boolean findPath(Node fromNode, Node toNode) {
-        boolean has = false;
-        ArrayList<Node> checkNodes = new ArrayList<>();
-        checkNodes.addAll(fromNode.getInputNodes());
-        checkNodes.addAll(fromNode.getOutputNodes());
-        for (Node currentNode : checkNodes) {
-            if(currentNode == toNode) {
-                return true;
-            }
-            if(currentNode != fromNode) {
-                ArrayList<Node> visitedPath = new ArrayList<>();
-                visitedPath.add(fromNode);
-                has = has | findPathList(visitedPath, currentNode, toNode);
-            }
-        }
-        return has;
-    }
-
-    private boolean findPathList(Collection<Node> visitedPath, Node fromNode, Node toNode) {
-        boolean has = false;
-        ArrayList<Node> checkNodes = new ArrayList<>();
-        checkNodes.addAll(fromNode.getInputNodes());
-        checkNodes.addAll(fromNode.getOutputNodes());
-        for (Node currentNode : checkNodes) {
-            if(currentNode == toNode) {
-                return true;
-            }
-            if(currentNode != fromNode & !visitedPath.contains(currentNode)) {
-                ArrayList<Node> fromList = new ArrayList<>(visitedPath);
-                fromList.add(fromNode);
-                has = has | findPathList(fromList, currentNode, toNode);
-            }
-        }
-        return has;
-    }
-
-    // what is the purpose of edges being passed along the nodes collection?
+    /* Checks for consistency.
+     *  I suppose that graph is inconsistent if there's a single Node which has no input and output.
+     */
     public void validateConsistency(Collection<Node> nodes, Collection<Link> edges) {
         if (nodes.size() == 1) {
             return;
         }
 
-        for (Node fromNode : nodes) {
-            for(Node toNode : nodes) {
-                if(!findPath(fromNode, toNode)){
-                    throw new ValidationException(Messages.getLocalizedMessage(Messages.VALIDATION_ERROR_GRAPH_INCONSISTENT, Locale.getDefault()));
+        for (Node node : nodes) {
+            boolean hasEdge = false;
+            for (Link edge : edges) {
+                if (edge.getFromNode().equals(node) || edge.getToNode().equals(node)) {
+                    hasEdge = true;
                 }
+            }
+            if (!hasEdge) {
+                throw new ValidationException(Messages.getLocalizedMessage(Messages.VALIDATION_ERROR_GRAPH_INCONSISTENT, Locale.getDefault()));
             }
         }
     }
