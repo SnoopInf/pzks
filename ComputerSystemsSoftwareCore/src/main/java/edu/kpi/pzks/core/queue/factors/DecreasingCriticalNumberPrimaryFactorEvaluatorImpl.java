@@ -1,5 +1,6 @@
 package edu.kpi.pzks.core.queue.factors;
 
+import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.core.queue.AbstractFactorEvaluator;
 
@@ -11,8 +12,8 @@ import java.util.Collection;
  * @author smarx
  */
 public class DecreasingCriticalNumberPrimaryFactorEvaluatorImpl extends AbstractFactorEvaluator {
-    public DecreasingCriticalNumberPrimaryFactorEvaluatorImpl(Collection<Node> nodes) {
-        super(nodes);
+    public DecreasingCriticalNumberPrimaryFactorEvaluatorImpl(Collection<Node> nodes, Collection<Link> links) {
+        super(nodes, links);
     }
 
     @Override

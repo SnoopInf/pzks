@@ -28,9 +28,9 @@ public class AbstractFactorEvaluatorTest {
         Node nodeC = new Node(3, 2);
         Collection<Node> nodes = Arrays.asList(new Node[]{nodeA, nodeB, nodeC});
         Collection<Link> links = Arrays.asList(new Link[]{new Link(nodeA, nodeB), new Link(nodeB, nodeC)});
-        fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes);
+        fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes, links);
 
-        assertEquals(11, fe.getCriticalPathForGraph());
+        assertEquals(11, fe.getCriticalPathWeightForGraph());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class AbstractFactorEvaluatorTest {
         Collection<Link> links = Arrays.asList(new Link(nodeA, nodeB),
                 new Link(nodeB, nodeC),
                 new Link(nodeB, nodeD));
-        LoopCheckCriticalPath(nodes, 13);
+        LoopCheckCriticalPath(nodes, links, 13);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class AbstractFactorEvaluatorTest {
                 new Link(nodeB, nodeC),
                 new Link(nodeB, nodeD));
 
-        LoopCheckCriticalPath(nodes, 19); //BUG! at rare cases, a critical path of 13 is returned
+        LoopCheckCriticalPath(nodes, links, 19); //BUG! at rare cases, a critical path of 13 is returned
     }
 
     @Test
@@ -80,7 +80,7 @@ public class AbstractFactorEvaluatorTest {
                 new Link(nodeE, nodeF)
         );
 
-        LoopCheckCriticalPath(nodes, 19);
+        LoopCheckCriticalPath(nodes, links, 19);
     }
 
     @Test
@@ -101,7 +101,7 @@ public class AbstractFactorEvaluatorTest {
                 new Link(nodeE, nodeF)
         );
 
-        LoopCheckCriticalPath(nodes, 27);
+        LoopCheckCriticalPath(nodes, links, 27);
     }
 
     @Test
@@ -122,17 +122,17 @@ public class AbstractFactorEvaluatorTest {
                 new Link(nodeE, nodeF)
         );
 
-        fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes);
-        assertEquals(fe.getCriticalPathForGraph(), fe.getCriticalPathFromTopTo(nodeD));
+        fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes, links);
+        assertEquals(fe.getCriticalPathWeightForGraph(), fe.getCriticalPathFromTopTo(nodeD));
         assertTrue("Weighted critical path of leaf node on critical path must be equal to 1",
                 Double.compare(1.0, fe.getWeightedCriticalPathFromTopTo(nodeD)) == 0);
     }
 
-    private void LoopCheckCriticalPath(List<Node> nodes, int weight) {
+    private void LoopCheckCriticalPath(List<Node> nodes, Collection<Link> links,  int weight) {
         for (int i = 0; i < 10; i++) {
             Collections.shuffle(nodes);
-            fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes);
-            assertEquals("Failed on i=" + i, weight, fe.getCriticalPathForGraph());
+            fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes, links);
+            assertEquals("Failed on i=" + i, weight, fe.getCriticalPathWeightForGraph());
         }
     }
 }

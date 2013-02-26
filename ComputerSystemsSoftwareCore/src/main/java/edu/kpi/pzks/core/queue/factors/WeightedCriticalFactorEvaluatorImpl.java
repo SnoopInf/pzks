@@ -1,5 +1,6 @@
 package edu.kpi.pzks.core.queue.factors;
 
+import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.core.queue.AbstractFactorEvaluator;
 
@@ -11,8 +12,8 @@ import java.util.Collection;
  * @author smarx
  */
 public class WeightedCriticalFactorEvaluatorImpl extends AbstractFactorEvaluator {
-    public WeightedCriticalFactorEvaluatorImpl(Collection<Node> nodes) {
-        super(nodes);
+    public WeightedCriticalFactorEvaluatorImpl(Collection<Node> nodes, Collection<Link> links) {
+        super(nodes, links);
     }
 
     @Override
