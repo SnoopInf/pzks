@@ -3,7 +3,7 @@ package test.edu.kpi.pzks.core.queue;
 import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.core.queue.IdFactorEvaluatorImpl;
-import edu.kpi.pzks.core.queue.Queue;
+import edu.kpi.pzks.core.queue.SingleFactorQueue;
 import edu.kpi.pzks.core.queue.QueuedNode;
 import org.junit.Test;
 
@@ -28,7 +28,7 @@ public class QueueTest {
         when(graph.getNodes()).thenReturn(new HashSet<>(Arrays.asList(new Node[]{new Node(1, 1),
                 new Node(1, 0), new Node(1, 4)})));
 
-        Queue queue = new Queue(new IdFactorEvaluatorImpl(), graph.getNodes());
+        SingleFactorQueue queue = new SingleFactorQueue(new IdFactorEvaluatorImpl(), graph.getNodes());
 
         Collection<QueuedNode> queuedNodeCollection = queue.evaluate();
 
