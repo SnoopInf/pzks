@@ -2,7 +2,7 @@ package test.edu.kpi.pzks.core.queue;
 
 import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.core.model.Node;
-import edu.kpi.pzks.core.queue.IdFactorEvaluatorImpl;
+import edu.kpi.pzks.core.queue.factors.IdFactorEvaluatorImpl;
 import edu.kpi.pzks.core.queue.SingleFactorQueue;
 import edu.kpi.pzks.core.queue.QueuedNode;
 import org.junit.Test;

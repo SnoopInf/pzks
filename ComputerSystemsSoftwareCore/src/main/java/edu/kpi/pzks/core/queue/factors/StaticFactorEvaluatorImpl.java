@@ -1,6 +1,7 @@
-package edu.kpi.pzks.core.queue;
+package edu.kpi.pzks.core.queue.factors;
 
 import edu.kpi.pzks.core.model.Node;
+import edu.kpi.pzks.core.queue.FactorEvaluator;
 
 /**
  * @author smarx
