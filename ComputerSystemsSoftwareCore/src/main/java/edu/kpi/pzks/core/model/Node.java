@@ -17,6 +17,11 @@ public class Node extends GraphObject {
         super();
     }
 
+    public Node(int weight, int id) {
+        this(weight);
+        this.setId(id);
+    }
+
     public Node(int weight) {
         super(weight);
     }
