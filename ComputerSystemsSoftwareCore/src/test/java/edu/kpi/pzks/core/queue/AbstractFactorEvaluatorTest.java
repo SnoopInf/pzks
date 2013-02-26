@@ -109,7 +109,7 @@ public class AbstractFactorEvaluatorTest {
     }
 
     private void LoopCheckCriticalPath(List<Node> nodes, int weight) {
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 10; i++) {
             Collections.shuffle(nodes);
             fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes);
             assertEquals("Failed on i="+i, weight, fe.getCriticalPathForGraph());
