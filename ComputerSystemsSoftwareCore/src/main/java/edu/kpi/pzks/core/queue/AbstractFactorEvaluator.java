@@ -6,7 +6,6 @@ import edu.kpi.pzks.core.model.Node;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author smarx
@@ -30,11 +29,7 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
         int pathWeight = 0;
         for(Node n : nodes) {
             if(n.getOutputNodes().size() == 0) {
-                System.out.printf("Calculate critical path for Node #%d (%d)\n", n.getId(), n.getWeight());
                 List<Node> path = findPathToRoot(n);
-                for (Node pathNode : path) {
-                    System.out.print();
-                }
                 int weight = calculateCriticalPath(path);
                 if(weight > pathWeight) {
                     pathWeight = weight;
@@ -63,12 +58,20 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
             int weight = calculateCriticalPath(currentPath);
             if(weight > criticalWeight) {
                 criticalPath = currentPath;
+                criticalWeight = weight;
             }
         }
 
         criticalPath.add(0, n);
         return criticalPath;
     }
+
+    /*protected void printPath(List<Node> path, int criticalWeight) {
+        for (Node n: path) {
+            System.out.print(n.getId()+"@"+n.getWeight()+"  ");
+        }
+        System.out.println("/ "+criticalWeight);
+    }*/
 
     protected int getCriticalPathFromTop(Node n) {
         return 0;
