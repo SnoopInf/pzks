@@ -22,10 +22,8 @@ public class CONSTANTS {
     public static final String NO_ICON = defaults.getString("no.icon");
 
     public static final int GRID_SPACING = Integer.parseInt(defaults.getString("grid.spacing"));
-    public static final boolean GRID_SNAP = Boolean.parseBoolean(defaults.containsKey("grid.snap")
-            ? defaults.getString("grid.snap")
-            : "true");
-    public static final boolean GRID_ENABLED = Boolean.parseBoolean(defaults.containsKey("grid.enabled")
-            ? defaults.getString("grid.enabled")
-            : "true");
+    public static final boolean GRID_SNAP = 
+            Boolean.parseBoolean(defaults.containsKey("grid.snap") ? defaults.getString("grid.snap") : "true");
+    public static final boolean GRID_ENABLED = 
+            Boolean.parseBoolean(defaults.containsKey("grid.enabled") ? defaults.getString("grid.enabled") : "true");
 }

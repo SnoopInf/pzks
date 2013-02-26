@@ -91,7 +91,7 @@ public class XmlLoaderSaverTest {
     private Set<Node> getNodes() {
         Set<Node> nodes = new HashSet<>();
         for (int i = 0; i < size; i++) {
-            nodes.add(new Node(random.nextInt()));
+            nodes.add(new Node(random(1, 100)));
         }
         return nodes;
     }
@@ -102,7 +102,7 @@ public class XmlLoaderSaverTest {
         for (int i = 0; i < size; i++) {
             Node fromNode = nodesAr[i];
             Node toNode = (i + 1 == size) ? nodesAr[0] : nodesAr[i + 1];
-            links.add(new Link(fromNode, toNode, random.nextInt()));
+            links.add(new Link(fromNode, toNode, random(1, 100)));
         }
         return links;
     }
@@ -216,5 +216,9 @@ public class XmlLoaderSaverTest {
             nodeCIt = controlNodes.listIterator();
         }
 
+    }
+
+    private static int random(int min, int max) {
+        return min + (int) (Math.random() * ((max - min) + 1));
     }
 }

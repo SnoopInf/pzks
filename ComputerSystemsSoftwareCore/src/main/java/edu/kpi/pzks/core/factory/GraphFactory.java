@@ -4,8 +4,6 @@ import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Links;
 import edu.kpi.pzks.core.model.Node;
-import edu.kpi.pzks.core.validator.CyclingValidator;
-import edu.kpi.pzks.core.validator.Validator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -24,33 +22,52 @@ public class GraphFactory {
         }
         //TODO check other params
 
-        Validator validator = new CyclingValidator();
         Graph graph = new Graph(true);
         Random generator = new Random();
         nodesWeightSum = 0;
         List<Node> nodes = generateNodes(numberOfNodes, maxNodeWeight, minNodeWeight);
-
         double linksWeightSum = (double) (nodesWeightSum / connectivity) - nodesWeightSum;
         double remainder = linksWeightSum;
-
+        Node[] nodesArr = nodes.toArray(new Node[nodes.size()]);
         Links links = new Links();
-
-        for (int i = 0; i < nodes.size(); i++) {
-            Node fromNode, toNode;
-            Link link = null;
-            int weight;
-            do {
-                if (link != null) {
-                    links.remove(link);
+        final double shouldCreateLink = 0.3;
+        final double shouldIncWeightLink = 0.5;
+        final double remainderDelta = 0.5;
+        int sum = 0;
+        System.out.println("LinksWeightSum: " + linksWeightSum);
+        loop:
+        while (remainder >= remainderDelta) {
+            for (int i = 0; i < nodesArr.length; i++) {
+                for (int j = i + 1; j < nodesArr.length; j++) {
+                    if (remainder <= remainderDelta) {
+                        break loop;
+                    }
+                    if (generator.nextDouble() <= shouldCreateLink) {
+                        final Node fromNode = nodesArr[i];
+                        final Node toNode = nodesArr[j];
+                        final Link linkBetween = links.getLinkBetween(fromNode, toNode);
+                        if (linkBetween == null) {
+                            int generatedWeight = generateWeight(1, (int) Math.ceil(remainder));
+                            remainder -= generatedWeight;
+                            Link link = new Link(fromNode, toNode, generatedWeight);
+                            links.add(link);
+                            sum += generatedWeight;
+                            System.out.println("Gen link: " + link.getWeight());
+                        } else {
+                            if (generator.nextDouble() <= shouldIncWeightLink) {
+                                int generatedWeight = generateWeight(1, (int) Math.ceil(remainder));
+                                remainder -= generatedWeight;
+                                final int oldWeight = linkBetween.getWeight();
+                                linkBetween.setWeight(oldWeight + generatedWeight);
+                                sum += generatedWeight;
+                                System.out.println("Inc weight: " + oldWeight+" new weight: "+linkBetween.getWeight());
+                            }
+                        }
+                    }
                 }
-                fromNode = nodes.get(generator.nextInt(nodes.size()));
-                toNode = nodes.get(generator.nextInt(nodes.size()));
-                weight = generateWeight(1, (int) remainder);
-                link = new Link(fromNode, toNode, weight);
-                links.add(link);
-            } while (!validator.isValid(nodes, links));
-            remainder = linksWeightSum - weight;
+            }
         }
+        System.out.println("Sum: " + sum);
         graph.addNodes(nodes);
         graph.addLinks(links);
         return graph;
@@ -69,7 +86,13 @@ public class GraphFactory {
     }
 
     private static int generateWeight(int minNodeWeight, int maxNodeWeight) {
-        int weight = minNodeWeight + (int)(Math.random() * ((maxNodeWeight - minNodeWeight) + 1));
+        if (minNodeWeight > maxNodeWeight) {
+            throw new IllegalArgumentException("Cannot generate random in current limits: [" + minNodeWeight + "; " + maxNodeWeight + "]");
+        }
+        if (minNodeWeight == maxNodeWeight) {
+            return minNodeWeight;
+        }
+        int weight = minNodeWeight + (int) (Math.random() * ((maxNodeWeight - minNodeWeight) + 1));
         return weight;
     }
 }
