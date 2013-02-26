@@ -3,9 +3,6 @@ package edu.kpi.pzks.core.queue;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
 import edu.kpi.pzks.core.queue.factors.DecreasingConnectivitySecondaryFactorEvaluatorImpl;
-import edu.kpi.pzks.core.queue.factors.StaticFactorEvaluatorImpl;
-import junit.framework.Assert.*;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -13,10 +10,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * @author smarx
@@ -89,9 +85,9 @@ public class AbstractFactorEvaluatorTest {
 
     @Test
     public void testTopAnBottomCutWithHeavyComponents() {
-        Node nodeA = new Node(1, 0);   //   1   7     1
+        Node nodeA = new Node(1, 0);   //   1   7     12
         Node nodeA2 = new Node(7, 1);  //   \  x      |
-        Node nodeB = new Node(7, 2);   //    7        5
+        Node nodeB = new Node(7, 2);   //    7        15 ===> 27
         Node nodeC = new Node(3, 3);   //   /x
         Node nodeD = new Node(5, 4);   //  3  5 ====> 19
         Node nodeE = new Node(12, 5);
@@ -108,11 +104,35 @@ public class AbstractFactorEvaluatorTest {
         LoopCheckCriticalPath(nodes, 27);
     }
 
+    @Test
+    public void testWeightedCriticalToLeafOnPathEqualsOne() throws Exception {
+        Node nodeA = new Node(1, 0);   //   1   7     1
+        Node nodeA2 = new Node(7, 1);  //   \  x      |
+        Node nodeB = new Node(7, 2);   //    7        5
+        Node nodeC = new Node(3, 3);   //   /x
+        Node nodeD = new Node(5, 4);   //  3  5 ====> 19
+        Node nodeE = new Node(1, 5);
+        Node nodeF = new Node(5, 6);
+
+        List<Node> nodes = Arrays.asList(nodeA, nodeA2, nodeB, nodeC, nodeD, nodeE, nodeF);
+        Collection<Link> links = Arrays.asList(new Link(nodeA, nodeB),
+                new Link(nodeA2, nodeB),
+                new Link(nodeB, nodeC),
+                new Link(nodeB, nodeD),
+                new Link(nodeE, nodeF)
+        );
+
+        fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes);
+        assertEquals(fe.getCriticalPathForGraph(), fe.getCriticalPathFromTopTo(nodeD));
+        assertTrue("Weighted critical path of leaf node on critical path must be equal to 1",
+                Double.compare(1.0, fe.getWeightedCriticalPathFromTopTo(nodeD)) == 0);
+    }
+
     private void LoopCheckCriticalPath(List<Node> nodes, int weight) {
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             Collections.shuffle(nodes);
             fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes);
-            assertEquals("Failed on i="+i, weight, fe.getCriticalPathForGraph());
+            assertEquals("Failed on i=" + i, weight, fe.getCriticalPathForGraph());
         }
     }
 }
