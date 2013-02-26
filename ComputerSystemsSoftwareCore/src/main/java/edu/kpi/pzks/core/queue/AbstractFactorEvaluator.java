@@ -15,8 +15,9 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
     private Collection<Node> nodes;
     private Collection<Link> links;
 
-    public AbstractFactorEvaluator(Collection<Node> nodes) {
+    public AbstractFactorEvaluator(Collection<Node> nodes, Collection<Link> links) {
         this.nodes = nodes;
+        this.links = links;
     }
 
     //TODO do we really need this method?
@@ -24,19 +25,26 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
         return false;
     }*/
 
-    protected int getCriticalPathForGraph() {
-        int pathWeight = 0;
+    protected int getCriticalPathWeightForGraph() {
+        List<Node> criticalPathForGraph = getCriticalPathForGraph();
+
+        return calculateCriticalPath(criticalPathForGraph);
+    }
+
+    private List<Node> getCriticalPathForGraph() {
+        int criticalWeight = 0;
+        List<Node> criticalPath = null;
         for(Node n : nodes) {
             if(n.getOutputNodes().size() == 0) {
-                List<Node> path = findPathToRootFrom(n);
-                int weight = calculateCriticalPath(path);
-                if(weight > pathWeight) {
-                    pathWeight = weight;
+                List<Node> currentPath = findPathToRootFrom(n);
+                int currentWeight = calculateCriticalPath(currentPath);
+                if(currentWeight > criticalWeight) {
+                    criticalWeight = currentWeight;
+                    criticalPath = currentPath;
                 }
             }
         }
-
-        return pathWeight;
+        return criticalPath;
     }
 
     private int calculateCriticalPath(List<Node> path) {
@@ -83,7 +91,7 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
     }*/
 
     protected double getWeightedCriticalPathFromTopTo(Node n) {
-        return (getCriticalPathFromTopTo(n) + .0d)/getCriticalPathForGraph();
+        return (getCriticalPathFromTopTo(n) + .0d)/ getCriticalPathWeightForGraph();
     }
 
     /*protected double getWeightedCriticalPathFromBottom(Node n) {
@@ -91,11 +99,11 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
     }*/
     
     protected int getCriticalNumberForGraph() {
-        return 0;
+        return getCriticalPathForGraph().size();
     }
 
     protected int getCriticalNumberFromTopTo(Node n) {
-        return 0;
+        return findPathToRootFrom(n).size();
     }
 
     /*protected int getCriticalNumberFromBottom(Node n) {
