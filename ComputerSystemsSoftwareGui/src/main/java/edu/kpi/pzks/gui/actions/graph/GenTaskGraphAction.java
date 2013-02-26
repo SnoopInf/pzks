@@ -29,15 +29,15 @@ public class GenTaskGraphAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        GraphGeneratorPanel dialog = new GraphGeneratorPanel(mainFrame);
-        dialog.setVisible(true);
-        int result = JOptionPane.showConfirmDialog(mainFrame, dialog, STRINGS.GEN_GRAPH, JOptionPane.YES_NO_CANCEL_OPTION);
+        GraphGeneratorPanel panel = new GraphGeneratorPanel(mainFrame);
+        panel.setVisible(true);
+        int result = JOptionPane.showConfirmDialog(mainFrame, panel, STRINGS.GEN_GRAPH, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result == JOptionPane.OK_OPTION) {
             GraphPanel graphPanel = mainFrame.getTaskPanel();
-            int numberOfNodes = dialog.getNumberOfNodes();
-            int minNodeWeight = dialog.getMinNodeWeight();
-            int maxNodeWeight = dialog.getMaxNodeWeight();
-            double connectivity = dialog.getConnectivity();
+            int numberOfNodes = panel.getNumberOfNodes();
+            int minNodeWeight = panel.getMinNodeWeight();
+            int maxNodeWeight = panel.getMaxNodeWeight();
+            double connectivity = panel.getConnectivity();
             Graph generatedGraph = GraphFactory.newGraph(numberOfNodes, minNodeWeight, maxNodeWeight, connectivity);
             GraphView graphView = GraphViewImpl.createView(generatedGraph);
             Dimension prefSize = graphPanel.getPreferredSize();
