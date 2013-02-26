@@ -17,7 +17,7 @@ public class WeightedCriticalFactorEvaluatorImpl extends AbstractFactorEvaluator
 
     @Override
     public double evaluateFactorForNode(Node node) {
-        return getWeightedCriticalPathFromTop(node) + getWeightedCriticalNumberFromTop(node); // пронормированная сумма
+        return getWeightedCriticalPathFromTopTo(node) + getWeightedCriticalNumberFromTopTo(node); // пронормированная сумма
     }
 
     @Override

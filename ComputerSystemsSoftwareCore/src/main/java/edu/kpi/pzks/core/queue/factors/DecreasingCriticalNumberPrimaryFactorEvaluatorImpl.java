@@ -17,7 +17,7 @@ public class DecreasingCriticalNumberPrimaryFactorEvaluatorImpl extends Abstract
 
     @Override
     public double evaluateFactorForNode(Node node) {
-        return getCriticalNumberFromTop(node);
+        return getCriticalNumberFromTopTo(node);
     }
 
     @Override
