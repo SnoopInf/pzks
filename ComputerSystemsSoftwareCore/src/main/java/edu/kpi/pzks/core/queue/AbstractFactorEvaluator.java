@@ -53,7 +53,7 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
     }
 
     protected double getWeightedCriticalNumberFromTop(Node n) {
-        return 0;
+        return (getCriticalNumberFromTop(n) + .0d)/getCriticalNumberForGraph();
     }
 
     protected double getWeightedCriticalNumberFromBottom(Node n) {
