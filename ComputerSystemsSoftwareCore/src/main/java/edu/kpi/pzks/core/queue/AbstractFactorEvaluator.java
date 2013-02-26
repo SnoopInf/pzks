@@ -33,7 +33,7 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
                 System.out.printf("Calculate critical path for Node #%d (%d)\n", n.getId(), n.getWeight());
                 List<Node> path = findPathToRoot(n);
                 for (Node pathNode : path) {
-                    System.out.print();
+//                    System.out.print();
                 }
                 int weight = calculateCriticalPath(path);
                 if(weight > pathWeight) {
