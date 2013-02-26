@@ -35,5 +35,7 @@ public class STRINGS {
     public static final String MIN_WEIGHT = strings.getString("minWeight");
     public static final String MAX_WEIGHT = strings.getString("maxWeight");
     public static final String CONNECTIVITY = strings.getString("connectivity");
+    
+    public static final String PARAMS = strings.getString("params");
 
 }
