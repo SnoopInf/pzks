@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @author smarx
  */
-public class SingleFactorQueue {
+public class SingleFactorQueue implements Queue {
     private FactorEvaluator factorEvaluator;
     private Collection<Node> nodes;
 
@@ -16,7 +16,7 @@ public class SingleFactorQueue {
         this.nodes = nodes;
     }
 
-
+    @Override
     public Collection<QueuedNode> evaluate() {
         NodeComparator comparator = new NodeComparator(factorEvaluator);
 

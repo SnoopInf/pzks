@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @author smarx
  */
-public class DoubleFactorQueue {
+public class DoubleFactorQueue implements Queue {
     private Collection<Node> nodes;
     private final FactorEvaluator factorEvaluatorPrimary;
     private final FactorEvaluator factorEvaluatorSecondary;
@@ -18,7 +18,7 @@ public class DoubleFactorQueue {
         this.nodes = nodes;
     }
 
-
+    @Override
     public Collection<QueuedNode> evaluate() {
         DoubleFactorNodeComparator comparator = new DoubleFactorNodeComparator(factorEvaluatorPrimary, factorEvaluatorSecondary);
 
@@ -34,23 +34,4 @@ public class DoubleFactorQueue {
         return queuedNodes;
     }
 
-    private class DoubleFactorNodeComparator implements Comparator<Node> {
-
-        private boolean naturalOrder;
-        private final NodeComparator nodeComparatorPrimary;
-        private final NodeComparator nodeComparatorSecondary;
-
-        private DoubleFactorNodeComparator(FactorEvaluator factorEvaluator1, FactorEvaluator factorEvaluator2) {
-            this.nodeComparatorPrimary = new NodeComparator(factorEvaluator1);
-            this.nodeComparatorSecondary = new NodeComparator(factorEvaluator2);
-        }
-
-        @Override
-        public int compare(Node n1, Node n2) {
-            int primaryComparison = nodeComparatorPrimary.compare(n1, n2);
-            if(primaryComparison != 0)
-                return primaryComparison;
-            return nodeComparatorSecondary.compare(n1, n2);
-        }
-    }
 }
