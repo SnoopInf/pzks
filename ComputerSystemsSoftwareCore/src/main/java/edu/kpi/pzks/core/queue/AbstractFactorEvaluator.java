@@ -81,14 +81,34 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
     }*/
 
     protected int getCriticalPathFromTopTo(Node n) {
-        List<Node> criticalPath = findPathToRootFrom(n);
+        List<Node> criticalPath = findCriticalPathToBottomFrom(n);
         int critical = calculateCriticalPath(criticalPath);
         return critical;
     }
 
-    /*protected int getCriticalPathFromBottom(Node n) {
-        return 0;
-    }*/
+    private List<Node> findCriticalPathToBottomFrom(Node n) {
+        Collection<Node> inNodes = n.getOutputNodes();
+        int criticalWeight = 0;
+        List<Node> criticalPath = new ArrayList<>();
+
+        for(Node current : inNodes) {
+            List<Node> currentPath = findCriticalPathToBottomFrom(current);
+            int weight = calculateCriticalPath(currentPath);
+            if(weight > criticalWeight) {
+                criticalPath = currentPath;
+                criticalWeight = weight;
+            }
+        }
+
+        criticalPath.add(0, n);
+        return criticalPath;
+    }
+
+    protected int getCriticalPathFromBottom(Node n) {
+        List<Node> criticalPath = findPathToRootFrom(n);
+        int critical = calculateCriticalPath(criticalPath);
+        return critical;
+    }
 
     protected double getWeightedCriticalPathFromTopTo(Node n) {
         return (getCriticalPathFromTopTo(n) + .0d)/ getCriticalPathWeightForGraph();
@@ -103,12 +123,12 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
     }
 
     protected int getCriticalNumberFromTopTo(Node n) {
-        return findPathToRootFrom(n).size();
+        return findCriticalPathToBottomFrom(n).size();
     }
 
-    /*protected int getCriticalNumberFromBottom(Node n) {
-        return 0;
-    }*/
+    protected int getCriticalNumberFromBottom(Node n) {
+        return findPathToRootFrom(n).size();
+    }
 
     protected double getWeightedCriticalNumberFromTopTo(Node n) {
         return ((double)getCriticalNumberFromTopTo(n))/getCriticalNumberForGraph();
