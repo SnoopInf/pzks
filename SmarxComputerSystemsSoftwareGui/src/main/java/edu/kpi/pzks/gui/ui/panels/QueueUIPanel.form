@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="edu.kpi.pzks.gui.ui.panels.QueueUIPanel">
+  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="5" left="5" bottom="5" right="5"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="3cf49" class="javax.swing.JButton" binding="buttonQueue1">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Метод №1"/>
+        </properties>
+      </component>
+      <component id="5a7c2" class="javax.swing.JButton" binding="buttonQueue4">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <text value="Метод №4"/>
+        </properties>
+      </component>
+      <component id="a2e7b" class="javax.swing.JButton" binding="buttonQueue9">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <text value="Метод №9"/>
+        </properties>
+      </component>
+      <scrollpane id="df90a">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="450" height="300"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="f5555" class="javax.swing.JTextArea" binding="queueOutputPane">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+    </children>
+  </grid>
+</form>
