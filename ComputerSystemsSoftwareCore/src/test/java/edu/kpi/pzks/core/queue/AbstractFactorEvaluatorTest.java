@@ -31,6 +31,9 @@ public class AbstractFactorEvaluatorTest {
         fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes, links);
 
         assertEquals(11, fe.getCriticalPathWeightForGraph());
+        assertEquals(11, fe.getCriticalPathFromTopTo(nodeA));
+        assertEquals(10, fe.getCriticalPathFromTopTo(nodeB));
+        assertEquals(3, fe.getCriticalPathFromTopTo(nodeC));
     }
 
     @Test
@@ -127,7 +130,7 @@ public class AbstractFactorEvaluatorTest {
         );
 
         fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes, links);
-        assertEquals(fe.getCriticalPathWeightForGraph(), fe.getCriticalPathFromTopTo(nodeD));
+        assertEquals(fe.getCriticalPathWeightForGraph(), fe.getCriticalPathFromTopTo(nodeA2));
         assertTrue("Weighted critical path of leaf node on critical path must be equal to 1",
                 Double.compare(1.0, fe.getWeightedCriticalPathFromTopTo(nodeA2)) == 0);
     }
