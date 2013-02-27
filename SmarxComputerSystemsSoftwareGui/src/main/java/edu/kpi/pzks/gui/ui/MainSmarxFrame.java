@@ -3,10 +3,12 @@ package edu.kpi.pzks.gui.ui;
 import com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI;
 import edu.kpi.pzks.core.validator.ConsistencyValidator;
 import edu.kpi.pzks.core.validator.CyclingValidator;
+import edu.kpi.pzks.core.validator.SubGraphValidator;
 import edu.kpi.pzks.gui.actions.graph.LinkCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.NodeCreationToolAction;
 import edu.kpi.pzks.gui.actions.graph.RemoveAction;
 import edu.kpi.pzks.gui.actions.graph.SelectionDraggingToolAction;
+import edu.kpi.pzks.gui.ui.actions.QueueAction;
 import edu.kpi.pzks.gui.utils.CONSTANTS;
 import edu.kpi.pzks.gui.utils.STRINGS;
 import edu.kpi.pzks.gui.utils.Utils;
@@ -70,6 +72,7 @@ public class MainSmarxFrame extends MainFrame {
         GraphPanel localSystemPanel = new SystemPanel();
         localSystemPanel.setName("systemPanel");
         localSystemPanel.addValidator(new ConsistencyValidator());
+        localSystemPanel.addValidator(new SubGraphValidator());
         return localSystemPanel;
     }
     
@@ -127,14 +130,19 @@ public class MainSmarxFrame extends MainFrame {
         JButton removeButton = new JButton(new RemoveAction(this));
         removeButton.setIcon(removeIcon);
 
+        ImageIcon queueIcon = Utils.createImageIcon(iconsPath + "/queue.png");
+        JButton queueButton = new JButton(new QueueAction(this));
+        queueButton.setIcon(queueIcon);
+
         
         toolBar.add(newNodeButton);
         toolBar.add(newLinkButton);
         toolBar.add(selectButton);
         toolBar.add(removeButton);
         toolBar.addSeparator();
-        toolBar.add(genTaskGraphButton);
-        toolBar.add(genSystemGraphButton);
+        toolBar.add(queueButton);
+//        toolBar.add(genTaskGraphButton);
+//        toolBar.add(genSystemGraphButton);
         toolBar.addSeparator();
         toolBar.add(openButton);
         toolBar.add(saveButton);
