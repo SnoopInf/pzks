@@ -1,8 +1,7 @@
-package edu.kpi.pzks.core.queue;
+package edu.kpi.pzks.core.queue.factors;
 
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
-import edu.kpi.pzks.core.queue.factors.AbstractFactorEvaluator;
 import edu.kpi.pzks.core.queue.factors.impl.DecreasingConnectivitySecondaryFactorEvaluatorImpl;
 import org.junit.Test;
 
@@ -26,8 +25,8 @@ public class AbstractFactorEvaluatorTest {
         Node nodeA = new Node(1, 0);
         Node nodeB = new Node(7, 1);
         Node nodeC = new Node(3, 2);
-        Collection<Node> nodes = Arrays.asList(new Node[]{nodeA, nodeB, nodeC});
-        Collection<Link> links = Arrays.asList(new Link[]{new Link(nodeA, nodeB), new Link(nodeB, nodeC)});
+        Collection<Node> nodes = Arrays.asList(nodeA, nodeB, nodeC);
+        Collection<Link> links = Arrays.asList(new Link(nodeA, nodeB), new Link(nodeB, nodeC));
         fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes, links);
 
         assertEquals(11, fe.getCriticalPathWeightForGraph());
