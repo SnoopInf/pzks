@@ -2,7 +2,8 @@ package edu.kpi.pzks.core.queue;
 
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
-import edu.kpi.pzks.core.queue.factors.DecreasingConnectivitySecondaryFactorEvaluatorImpl;
+import edu.kpi.pzks.core.queue.factors.AbstractFactorEvaluator;
+import edu.kpi.pzks.core.queue.factors.impl.DecreasingConnectivitySecondaryFactorEvaluatorImpl;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -12,7 +13,6 @@ import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
 
 /**
  * @author smarx
@@ -167,7 +167,7 @@ public class AbstractFactorEvaluatorTest {
         assertEquals(1, fe.getCriticalNumberFromTopTo(node8));
     }
 
-    private void LoopCheckCriticalPath(List<Node> nodes, Collection<Link> links,  int weight) {
+    private void LoopCheckCriticalPath(List<Node> nodes, Collection<Link> links, int weight) {
         for (int i = 0; i < 10; i++) {
             Collections.shuffle(nodes);
             fe = new DecreasingConnectivitySecondaryFactorEvaluatorImpl(nodes, links);

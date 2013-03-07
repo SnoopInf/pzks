@@ -1,4 +1,4 @@
-package edu.kpi.pzks.core.queue;
+package edu.kpi.pzks.core.queue.utils;
 
 import edu.kpi.pzks.core.model.Node;
 

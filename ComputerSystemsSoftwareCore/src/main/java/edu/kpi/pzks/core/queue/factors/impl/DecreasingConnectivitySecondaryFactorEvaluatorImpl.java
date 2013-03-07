@@ -1,8 +1,8 @@
-package edu.kpi.pzks.core.queue.factors;
+package edu.kpi.pzks.core.queue.factors.impl;
 
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
-import edu.kpi.pzks.core.queue.AbstractFactorEvaluator;
+import edu.kpi.pzks.core.queue.factors.AbstractFactorEvaluator;
 
 import java.util.Collection;
 

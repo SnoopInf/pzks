@@ -1,10 +1,9 @@
-package test.edu.kpi.pzks.core.queue;
+package edu.kpi.pzks.core.queue;
 
 import edu.kpi.pzks.core.model.Graph;
 import edu.kpi.pzks.core.model.Node;
-import edu.kpi.pzks.core.queue.factors.IdFactorEvaluatorImpl;
-import edu.kpi.pzks.core.queue.SingleFactorQueue;
-import edu.kpi.pzks.core.queue.QueuedNode;
+import edu.kpi.pzks.core.queue.factors.impl.IdFactorEvaluatorImpl;
+import edu.kpi.pzks.core.queue.utils.QueuedNode;
 import org.junit.Test;
 
 import java.util.Arrays;

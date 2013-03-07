@@ -1,10 +1,7 @@
-package test.edu.kpi.pzks.core.validator;
+package edu.kpi.pzks.core.validator;
 
-import edu.kpi.pzks.core.exceptions.ValidationException;
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
-import edu.kpi.pzks.core.validator.ConsistencyValidator;
-import edu.kpi.pzks.core.validator.SubGraphValidator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author smarx

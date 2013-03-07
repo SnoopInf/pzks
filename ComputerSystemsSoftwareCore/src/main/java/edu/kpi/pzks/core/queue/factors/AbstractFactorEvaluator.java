@@ -1,4 +1,4 @@
-package edu.kpi.pzks.core.queue;
+package edu.kpi.pzks.core.queue.factors;
 
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Node;
@@ -34,11 +34,11 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
     private List<Node> getCriticalPathForGraph() {
         int criticalWeight = 0;
         List<Node> criticalPath = null;
-        for(Node n : nodes) {
-            if(n.getOutputNodes().size() == 0) {
+        for (Node n : nodes) {
+            if (n.getOutputNodes().size() == 0) {
                 List<Node> currentPath = findPathToRootFrom(n);
                 int currentWeight = calculateCriticalPath(currentPath);
-                if(currentWeight > criticalWeight) {
+                if (currentWeight > criticalWeight) {
                     criticalWeight = currentWeight;
                     criticalPath = currentPath;
                 }
@@ -49,7 +49,7 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
 
     private int calculateCriticalPath(List<Node> path) {
         int weight = 0;
-        for(Node node : path) {
+        for (Node node : path) {
             weight += node.getWeight();
         }
         return weight;
@@ -60,10 +60,10 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
         int criticalWeight = 0;
         List<Node> criticalPath = new ArrayList<>();
 
-        for(Node current : inNodes) {
+        for (Node current : inNodes) {
             List<Node> currentPath = findPathToRootFrom(current);
             int weight = calculateCriticalPath(currentPath);
-            if(weight > criticalWeight) {
+            if (weight > criticalWeight) {
                 criticalPath = currentPath;
                 criticalWeight = weight;
             }
@@ -82,8 +82,7 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
 
     protected int getCriticalPathFromTopTo(Node n) {
         List<Node> criticalPath = findCriticalPathToBottomFrom(n);
-        int critical = calculateCriticalPath(criticalPath);
-        return critical;
+        return calculateCriticalPath(criticalPath);
     }
 
     private List<Node> findCriticalPathToBottomFrom(Node n) {
@@ -91,10 +90,10 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
         int criticalWeight = 0;
         List<Node> criticalPath = new ArrayList<>();
 
-        for(Node current : inNodes) {
+        for (Node current : inNodes) {
             List<Node> currentPath = findCriticalPathToBottomFrom(current);
             int weight = calculateCriticalPath(currentPath);
-            if(weight > criticalWeight) {
+            if (weight > criticalWeight) {
                 criticalPath = currentPath;
                 criticalWeight = weight;
             }
@@ -106,18 +105,17 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
 
     protected int getCriticalPathFromBottom(Node n) {
         List<Node> criticalPath = findPathToRootFrom(n);
-        int critical = calculateCriticalPath(criticalPath);
-        return critical;
+        return calculateCriticalPath(criticalPath);
     }
 
     protected double getWeightedCriticalPathFromTopTo(Node n) {
-        return (getCriticalPathFromTopTo(n) + .0d)/ getCriticalPathWeightForGraph();
+        return (getCriticalPathFromTopTo(n) + .0d) / getCriticalPathWeightForGraph();
     }
 
     /*protected double getWeightedCriticalPathFromBottom(Node n) {
         return 0;
     }*/
-    
+
     protected int getCriticalNumberForGraph() {
         return getCriticalPathForGraph().size();
     }
@@ -131,7 +129,7 @@ public abstract class AbstractFactorEvaluator implements FactorEvaluator {
     }
 
     protected double getWeightedCriticalNumberFromTopTo(Node n) {
-        return ((double)getCriticalNumberFromTopTo(n))/getCriticalNumberForGraph();
+        return ((double) getCriticalNumberFromTopTo(n)) / getCriticalNumberForGraph();
     }
 
     /*protected double getWeightedCriticalNumberFromBottom(Node n) {

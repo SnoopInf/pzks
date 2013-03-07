@@ -1,11 +1,8 @@
-package test.java.edu.kpi.pzks.core;
+package edu.kpi.pzks.core.validator;
 
 import edu.kpi.pzks.core.model.Link;
 import edu.kpi.pzks.core.model.Links;
 import edu.kpi.pzks.core.model.Node;
-import edu.kpi.pzks.core.validator.ConsistencyValidator;
-import edu.kpi.pzks.core.validator.CyclingValidator;
-import edu.kpi.pzks.core.validator.Validator;
 import org.junit.Before;
 import org.junit.Test;
 

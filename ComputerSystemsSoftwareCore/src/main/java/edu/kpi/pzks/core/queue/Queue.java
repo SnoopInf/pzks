@@ -1,5 +1,7 @@
 package edu.kpi.pzks.core.queue;
 
+import edu.kpi.pzks.core.queue.utils.QueuedNode;
+
 import java.util.Collection;
 
 /**

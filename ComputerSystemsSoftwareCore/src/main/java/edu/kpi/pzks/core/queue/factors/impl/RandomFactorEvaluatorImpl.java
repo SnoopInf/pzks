@@ -1,7 +1,7 @@
-package edu.kpi.pzks.core.queue.factors;
+package edu.kpi.pzks.core.queue.factors.impl;
 
 import edu.kpi.pzks.core.model.Node;
-import edu.kpi.pzks.core.queue.FactorEvaluator;
+import edu.kpi.pzks.core.queue.factors.FactorEvaluator;
 
 import java.util.Random;
 

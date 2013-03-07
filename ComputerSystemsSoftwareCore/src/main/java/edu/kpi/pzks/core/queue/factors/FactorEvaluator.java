@@ -1,4 +1,4 @@
-package edu.kpi.pzks.core.queue;
+package edu.kpi.pzks.core.queue.factors;
 
 import edu.kpi.pzks.core.model.Node;
 
@@ -7,5 +7,6 @@ import edu.kpi.pzks.core.model.Node;
  */
 public interface FactorEvaluator {
     double evaluateFactorForNode(Node node);
+
     boolean hasNaturalOrder();
 }

@@ -1,8 +1,14 @@
 package edu.kpi.pzks.core.queue;
 
 import edu.kpi.pzks.core.model.Node;
+import edu.kpi.pzks.core.queue.factors.FactorEvaluator;
+import edu.kpi.pzks.core.queue.utils.DoubleFactorNodeComparator;
+import edu.kpi.pzks.core.queue.utils.QueuedNode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author smarx
@@ -26,7 +32,7 @@ public class DoubleFactorQueue implements Queue {
         Collections.sort(nodeList, comparator);
 
         List<QueuedNode> queuedNodes = new ArrayList<>();
-        for(Node n : nodeList) {
+        for (Node n : nodeList) {
             QueuedNode queuedNode = new QueuedNode(n, factorEvaluatorPrimary.evaluateFactorForNode(n)); // костыль?
             queuedNodes.add(queuedNode);
         }
